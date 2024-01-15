@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import { Table, Button } from "reactstrap";
 import * as FaIcons from "react-icons/fa";
@@ -41,7 +40,9 @@ function ListUser() {
   const abrirCerrarModalEliminar = () => {
     setModalEliminar(!modalEliminar);
   };
-
+  const act = () => {
+    window.location.reload();
+  };
   const peticionGet = async () => {
     await axios
       .get(baseUrl)
@@ -66,6 +67,7 @@ function ListUser() {
       .then((response) => {
         setData(data.concat(response.data));
         abrirCerrarModalInsertar();
+        act();
       })
       .catch((error) => {
         console.log(error);
@@ -95,6 +97,7 @@ function ListUser() {
         });
         setData(dataNueva);
         abrirCerrarModalEditar();
+        act();
       })
       .catch((error) => {
         console.log(error);

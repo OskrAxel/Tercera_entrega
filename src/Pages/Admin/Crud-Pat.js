@@ -14,10 +14,11 @@ function ListUserPat() {
   const [usuarioSeleccionado, setusuarioSeleccionado] = useState({
     id: "",
     nombre: "",
-    apellido: "",
+    pais: "",
     email: "",
-    contraseña: "",
+    direccion: "",
     celular: "",
+    institucion: "",
   });
 
   const handleChange = (e) => {
@@ -40,7 +41,9 @@ function ListUserPat() {
   const abrirCerrarModalEliminar = () => {
     setModalEliminar(!modalEliminar);
   };
-
+  const act = () => {
+    window.location.reload();
+  };
   const peticionGet = async () => {
     await axios
       .get(baseUrl)
@@ -55,16 +58,18 @@ function ListUserPat() {
   const peticionPost = async () => {
     var f = new FormData();
     f.append("nombre", usuarioSeleccionado.nombre);
-    f.append("apellido", usuarioSeleccionado.apellido);
+    f.append("pais", usuarioSeleccionado.pais);
     f.append("email", usuarioSeleccionado.email);
-    f.append("contraseña", usuarioSeleccionado.contraseña);
+    f.append("direccion", usuarioSeleccionado.direccion);
     f.append("celular", usuarioSeleccionado.celular);
+    f.append("institucion", usuarioSeleccionado.institucion);
     f.append("METHOD", "POST");
     await axios
       .post(baseUrl, f)
       .then((response) => {
         setData(data.concat(response.data));
         abrirCerrarModalInsertar();
+        act();
       })
       .catch((error) => {
         console.log(error);
@@ -74,10 +79,11 @@ function ListUserPat() {
   const peticionPut = async () => {
     var f = new FormData();
     f.append("nombre", usuarioSeleccionado.nombre);
-    f.append("apellido", usuarioSeleccionado.apellido);
+    f.append("pais", usuarioSeleccionado.pais);
     f.append("email", usuarioSeleccionado.email);
-    f.append("contraseña", usuarioSeleccionado.contraseña);
+    f.append("direccion", usuarioSeleccionado.direccion);
     f.append("celular", usuarioSeleccionado.celular);
+    f.append("institucion", usuarioSeleccionado.institucion);
     f.append("METHOD", "PUT");
     await axios
       .post(baseUrl, f, { params: { id: usuarioSeleccionado.id } })
@@ -86,14 +92,16 @@ function ListUserPat() {
         dataNueva.map((Usuario) => {
           if (Usuario.id === usuarioSeleccionado.id) {
             Usuario.nombre = usuarioSeleccionado.nombre;
-            Usuario.apellido = usuarioSeleccionado.apellido;
+            Usuario.pais = usuarioSeleccionado.pais;
             Usuario.email = usuarioSeleccionado.email;
-            Usuario.contraseña = usuarioSeleccionado.contraseña;
+            Usuario.direccion = usuarioSeleccionado.direccion;
             Usuario.celular = usuarioSeleccionado.celular;
+            Usuario.institucion = usuarioSeleccionado.institucion;
           }
         });
         setData(dataNueva);
         abrirCerrarModalEditar();
+        act();
       })
       .catch((error) => {
         console.log(error);
@@ -150,10 +158,11 @@ function ListUserPat() {
             <tr className="text-center">
               <th>#</th>
               <th>Nombres</th>
-              <th>Apellidos</th>
+              <th>Pais</th>
               <th>Correo</th>
-              <th>Clave</th>
+              <th>Direccion</th>
               <th>Celular</th>
+              <th>Institucion</th>
               <th>Acciones</th>
             </tr>
           </thead>
@@ -162,10 +171,11 @@ function ListUserPat() {
               <tr className="text-center" key={Usuario.id}>
                 <td>{Usuario.id}</td>
                 <td>{Usuario.nombre}</td>
-                <td>{Usuario.apellido}</td>
+                <td>{Usuario.pais}</td>
                 <td>{Usuario.email}</td>
-                <td>{Usuario.contraseña}</td>
+                <td>{Usuario.direccion}</td>
                 <td>{Usuario.celular}</td>
+                <td>{Usuario.institucion}</td>
                 <td>
                   <button
                     className="btn btn-warning"
@@ -199,12 +209,12 @@ function ListUserPat() {
                 onChange={handleChange}
               />
               <br />
-              <label>Apellidos: </label>
+              <label>Pais: </label>
               <br />
               <input
                 type="text"
                 className="form-control"
-                name="apellido"
+                name="pais"
                 onChange={handleChange}
               />
               <br />
@@ -217,12 +227,12 @@ function ListUserPat() {
                 onChange={handleChange}
               />
               <br />
-              <label>Clave: </label>
+              <label>Direccion: </label>
               <br />
               <input
                 type="text"
                 className="form-control"
-                name="contraseña"
+                name="direccion"
                 onChange={handleChange}
               />
               <br />
@@ -232,6 +242,15 @@ function ListUserPat() {
                 type="text"
                 className="form-control"
                 name="celular"
+                onChange={handleChange}
+              />
+              <br />
+              <label>Institucion: </label>
+              <br />
+              <input
+                type="text"
+                className="form-control"
+                name="institucion"
                 onChange={handleChange}
               />
               <br />
@@ -265,14 +284,14 @@ function ListUserPat() {
                 value={usuarioSeleccionado && usuarioSeleccionado.nombre}
               />
               <br />
-              <label>Apellidos: </label>
+              <label>paiss: </label>
               <br />
               <input
                 type="text"
                 className="form-control"
-                name="apellido"
+                name="pais"
                 onChange={handleChange}
-                value={usuarioSeleccionado && usuarioSeleccionado.apellido}
+                value={usuarioSeleccionado && usuarioSeleccionado.pais}
               />
               <br />
               <label>Correo: </label>
@@ -285,14 +304,14 @@ function ListUserPat() {
                 value={usuarioSeleccionado && usuarioSeleccionado.email}
               />
               <br />
-              <label>Clave: </label>
+              <label>Direccion: </label>
               <br />
               <input
                 type="text"
                 className="form-control"
-                name="contraseña"
+                name="direccion"
                 onChange={handleChange}
-                value={usuarioSeleccionado && usuarioSeleccionado.contraseña}
+                value={usuarioSeleccionado && usuarioSeleccionado.direccion}
               />
               <br />
               <label>Celular: </label>
@@ -305,6 +324,15 @@ function ListUserPat() {
                 value={usuarioSeleccionado && usuarioSeleccionado.celular}
               />
               <br />
+              <label>Institucion: </label>
+              <br />
+              <input
+                type="text"
+                className="form-control"
+                name="institucion"
+                onChange={handleChange}
+                value={usuarioSeleccionado && usuarioSeleccionado.institucion}
+              />
             </div>
           </ModalBody>
           <ModalFooter>

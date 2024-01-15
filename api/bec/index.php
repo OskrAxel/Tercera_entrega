@@ -14,7 +14,7 @@ if($_SERVER['REQUEST_METHOD']=='GET'){
         $resultado=metodoGet($query);
         echo json_encode($resultado->fetch(PDO::FETCH_ASSOC));
     }else{
-        $query="SELECT * from usuarios_bec";
+        $query="SELECT id, nombre, apellido, email, contrasena, celular from usuarios_bec";
         $resultado=metodoGet($query);
         echo json_encode($resultado->fetchAll()); 
     }
@@ -27,12 +27,12 @@ if($_POST['METHOD']=='POST'){
     $nombre=$_POST['nombre'];
     $apellido=$_POST['apellido'];
     $email=$_POST['email'];
-    $contraseña=$_POST['contrasena'];
+    $contrasena=$_POST['contrasena'];
     $celular=$_POST['celular'];
     $created_at = date('Y-m-d');
-    $pass = md5($contraseña);
-    $query="INSERT INTO usuarios_bec(id,nombre, apellido, email, contrasena, celular, created_at) values (NULL,'$nombre', '$apellido', '$email', '$pass', '$celular', '$created_at')";
-    $queryAutoIncrement="SELECT MAX(id) as id from usuarios_bec";
+    $pass = md5($contrasena);
+    $query="INSERT INTO usuarios_bec(id,nombre, apellido, email, contrasena, contrasena_lit, celular, created_at) values (NULL,'$nombre', '$apellido', '$email', '$pass', '$contrasena', '$celular', '$created_at')";
+    $queryAutoIncrement="SELECT MAX(id) as id from usuarios_per";
     $resultado=metodoPost($query, $queryAutoIncrement);
     echo json_encode($resultado);
     header("HTTP/1.1 200 OK");
@@ -45,10 +45,10 @@ if($_POST['METHOD']=='PUT'){
     $nombre=$_POST['nombre'];
     $apellido=$_POST['apellido'];
     $email=$_POST['email'];
-    $contraseña=$_POST['contraseña'];
+    $contrasena=$_POST['contrasena'];
     $celular=$_POST['celular'];
-    $pass = md5($contraseña);
-    $query="UPDATE usuarios_bec SET nombre='$nombre', apellido='$apellido', email='$email', contrasena='$pass', celular='$celular' WHERE id='$id'";
+    $pass = md5($contrasena);
+    $query="UPDATE usuarios_bec SET nombre='$nombre', apellido='$apellido', email='$email',contrasena='$pass',contrasena_lit='$contrasena', celular='$celular' WHERE id='$id'";
     $resultado=metodoPut($query);
     echo json_encode($resultado);
     header("HTTP/1.1 200 OK");

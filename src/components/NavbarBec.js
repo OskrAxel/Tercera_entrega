@@ -67,6 +67,17 @@ function NavbarBec(args) {
     console.log(res.data);
   }
   ////
+  const [modalContra, setModalContra] = useState(false);
+  const abrirCerrarModalContra = () => {
+    setModalContra(!modalContra);
+  };
+  const [Contra, setContra] = useState([]);
+  async function getContra() {
+    const res = await axios.get("http://localhost:80/api/bec/foto.php");
+    setContra(res.data);
+    console.log(res.data);
+  }
+  ////
   return (
     <div>
       <Navbar expand="md" {...args}>
@@ -88,7 +99,8 @@ function NavbarBec(args) {
             <NavItem>
               <Button
                 color="warning"
-                onClick={() => abrirCerrarModalInsertar()}>
+                onClick={() => abrirCerrarModalInsertar()}
+              >
                 <FaIcons.FaPlus /> ENVIAR INF
               </Button>
             </NavItem>
@@ -111,7 +123,7 @@ function NavbarBec(args) {
                 <DropdownItem onClick={() => abrirCerrarModalFoto()}>
                   Foto
                 </DropdownItem>
-                <DropdownItem onClick={() => abrirCerrarModalInsertar()}>
+                <DropdownItem onClick={() => abrirCerrarModalContra()}>
                   Cambiar Contraseña
                 </DropdownItem>
                 <DropdownItem divider />
@@ -163,7 +175,8 @@ function NavbarBec(args) {
           <Button
             color="danger"
             size="lg"
-            onClick={() => abrirCerrarModalInsertar()}>
+            onClick={() => abrirCerrarModalInsertar()}
+          >
             Cancelar
           </Button>
         </ModalFooter>
@@ -171,7 +184,8 @@ function NavbarBec(args) {
       {/* MODAL INFORME */}
       <Modal isOpen={modalFoto}>
         <ModalHeader
-          style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}>
+          style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}
+        >
           Modificar Imagen
         </ModalHeader>
         <ModalBody>
@@ -185,7 +199,7 @@ function NavbarBec(args) {
               onChange={(e) => setNom(e.target.value)}
             />
             <img
-              src={"data:archivo_per/png;base64," + item.archivo_per}
+              src={"data:archivo_per/png;base64,"}
               className="img-fluid"
               alt="archivo_per"
             />
@@ -218,7 +232,49 @@ function NavbarBec(args) {
           <Button
             color="danger"
             size="lg"
-            onClick={() => abrirCerrarModalFoto()}>
+            onClick={() => abrirCerrarModalFoto()}
+          >
+            Cancelar
+          </Button>
+        </ModalFooter>
+      </Modal>
+      {/* MODAL CONTRASEÑA */}
+      <Modal isOpen={modalContra}>
+        <ModalHeader
+          style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}
+        >
+          Modificar Contraseña
+        </ModalHeader>
+        <ModalBody>
+          <div className="form-group">
+            <label>Contraseña Actual: </label>
+            <br />
+            <input
+              type="text"
+              className="form-control"
+              name="nom_doc"
+              onChange={(e) => setNom(e.target.value)}
+            />
+            <br />
+            <label>Contraseña Nueva: </label>
+            <br />
+            <input
+              type="text"
+              className="form-control"
+              name="nom_usu"
+              onChange={(e) => setDescripcion(e.target.value)}
+            />
+          </div>
+        </ModalBody>
+        <ModalFooter>
+          <Button color="success" size="lg" onClick={(e) => addImagen(e)}>
+            Guardar
+          </Button>
+          <Button
+            color="danger"
+            size="lg"
+            onClick={() => abrirCerrarModalContra()}
+          >
             Cancelar
           </Button>
         </ModalFooter>

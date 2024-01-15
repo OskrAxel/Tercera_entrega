@@ -25,13 +25,14 @@ if($_SERVER['REQUEST_METHOD']=='GET'){
 if($_POST['METHOD']=='POST'){
     unset($_POST['METHOD']);
     $nombre=$_POST['nombre'];
-    $apellido=$_POST['apellido'];
+    $pais=$_POST['pais'];
     $email=$_POST['email'];
-    $contraseña=$_POST['contraseña'];
+    $direccion=$_POST['direccion'];
     $celular=$_POST['celular'];
     $created_at = date('Y-m-d');
-    $pass = md5($contraseña);
-    $query="INSERT INTO patrocinador(id,nombre, apellido, email, contraseña, celular, created_at) values (NULL,'$nombre', '$apellido', '$email', '$pass', '$celular', '$created_at')";
+    $institucion = $_POST['institucion'];
+    $query="INSERT INTO patrocinador(id,nombre, pais, email, direccion, celular, institucion, created_at)
+    values (NULL,'$nombre', '$pais', '$email', '$direccion', '$celular', '$institucion', '$created_at')";
     $queryAutoIncrement="SELECT MAX(id) as id from patrocinador";
     $resultado=metodoPost($query, $queryAutoIncrement);
     echo json_encode($resultado);
@@ -43,12 +44,13 @@ if($_POST['METHOD']=='PUT'){
     unset($_POST['METHOD']);
     $id=$_GET['id'];
     $nombre=$_POST['nombre'];
-    $apellido=$_POST['apellido'];
+    $pais=$_POST['pais'];
     $email=$_POST['email'];
-    $contraseña=$_POST['contraseña'];
+    $direccion=$_POST['direccion'];
     $celular=$_POST['celular'];
-    $pass = md5($contraseña);
-    $query="UPDATE patrocinador SET nombre='$nombre', apellido='$apellido', email='$email', contraseña='$pass', celular='$celular' WHERE id='$id'";
+    $institucion = $_POST['institucion'];
+    $updated_at = date('Y-m-d');
+    $query="UPDATE patrocinador SET nombre='$nombre', pais='$pais', email='$email', direccion='$direccion', celular='$celular', institucion='$institucion', updated_at='$updated_at' WHERE id='$id'";
     $resultado=metodoPut($query);
     echo json_encode($resultado);
     header("HTTP/1.1 200 OK");
