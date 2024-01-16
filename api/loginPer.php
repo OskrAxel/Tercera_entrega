@@ -19,7 +19,7 @@ if(mysqli_connect_error()){
         $result = "";
  
         if($user != "" && $pass != ""){
-            $sql = "SELECT * FROM usuarios_per WHERE nombre='$user';";
+            $sql = "SELECT * FROM usuarios_per WHERE id_per='$user';";
             $res = mysqli_query($conn, $sql);
  
             if(mysqli_num_rows($res) != 0){

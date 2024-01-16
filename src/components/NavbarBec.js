@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./navbar.scss";
 import Logo from "./img/logo.png";
 import axios from "axios";
@@ -25,6 +25,47 @@ import { Outlet, useNavigate } from "react-router-dom";
 import SidebarBec from "./SidebarBec";
 
 function NavbarBec(args) {
+  ////
+  const [data, setData] = useState({
+    id: "",
+    contrasena: "",
+    contrasena_lit: "",
+  });
+
+  const [modalContra, setModalContra] = useState(false);
+  const abrirCerrarModalContra = () => {
+    setModalContra(!modalContra);
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+    console.log(data);
+  };
+
+  const peticionGet = async () => {
+    await axios
+      .get(`http://localhost:80/api/bec/contrabec.php`, {
+        params: {
+          id: localStorage.getItem("iduser"),
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+        setData(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  ////
+  const act = () => {
+    window.location.reload();
+  };
+  ////
   const naviget = useNavigate();
   function logoutSubmit() {
     localStorage.setItem("login", "");
@@ -56,28 +97,27 @@ function NavbarBec(args) {
     setModalInsertar(!modalInsertar);
   };
   ////
-  const [modalFoto, setModalFoto] = useState(false);
-  const abrirCerrarModalFoto = () => {
-    setModalFoto(!modalFoto);
+  const peticionPutContra = async () => {
+    var f = new FormData();
+    ///)
+    f.append("contrasena", data.contrasena);
+    f.append("contrasena_lit", data.contrasena_lit);
+    f.append("METHOD", "PUT");
+    await axios
+      .post(`http://localhost:80/api/bec/contrabec.php`, f, {
+        params: { idb: data.id },
+      })
+      .then((response) => {
+        setData(response);
+        act();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
-  const [foto, setFoto] = useState([]);
-  async function getImagenes() {
-    const res = await axios.get("http://localhost:80/api/bec/foto.php");
-    setFoto(res.data);
-    console.log(res.data);
-  }
-  ////
-  const [modalContra, setModalContra] = useState(false);
-  const abrirCerrarModalContra = () => {
-    setModalContra(!modalContra);
-  };
-  const [Contra, setContra] = useState([]);
-  async function getContra() {
-    const res = await axios.get("http://localhost:80/api/bec/foto.php");
-    setContra(res.data);
-    console.log(res.data);
-  }
-  ////
+  useEffect(() => {
+    peticionGet();
+  }, []);
   return (
     <div>
       <Navbar expand="md" {...args}>
@@ -99,8 +139,7 @@ function NavbarBec(args) {
             <NavItem>
               <Button
                 color="warning"
-                onClick={() => abrirCerrarModalInsertar()}
-              >
+                onClick={() => abrirCerrarModalInsertar()}>
                 <FaIcons.FaPlus /> ENVIAR INF
               </Button>
             </NavItem>
@@ -120,9 +159,7 @@ function NavbarBec(args) {
                 </DropdownItem>
                 <DropdownItem>Sobre Nosotros...</DropdownItem>
                 <DropdownItem divider />
-                <DropdownItem onClick={() => abrirCerrarModalFoto()}>
-                  Foto
-                </DropdownItem>
+                <DropdownItem>Foto</DropdownItem>
                 <DropdownItem onClick={() => abrirCerrarModalContra()}>
                   Cambiar Contraseña
                 </DropdownItem>
@@ -133,6 +170,7 @@ function NavbarBec(args) {
           </Nav>
         </Collapse>
       </Navbar>
+
       {/* MODAL INFORME */}
       <Modal isOpen={modalInsertar}>
         <ModalHeader>Cargar documento</ModalHeader>
@@ -175,106 +213,52 @@ function NavbarBec(args) {
           <Button
             color="danger"
             size="lg"
-            onClick={() => abrirCerrarModalInsertar()}
-          >
+            onClick={() => abrirCerrarModalInsertar()}>
             Cancelar
           </Button>
         </ModalFooter>
       </Modal>
-      {/* MODAL INFORME */}
-      <Modal isOpen={modalFoto}>
-        <ModalHeader
-          style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}
-        >
-          Modificar Imagen
-        </ModalHeader>
-        <ModalBody>
-          <div className="form-group">
-            <label>Imagen Actual: </label>
-            <br />
-            <input
-              type="text"
-              className="form-control"
-              name="nom_doc"
-              onChange={(e) => setNom(e.target.value)}
-            />
-            <img
-              src={"data:archivo_per/png;base64,"}
-              className="img-fluid"
-              alt="archivo_per"
-            />
-            <br />
-            <label>Usuario: </label>
-            <br />
-            <input
-              type="text"
-              className="form-control"
-              name="nom_usu"
-              onChange={(e) => setDescripcion(e.target.value)}
-            />
-            <br />
-            <label>Nueva Imagen: </label>
-            <br />
-            <input
-              type="file"
-              className="form-control"
-              accept="archivo_per/*"
-              onChange={(e) => setImagen(e.target.files[0])}
-              multiple
-            />
-            <br />
-          </div>
-        </ModalBody>
-        <ModalFooter>
-          <Button color="success" size="lg" onClick={(e) => addImagen(e)}>
-            Guardar
-          </Button>
-          <Button
-            color="danger"
-            size="lg"
-            onClick={() => abrirCerrarModalFoto()}
-          >
-            Cancelar
-          </Button>
-        </ModalFooter>
-      </Modal>
+
       {/* MODAL CONTRASEÑA */}
       <Modal isOpen={modalContra}>
         <ModalHeader
-          style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}
-        >
-          Modificar Contraseña
+          style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}>
+          Editar Contraseña
         </ModalHeader>
         <ModalBody>
           <div className="form-group">
-            <label>Contraseña Actual: </label>
+            <label>Clave Actual: </label>
+            <br />
+            <input
+              disabled
+              type="text"
+              className="form-control"
+              name="contrasena_lit"
+              onChange={handleChange}
+              value={data.contrasena_lit}
+            />
+            <br />
+            <label>Nueva Clave: </label>
             <br />
             <input
               type="text"
               className="form-control"
-              name="nom_doc"
-              onChange={(e) => setNom(e.target.value)}
+              name="contrasena"
+              onChange={handleChange}
+              value={data.contrasena}
             />
             <br />
-            <label>Contraseña Nueva: </label>
-            <br />
-            <input
-              type="text"
-              className="form-control"
-              name="nom_usu"
-              onChange={(e) => setDescripcion(e.target.value)}
-            />
           </div>
         </ModalBody>
         <ModalFooter>
-          <Button color="success" size="lg" onClick={(e) => addImagen(e)}>
-            Guardar
+          <Button color="success" size="lg" onClick={() => peticionPutContra()}>
+            Editar
           </Button>
+          {"   "}
           <Button
             color="danger"
             size="lg"
-            onClick={() => abrirCerrarModalContra()}
-          >
+            onClick={() => abrirCerrarModalContra()}>
             Cancelar
           </Button>
         </ModalFooter>
