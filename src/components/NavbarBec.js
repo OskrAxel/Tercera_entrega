@@ -20,6 +20,7 @@ import {
   ModalBody,
   ModalFooter,
   ModalHeader,
+  CardImg,
 } from "reactstrap";
 import { Outlet, useNavigate } from "react-router-dom";
 import SidebarBec from "./SidebarBec";
@@ -118,6 +119,29 @@ function NavbarBec(args) {
   useEffect(() => {
     peticionGet();
   }, []);
+  ////MOSTRAR IMAGEN
+  const [lista, setLista] = useState([]);
+
+  useEffect(() => {
+    getImagenes();
+  }, []);
+
+  const getImagenes = async () => {
+    await axios
+      .get(`http://localhost:80/api/bec/img/index.php`, {
+        params: {
+          id: localStorage.getItem("iduser"),
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+        setLista(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  ////
   return (
     <div>
       <Navbar expand="md" {...args}>
@@ -138,14 +162,37 @@ function NavbarBec(args) {
           <Nav className="ms-auto" navbar>
             <NavItem>
               <Button
+                style={{
+                  marginTop: "5px",
+                }}
                 color="warning"
                 onClick={() => abrirCerrarModalInsertar()}>
                 <FaIcons.FaPlus /> ENVIAR INF
               </Button>
             </NavItem>
-            <>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</>
+            <>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</>
+            <NavItem>
+              {lista.map((item) => (
+                <div key={item.id}>
+                  <CardImg
+                    className="rounded-circle"
+                    alt="Card image cap"
+                    src={" data:image/png;base64," + item.foto}
+                    style={{
+                      height: 50,
+                      width: 50,
+                      marginTop: "1.5px",
+                      border: "5px solid rgba(3, 87, 77, 1)",
+                    }}
+                    width="100%"
+                  />
+                </div>
+              ))}
+            </NavItem>
+            <>&nbsp;&nbsp;&nbsp;</>
             {/* //REVISAR */}
             <NavbarText className="text-light">{iduser}</NavbarText>
+            <>&nbsp;&nbsp;&nbsp;</>
             <UncontrolledDropdown nav direction="down">
               <DropdownToggle nav caret className="text-light">
                 MENU

@@ -1,9 +1,15 @@
 import * as FaIcons from "react-icons/fa";
 import "./Sidebar.scss";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { NavLink } from "react-router-dom";
-import { Button, Offcanvas, OffcanvasBody, OffcanvasHeader } from "reactstrap";
-import Logo from "./img/logo.png";
+import {
+  Button,
+  Offcanvas,
+  OffcanvasBody,
+  OffcanvasHeader,
+  CardImg,
+} from "reactstrap";
 
 const SidebarBec = () => {
   //OffCanvas
@@ -36,6 +42,29 @@ const SidebarBec = () => {
       icon: <FaIcons.FaUsers />,
     },
   ];
+  ////MOSTRAR IMAGEN
+  const [lista, setLista] = useState([]);
+
+  useEffect(() => {
+    getImagenes();
+  }, []);
+
+  const getImagenes = async () => {
+    await axios
+      .get(`http://localhost:80/api/bec/img/index.php`, {
+        params: {
+          id: localStorage.getItem("iduser"),
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+        setLista(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  ////
   return (
     <div>
       <div>
@@ -46,20 +75,22 @@ const SidebarBec = () => {
       <Offcanvas isOpen={isOpen} toggle={toggleOffCanvas} className="sidebar">
         <OffcanvasHeader toggle={toggleOffCanvas}>
           <div>
-            <h1 className="logo">
-              <img
-                src={Logo}
-                alt="logo"
-                className="rounded-circle me-2"
-                style={{
-                  height: 100,
-                  width: 100,
-                }}
-              />
-            </h1>
-            {/* <h1 className="logo">
-              <p className="text-user">Alcides Oscar Cusi Ajno</p>
-            </h1> */}
+            {lista.map((item) => (
+              <div key={item.id}>
+                <CardImg
+                  className="rounded-circle me-2"
+                  alt="Card image cap"
+                  src={" data:image/png;base64," + item.foto}
+                  style={{
+                    height: 200,
+                    width: 200,
+                    marginTop: "1.5px",
+                    border: "5px solid rgba(3, 87, 77, 1)",
+                  }}
+                  width="100%"
+                />
+              </div>
+            ))}
           </div>
         </OffcanvasHeader>
         <OffcanvasBody>
