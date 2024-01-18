@@ -21,6 +21,7 @@ import {
   ModalFooter,
   ModalHeader,
   CardImg,
+  Input,
 } from "reactstrap";
 import { Outlet, useNavigate } from "react-router-dom";
 import SidebarBec from "./SidebarBec";
@@ -36,6 +37,11 @@ function NavbarBec(args) {
   const [modalContra, setModalContra] = useState(false);
   const abrirCerrarModalContra = () => {
     setModalContra(!modalContra);
+  };
+
+  const [modalFoto, setModalFoto] = useState(false);
+  const abrirCerrarModalFoto = () => {
+    setModalFoto(!modalFoto);
   };
 
   const handleChange = (e) => {
@@ -82,6 +88,21 @@ function NavbarBec(args) {
   const [descripcion, setDescripcion] = useState("");
   const [nom, setNom] = useState("");
   const [imagen, setImagen] = useState(null);
+
+  const [imagenP, setImagenP] = useState(null);
+  async function addImagenP(e) {
+    e.preventDefault();
+    let fd = new FormData();
+    fd.append("archivo_per", imagen);
+    fd.append("nom_usu", descripcion);
+    fd.append("nom_doc", nom);
+    const res = await axios.post(
+      `http://localhost:80/api/bec/img/index.php`,
+      fd
+    );
+    console.log(res.data);
+    abrirCerrarModalInsertar();
+  }
 
   async function addImagen(e) {
     e.preventDefault();
@@ -181,8 +202,8 @@ function NavbarBec(args) {
                     style={{
                       height: 50,
                       width: 50,
-                      marginTop: "1.5px",
-                      border: "5px solid rgba(3, 87, 77, 1)",
+                      marginTop: "2px",
+                      border: "5px solid rgba(1, 67, 59, 1)",
                     }}
                     width="100%"
                   />
@@ -206,7 +227,9 @@ function NavbarBec(args) {
                 </DropdownItem>
                 <DropdownItem>Sobre Nosotros...</DropdownItem>
                 <DropdownItem divider />
-                <DropdownItem>Foto</DropdownItem>
+                <DropdownItem onClick={() => abrirCerrarModalFoto()}>
+                  Foto
+                </DropdownItem>
                 <DropdownItem onClick={() => abrirCerrarModalContra()}>
                   Cambiar Contraseña
                 </DropdownItem>
@@ -306,6 +329,54 @@ function NavbarBec(args) {
             color="danger"
             size="lg"
             onClick={() => abrirCerrarModalContra()}>
+            Cancelar
+          </Button>
+        </ModalFooter>
+      </Modal>
+
+      {/* MODAL FOTO */}
+      <Modal isOpen={modalFoto}>
+        <ModalHeader
+          style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}>
+          Modificar Foto Perfil
+        </ModalHeader>
+        <ModalBody>
+          <div className="form-group">
+            <label>Foto Actual: </label>
+            <br />
+            {lista.map((item) => (
+              <div key={item.id}>
+                <CardImg
+                  className="rounded-circle"
+                  alt="Card image cap"
+                  src={" data:image/png;base64," + item.foto}
+                  style={{
+                    height: 200,
+                    width: 200,
+                    marginLeft: "28%",
+                    border: "5px solid rgba(1, 67, 59, 1)",
+                  }}
+                  width="100%"
+                />
+              </div>
+            ))}
+            <br />
+            <label>Nueva Foto: </label>
+            <br />
+            <Input
+              type="file"
+              className="form-control"
+              accept="archivo_per/*"
+              onChange={(e) => setImagenP(e.target.files[0])}
+              multiple
+            />
+          </div>
+        </ModalBody>
+        <ModalFooter>
+          <Button
+            color="danger"
+            size="lg"
+            onClick={() => abrirCerrarModalFoto()}>
             Cancelar
           </Button>
         </ModalFooter>

@@ -84,8 +84,8 @@ const SidebarBec = () => {
                   style={{
                     height: 200,
                     width: 200,
-                    marginTop: "1.5px",
-                    border: "5px solid rgba(3, 87, 77, 1)",
+                    marginTop: "2px",
+                    border: "5px solid rgba(1, 67, 59, 1)",
                   }}
                   width="100%"
                 />
