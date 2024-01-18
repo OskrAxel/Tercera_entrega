@@ -19,13 +19,15 @@ if($method == "GET") {
     echo $json;
 }
 
-if($method=="POST"){
+if($method=="PUT"){
+    isset($_GET['id']);
+    $id= $_GET['id'];
     $json = null;
     $foto = (file_get_contents($_FILES['archivo_per']['tmp_name']));
-    $descripcion = $_POST['nom_usu'];
-    $nom_doc = $_POST['nom_doc'];
+    // $descripcion = $_POST['nom_usu'];
+    // $nom_doc = $_POST['nom_doc'];
     $api = new Api();
-    $json = $api->addImagen($descripcion,$foto,$nom_doc);
+    $json = $api->addImagen($id,$foto);
     echo $json;
 }
 

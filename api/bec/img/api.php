@@ -23,7 +23,7 @@ public function getImagenes($id){
 }
 
 
-public function addImagen($descripcion,$foto,$nom_doc){
+public function addImagen($id,$foto,$nom_doc){
   
   $conexion = new Conexion();
   $db = $conexion->getConexion();
@@ -31,7 +31,6 @@ public function addImagen($descripcion,$foto,$nom_doc){
   $consulta = $db->prepare($sql);
   $consulta->bindParam(':nom_usu', $descripcion);
   $consulta->bindParam(':archivo_per', $foto);
-  $consulta->bindParam(':nom_doc', $nom_doc);
   $consulta->execute();
 
   return '{"msg":"imagen agregada"}';
