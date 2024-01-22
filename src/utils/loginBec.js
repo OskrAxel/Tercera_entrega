@@ -27,7 +27,7 @@ function LoginBec() {
     setTimeout(function () {
       setMsg("");
     }, 700);
-  }, [msg]);
+  }, [msg, naviget]);
 
   const handleInputChange = (e, type) => {
     switch (type) {

@@ -52,7 +52,7 @@ function NavbarBec(args) {
     }));
     console.log(data);
   };
-
+  ////CONTRASEÑA
   const peticionGet = async () => {
     await axios
       .get(`http://localhost:80/api/bec/contrabec.php`, {
@@ -68,11 +68,11 @@ function NavbarBec(args) {
         console.log(error);
       });
   };
-  ////
+  ////RECARGAR URL
   const act = () => {
     window.location.reload();
   };
-  ////
+  ////LOGOUT
   const naviget = useNavigate();
   function logoutSubmit() {
     localStorage.setItem("login", "");
@@ -88,22 +88,7 @@ function NavbarBec(args) {
   const [descripcion, setDescripcion] = useState("");
   const [nom, setNom] = useState("");
   const [imagen, setImagen] = useState(null);
-
-  const [imagenP, setImagenP] = useState(null);
-  async function addImagenP(e) {
-    e.preventDefault();
-    let fd = new FormData();
-    fd.append("archivo_per", imagen);
-    fd.append("nom_usu", descripcion);
-    fd.append("nom_doc", nom);
-    const res = await axios.post(
-      `http://localhost:80/api/bec/img/index.php`,
-      fd
-    );
-    console.log(res.data);
-    abrirCerrarModalInsertar();
-  }
-
+  ////CARGAR ARCHIVO
   async function addImagen(e) {
     e.preventDefault();
     let fd = new FormData();
@@ -118,10 +103,10 @@ function NavbarBec(args) {
   const abrirCerrarModalInsertar = () => {
     setModalInsertar(!modalInsertar);
   };
-  ////
+  ////LEER CONTRASEÑA LITERAL MYSQL
   const peticionPutContra = async () => {
     var f = new FormData();
-    ///)
+
     f.append("contrasena", data.contrasena);
     f.append("contrasena_lit", data.contrasena_lit);
     f.append("METHOD", "PUT");
@@ -146,7 +131,7 @@ function NavbarBec(args) {
   useEffect(() => {
     getImagenes();
   }, []);
-
+  ////MOSTRAR IMAGEN DE PERFIL
   const getImagenes = async () => {
     await axios
       .get(`http://localhost:80/api/bec/img/index.php`, {
@@ -157,6 +142,26 @@ function NavbarBec(args) {
       .then((response) => {
         console.log(response.data);
         setLista(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  ////CAMBIAR IMAGEN PERFIL
+  const [imagenP, setImagenP] = useState(null);
+
+  const peticionPuti = async () => {
+    var f = new FormData();
+    f.append("archivo_foto", imagenP);
+    f.append("METHOD", "PUT");
+    await axios
+      .post(`http://localhost:80/api/bec/foto.php`, f, {
+        params: { id: data.id },
+      })
+      .then((response) => {
+        setData(response);
+        abrirCerrarModalFoto();
+        act();
       })
       .catch((error) => {
         console.log(error);
@@ -366,13 +371,16 @@ function NavbarBec(args) {
             <Input
               type="file"
               className="form-control"
-              accept="archivo_per/*"
+              accept="archivo_foto/*"
               onChange={(e) => setImagenP(e.target.files[0])}
               multiple
             />
           </div>
         </ModalBody>
         <ModalFooter>
+          <Button className="btn btn-success" onClick={() => peticionPuti()}>
+            Guardar
+          </Button>
           <Button
             color="danger"
             size="lg"

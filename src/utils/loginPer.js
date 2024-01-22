@@ -27,7 +27,7 @@ function LoginPer() {
     setTimeout(function () {
       setMsg("");
     }, 5000);
-  }, [msg]);
+  }, [msg, navigate]);
 
   const handleInputChange = (e, type) => {
     switch (type) {

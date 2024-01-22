@@ -13,7 +13,7 @@ export default function Protected(props) {
       );
       naviget("/", { replace: true });
     }
-  }, []);
+  }, [naviget]);
 
   return <Component />;
 }
