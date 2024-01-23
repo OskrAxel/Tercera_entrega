@@ -141,15 +141,14 @@ function ListBe() {
     <div id="main_content">
       <div className="tra">
         <div className="tra title-form">
-          <h2 className>Listado Usuarios</h2>
+          <h2 className>Listado Becarios</h2>
         </div>
         <div id="subt">
           {/* <Link to="user/create"> */}
           <Button
             color="primary"
             size="lg"
-            onClick={() => abrirCerrarModalInsertar()}
-          >
+            onClick={() => abrirCerrarModalInsertar()}>
             <FaIcons.FaFileDownload /> Reporte
           </Button>
           {/* </Link> */}
@@ -249,8 +248,7 @@ function ListBe() {
             <Button
               color="danger"
               size="lg"
-              onClick={() => abrirCerrarModalInsertar()}
-            >
+              onClick={() => abrirCerrarModalInsertar()}>
               Cancelar
             </Button>
           </ModalFooter>
@@ -319,8 +317,7 @@ function ListBe() {
             {"   "}
             <button
               className="btn btn-danger"
-              onClick={() => abrirCerrarModalEditar()}
-            >
+              onClick={() => abrirCerrarModalEditar()}>
               Cancelar
             </button>
           </ModalFooter>
@@ -337,8 +334,7 @@ function ListBe() {
             </button>
             <button
               className="btn btn-secondary"
-              onClick={() => abrirCerrarModalEliminar()}
-            >
+              onClick={() => abrirCerrarModalEliminar()}>
               No
             </button>
           </ModalFooter>

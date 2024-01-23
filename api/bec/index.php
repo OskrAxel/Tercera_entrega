@@ -14,7 +14,7 @@ if($_SERVER['REQUEST_METHOD']=='GET'){
         $resultado=metodoGet($query);
         echo json_encode($resultado->fetch(PDO::FETCH_ASSOC));
     }else{
-        $query="SELECT id, nombre, apellido, email, contrasena, celular from usuarios_bec";
+        $query="SELECT id, nombre, apellido, email, contrasena, celular, carrera, anio, ciudad, direccion, nom_pad, nom_mad from usuarios_bec";
         $resultado=metodoGet($query);
         echo json_encode($resultado->fetchAll()); 
     }

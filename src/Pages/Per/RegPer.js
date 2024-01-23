@@ -48,6 +48,7 @@ function Regper() {
       })
       .then((response) => {
         setData(response);
+        peticionGet();
       })
       .catch((error) => {
         console.log(error);
@@ -61,7 +62,6 @@ function Regper() {
       <div className="tra">
         <div className="tra title-form">
           <h2 className>Datos Personales</h2>
-          {data.user}
         </div>
         <Form className="frm">
           <Row>
@@ -91,9 +91,8 @@ function Regper() {
           <Row>
             <Col md={6}>
               <FormGroup>
-                <Label for="id_per">ID Usuario:</Label>
+                <Label>ID Usuario:</Label>
                 <Input
-                  id="id_per"
                   name="id_per"
                   type="text"
                   onChange={handleChange}
@@ -103,9 +102,8 @@ function Regper() {
             </Col>
             <Col md={4}>
               <FormGroup>
-                <Label for="carrera">Carrera:</Label>
+                <Label>Carrera:</Label>
                 <Input
-                  id="carrera"
                   name="carrera"
                   type="text"
                   onChange={handleChange}
@@ -115,9 +113,8 @@ function Regper() {
             </Col>
             <Col md={2}>
               <FormGroup>
-                <Label for="celular">Celular:</Label>
+                <Label>Celular:</Label>
                 <Input
-                  id="celular"
                   name="celular"
                   type="text"
                   onChange={handleChange}
@@ -129,9 +126,8 @@ function Regper() {
           <Row>
             <Col md={6}>
               <FormGroup>
-                <Label for="institucion">Universidad/Institución:</Label>
+                <Label>Universidad/Institución:</Label>
                 <Input
-                  id="institucion"
                   name="institucion"
                   type="text"
                   onChange={handleChange}
@@ -141,9 +137,8 @@ function Regper() {
             </Col>
             <Col md={4}>
               <FormGroup>
-                <Label for="anio_inicio">Año Inicio:</Label>
+                <Label>Año Inicio:</Label>
                 <Input
-                  id="anio_inicio"
                   name="anio_inicio"
                   type="text"
                   onChange={handleChange}
@@ -153,9 +148,8 @@ function Regper() {
             </Col>
             <Col md={2}>
               <FormGroup>
-                <Label for="email">Correo:</Label>
+                <Label>Correo:</Label>
                 <Input
-                  id="email"
                   name="email"
                   type="text"
                   onChange={handleChange}
@@ -164,7 +158,7 @@ function Regper() {
               </FormGroup>
             </Col>
           </Row>
-          <Button className="btn btn-success" onClick={() => peticionPut()}>
+          <Button color="success" size="lg" onClick={() => peticionPut()}>
             Modificar
           </Button>
         </Form>

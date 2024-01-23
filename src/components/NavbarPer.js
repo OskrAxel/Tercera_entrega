@@ -33,6 +33,11 @@ function NavbarBec(args) {
   const abrirCerrarModalContra = () => {
     setModalContra(!modalContra);
   };
+  ////FECHA
+  const [modalFecha, setModalFecha] = useState(false);
+  const abrirCerrarModalFecha = () => {
+    setModalFecha(!modalFecha);
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -127,6 +132,9 @@ function NavbarBec(args) {
                 <DropdownItem href="./pdf2" target="_blank">
                   Postulacion
                 </DropdownItem>
+                <DropdownItem onClick={() => abrirCerrarModalContra()}>
+                  Fecha Entrega
+                </DropdownItem>
                 <DropdownItem>Sobre Nosotros...</DropdownItem>
                 <DropdownItem divider />
                 <DropdownItem onClick={() => abrirCerrarModalContra()}>
@@ -173,13 +181,47 @@ function NavbarBec(args) {
         </ModalBody>
         <ModalFooter>
           <Button color="success" size="lg" onClick={() => peticionPutContra()}>
-            Editar
+            Guardar
           </Button>
           {"   "}
           <Button
             color="danger"
             size="lg"
             onClick={() => abrirCerrarModalContra()}>
+            Cancelar
+          </Button>
+        </ModalFooter>
+      </Modal>
+
+      {/* MODAL FECHA */}
+      <Modal isOpen={modalFecha}>
+        <ModalHeader
+          style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}>
+          Establecer Fecha Entrega
+        </ModalHeader>
+        <ModalBody>
+          <div className="form-group">
+            <label>Nueva Clave: </label>
+            <br />
+            <input
+              type="text"
+              className="form-control"
+              name="contrasena"
+              onChange={handleChange}
+              value={data.contrasena}
+            />
+            <br />
+          </div>
+        </ModalBody>
+        <ModalFooter>
+          <Button color="success" size="lg" onClick={() => peticionPutContra()}>
+            Guardar
+          </Button>
+          {"   "}
+          <Button
+            color="danger"
+            size="lg"
+            onClick={() => abrirCerrarModalFecha()}>
             Cancelar
           </Button>
         </ModalFooter>
