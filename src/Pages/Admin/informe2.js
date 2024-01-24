@@ -95,7 +95,8 @@ function Informe2() {
           <Button
             color="success"
             size="lg"
-            onClick={() => abrirCerrarModalInsertar()}>
+            onClick={() => abrirCerrarModalInsertar()}
+          >
             <FaIcons.FaPlus /> Añadir
           </Button>
         </div>
@@ -129,7 +130,8 @@ function Informe2() {
                 <td>
                   <button
                     className="btn btn-success"
-                    onClick={() => abrirCerrarModalVer()}>
+                    onClick={() => abrirCerrarModalVer()}
+                  >
                     Descargar
                   </button>{" "}
                   {/* <button
@@ -140,7 +142,8 @@ function Informe2() {
                   </button>{" "} */}
                   <button
                     className="btn btn-danger"
-                    onClick={() => seleccionarUsuario(item, "Eliminar")}>
+                    onClick={() => seleccionarUsuario(item, "Eliminar")}
+                  >
                     Eliminar
                   </button>
                 </td>
@@ -199,7 +202,8 @@ function Informe2() {
             <Button
               color="danger"
               size="lg"
-              onClick={() => abrirCerrarModalInsertar()}>
+              onClick={() => abrirCerrarModalInsertar()}
+            >
               Cancelar
             </Button>
           </ModalFooter>
@@ -213,12 +217,14 @@ function Informe2() {
           <ModalFooter>
             <button
               className="btn btn-danger"
-              onClick={() => deleteImagen(usuarioSeleccionado.id_doc)}>
+              onClick={() => deleteImagen(usuarioSeleccionado.id_doc)}
+            >
               Sí
             </button>
             <button
               className="btn btn-secondary"
-              onClick={() => abrirCerrarModalEliminar()}>
+              onClick={() => abrirCerrarModalEliminar()}
+            >
               No
             </button>
           </ModalFooter>
@@ -233,12 +239,14 @@ function Informe2() {
           <ModalFooter>
             <button
               className="btn btn-danger"
-              onClick={() => deleteImagen(usuarioSeleccionado.id_doc)}>
+              onClick={() => deleteImagen(usuarioSeleccionado.id_doc)}
+            >
               Sí
             </button>
             <button
               className="btn btn-secondary"
-              onClick={() => abrirCerrarModalVer()}>
+              onClick={() => abrirCerrarModalVer()}
+            >
               No
             </button>
           </ModalFooter>

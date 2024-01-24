@@ -24,7 +24,7 @@ import Horarios10 from "./Pages/Bec/Horarios/Horarios10";
 import Clients from "./Pages/Clients";
 import NavbarBec from "./components/NavbarBec";
 import NavbarAdm from "./components/NavbarAdm";
-import NavbarPer from "./components/NavbarPer";
+import NavbarPer from "./components/Navbarper/NavbarPer";
 import NavbarLogin from "./components/NavbarLogin";
 import RegComp from "./Pages/Bec/RegComp";
 import ListBe from "./Pages/Per/Bec";

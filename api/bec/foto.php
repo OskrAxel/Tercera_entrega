@@ -1,29 +1,27 @@
 <?php
 
-include 'BD.php';
+require_once 'BDF.php';
+require_once 'api.php';
+require_once 'cors.php';
+$method = $_SERVER['REQUEST_METHOD'];
 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Headers: *");
-header("Access-Control-Allow-Methods: *");
-
-
-if($_POST['METHOD']=='PUT'){
-    unset($_POST['METHOD']);
-    $id=$_GET['id'];
-    ////
-    $fotom = $_FILES['archivo_foto'];
-	$tmp_name = $fotom['tmp_name'];
-	$contenido_foto = file_get_contents($tmp_name);
-	$fotoBLOB = addslashes($contenido_foto);
-    ////
-    $query="UPDATE usuarios_bec SET foto='$fotoBLOB' WHERE id='$id'";
-    $resultado=metodoPut($query);
-    echo json_encode($resultado);
-    header("HTTP/1.1 200 OK");
-    exit();
+if($method == "GET") {
+    $vector = array();
+    $api = new Api();
+    $vector = $api->getImagenes();
+    $json = json_encode($vector);
+    echo $json;
 }
 
-header("HTTP/1.1 400 Bad Request");
+if($method=="POST"){
+    $json = null;
+    $foto = (file_get_contents($_FILES['archivo_per']['tmp_name']));
+    $descripcion = $_POST['nom_usu'];
+    $nom_doc = $_POST['nom_doc'];
+    $api = new Api();
+    $json = $api->addImagen($descripcion,$foto,$nom_doc);
+    echo $json;
+}
+
+
 ?>
