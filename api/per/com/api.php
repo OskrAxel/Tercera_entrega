@@ -28,10 +28,10 @@ public function addImagen($descripcion,$foto,$nom_doc){
   
   $conexion = new Conexion();
   $db = $conexion->getConexion();
-  $sql = "INSERT INTO informe (nom_usu, nom_doc, archivo_per) VALUES (:nom_usu,:nom_doc,:archivo_per)";
+  $sql = "INSERT INTO informe (id_per, nom_doc, archivo_com) VALUES (:nom_usu,:nom_doc,:archivo_per)";
   $consulta = $db->prepare($sql);
   $consulta->bindParam(':nom_usu', $descripcion);
-  $consulta->bindParam(':archivo_per', $foto);
+  $consulta->bindParam(':archivo_com', $foto);
   $consulta->bindParam(':nom_doc', $nom_doc);
   $consulta->execute();
 

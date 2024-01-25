@@ -8,7 +8,8 @@ const CargaDoc = () => {
   const user = localStorage.getItem("user");
   const [detalle, setDetalle] = useState("");
   const [nom, setNom] = useState("");
-  const [imagen, setImagen] = useState(null);
+  const [nom_usu, setNomusu] = useState("");
+  const [comunicado, setComunicado] = useState(null);
 
   const abrirCerrarModalInsertar = () => {
     setModalInsertar(!modalInsertar);
@@ -26,7 +27,7 @@ const CargaDoc = () => {
     archivo_com: "",
   });
   useEffect(() => {
-    getImagenes();
+    getComunicado();
   }, []);
   ////
   const handleChange = (e) => {
@@ -38,22 +39,23 @@ const CargaDoc = () => {
     console.log(usuarioSeleccionado);
   };
   ////Mostrar comunicados
-  async function getImagenes() {
+  async function getComunicado() {
     const res = await axios.get("http://localhost:80/api/per/com/");
     setLista(res.data);
     console.log(res.data);
   }
   ////Agregar comunicado
-  async function addImagen(e) {
+  async function addComunicado(e) {
     e.preventDefault();
     let fd = new FormData();
-    fd.append("archivo_per", imagen);
+    fd.append("archivo_per", comunicado);
     fd.append("detalle", detalle);
     fd.append("nom_doc", nom);
+    fd.append("nom_usu", nom_usu);
     const res = await axios.post("http://localhost:80/api/per/com/", fd);
     console.log(res.data);
     abrirCerrarModalInsertar();
-    getImagenes();
+    getComunicado();
   }
   ////modal editar
   const [modalEditar, setModalEditar] = useState(false);
@@ -66,17 +68,16 @@ const CargaDoc = () => {
     caso === "Editar" ? abrirCerrarModalEditar() : abrirCerrarModalEliminar();
   };
   ////eliminar comunicado
-  async function deleteImagen(id_com) {
+  async function deleteComunicado(id_com) {
     const res = await axios.delete(
       "http://localhost:80/api/per/com/?id_com=" + id_com
     );
     abrirCerrarModalEliminar();
-    getImagenes();
+    getComunicado();
     console.log(res.data);
   }
   ////
   const [lista, setLista] = useState([]);
-  const [data, setData] = useState([]);
   const [modalInsertar, setModalInsertar] = useState(false);
   //modal eliminar
   const [modalEliminar, setModalEliminar] = useState(false);
@@ -189,7 +190,7 @@ const CargaDoc = () => {
                 type="file"
                 className="form-control"
                 accept="archivo_per/*"
-                onChange={(e) => setImagen(e.target.files[0])}
+                onChange={(e) => setComunicado(e.target.files[0])}
                 multiple
               />
               <br />
@@ -199,13 +200,13 @@ const CargaDoc = () => {
                 type="text"
                 className="form-control"
                 name="detalle"
-                onChange={handleChange}
+                onChange={(e) => setDetalle(e.target.value)}
               />
               <br />
             </div>
           </ModalBody>
           <ModalFooter>
-            <Button color="success" size="lg" onClick={(e) => addImagen(e)}>
+            <Button color="success" size="lg" onClick={(e) => addComunicado(e)}>
               Guardar
             </Button>
             <Button
@@ -231,7 +232,7 @@ const CargaDoc = () => {
           <ModalFooter>
             <button
               className="btn btn-danger"
-              onClick={() => deleteImagen(usuarioSeleccionado.id_com)}
+              onClick={() => deleteComunicado(usuarioSeleccionado.id_com)}
             >
               Sí
             </button>
