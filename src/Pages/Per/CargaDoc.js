@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
-import { Table, Button } from "reactstrap";
+import { Table, Button, Label, Input } from "reactstrap";
 import * as FaIcons from "react-icons/fa";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const CargaDoc = () => {
-  const user = localStorage.getItem("user");
+  // const user = localStorage.getItem("user");
   const [detalle, setDetalle] = useState("");
   const [nom, setNom] = useState("");
   const [nom_usu, setNomusu] = useState("");
@@ -30,14 +31,6 @@ const CargaDoc = () => {
     getComunicado();
   }, []);
   ////
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setusuarioSeleccionado((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-    console.log(usuarioSeleccionado);
-  };
   ////Mostrar comunicados
   async function getComunicado() {
     const res = await axios.get("http://localhost:80/api/per/com/");
@@ -48,7 +41,7 @@ const CargaDoc = () => {
   async function addComunicado(e) {
     e.preventDefault();
     let fd = new FormData();
-    fd.append("archivo_per", comunicado);
+    fd.append("archivo_com", comunicado);
     fd.append("detalle", detalle);
     fd.append("nom_doc", nom);
     fd.append("nom_usu", nom_usu);
@@ -65,7 +58,7 @@ const CargaDoc = () => {
   const seleccionarUsuario = (Usuario, caso) => {
     setusuarioSeleccionado(Usuario);
 
-    caso === "Editar" ? abrirCerrarModalEditar() : abrirCerrarModalEliminar();
+    caso === "Editar" ? abrirCerrarModalVer() : abrirCerrarModalEliminar();
   };
   ////eliminar comunicado
   async function deleteComunicado(id_com) {
@@ -84,6 +77,7 @@ const CargaDoc = () => {
   const abrirCerrarModalEliminar = () => {
     setModalEliminar(!modalEliminar);
   };
+  const baseUrl = "http://localhost:80/api/pat/index.php";
   return (
     <div id="main_content">
       <div className="tra">
@@ -97,6 +91,11 @@ const CargaDoc = () => {
             onClick={() => abrirCerrarModalInsertar()}
           >
             <FaIcons.FaFileDownload /> Reporte
+          </Button>
+          <Button>
+            <a download={baseUrl} href="#" target="_blank">
+              Hypervínculo
+            </a>
           </Button>
           <Button
             style={{ float: "right" }}
@@ -120,36 +119,22 @@ const CargaDoc = () => {
           <tbody>
             {lista.map((item) => (
               <tr className="text-center" key={item.id_com}>
-                {/* <td>{item.id_doc}</td> */}
                 <td>{item.nom_doc}</td>
                 <td>{item.id_per}</td>
                 <td>{item.detalle}</td>
-                {/* <td>
-                  <img
-                    src={"data:archivo_per/png;base64," + item.archivo_per}
-                    className=""
-                    alt="archivo_per"
-                  />
-                </td> */}
                 <td>
-                  <button
-                    className="btn btn-success"
-                    onClick={() => abrirCerrarModalVer()}
-                  >
-                    Descargar
-                  </button>{" "}
-                  <button
-                    className="btn btn-warning"
+                  <Button
+                    color="success"
                     onClick={() => seleccionarUsuario(item, "Editar")}
                   >
-                    Visualizar
-                  </button>{" "}
-                  <button
-                    className="btn btn-danger"
+                    Visualizar/Descargar
+                  </Button>{" "}
+                  <Button
+                    color="danger"
                     onClick={() => seleccionarUsuario(item, "Eliminar")}
                   >
                     Eliminar
-                  </button>
+                  </Button>
                 </td>
               </tr>
             ))}
@@ -164,39 +149,37 @@ const CargaDoc = () => {
           </ModalHeader>
           <ModalBody>
             <div className="form-group">
-              <label>Nombre documento: </label>
+              <Label>Nombre documento: </Label>
               <br />
-              <input
+              <Input
                 type="text"
                 className="form-control"
                 name="nom_doc"
                 onChange={(e) => setNom(e.target.value)}
               />
               <br />
-              <label>Usuario: </label>
+              <Label>Usuario: </Label>
               <br />
-              <input
-                disabled
+              <Input
                 type="text"
                 className="form-control"
                 name="nom_usu"
-                // onChange={(e) => setDescripcion(e.target.value)}
-                value={user}
+                onChange={(e) => setNomusu(e.target.value)}
               />
               <br />
-              <label>Informe personal: </label>
+              <Label>Informe personal: </Label>
               <br />
-              <input
+              <Input
                 type="file"
                 className="form-control"
-                accept="archivo_per/*"
+                accept="archivo_com/*"
                 onChange={(e) => setComunicado(e.target.files[0])}
                 multiple
               />
               <br />
-              <label>Detalle: </label>
+              <Label>Detalle: </Label>
               <br />
-              <input
+              <Input
                 type="text"
                 className="form-control"
                 name="detalle"
@@ -230,18 +213,49 @@ const CargaDoc = () => {
             {usuarioSeleccionado && usuarioSeleccionado.nom_doc}?
           </ModalBody>
           <ModalFooter>
-            <button
-              className="btn btn-danger"
+            <Button
+              color="success"
+              size="lg"
               onClick={() => deleteComunicado(usuarioSeleccionado.id_com)}
             >
               Sí
-            </button>
-            <button
-              className="btn btn-secondary"
+            </Button>
+            <Button
+              color="danger"
+              size="lg"
               onClick={() => abrirCerrarModalEliminar()}
             >
               No
-            </button>
+            </Button>
+          </ModalFooter>
+        </Modal>
+
+        {/* Modal VER */}
+        <Modal isOpen={modalVer}>
+          <ModalHeader
+            style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}
+          >
+            Eliminar comunicado
+          </ModalHeader>
+          <ModalBody>
+            ¿Estás seguro que deseas eliminar el documento{" "}
+            {usuarioSeleccionado && usuarioSeleccionado.nom_doc}?
+          </ModalBody>
+          <ModalFooter>
+            <Button
+              color="success"
+              size="lg"
+              onClick={() => deleteComunicado(usuarioSeleccionado.id_com)}
+            >
+              Sí
+            </Button>
+            <Button
+              color="danger"
+              size="lg"
+              onClick={() => abrirCerrarModalVer()}
+            >
+              No
+            </Button>
           </ModalFooter>
         </Modal>
       </div>

@@ -24,18 +24,18 @@ public function getImagenes(){
 }
 
 
-public function addImagen($descripcion,$foto,$nom_doc){
+public function addImagen($nom_usu,$com,$nom_doc){
   
   $conexion = new Conexion();
   $db = $conexion->getConexion();
-  $sql = "INSERT INTO informe (id_per, nom_doc, archivo_com) VALUES (:nom_usu,:nom_doc,:archivo_per)";
+  $sql = "INSERT INTO comunicado (id_per, nom_doc, archivo_com) VALUES (:nom_usu,:nom_doc,:archivo_com)";
   $consulta = $db->prepare($sql);
-  $consulta->bindParam(':nom_usu', $descripcion);
-  $consulta->bindParam(':archivo_com', $foto);
+  $consulta->bindParam(':nom_usu', $nom_usu);
+  $consulta->bindParam(':archivo_com', $com);
   $consulta->bindParam(':nom_doc', $nom_doc);
   $consulta->execute();
 
-  return '{"msg":"imagen agregada"}';
+  return '{"msg":"comunicado agregado"}';
 }
 
 public function deleteImagen($id_com){
