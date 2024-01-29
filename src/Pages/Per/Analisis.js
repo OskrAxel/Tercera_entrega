@@ -34,13 +34,13 @@ const COLORS = [
 ];
 //
 const data = [
-  { name: "María", age: 10, weight: 60 },
-  { name: "Karina", age: 25, weight: 70 },
-  { name: "Susana", age: 15, weight: 65 },
-  { name: "Pedro", age: 35, weight: 85 },
-  { name: "Felipe", age: 12, weight: 48 },
-  { name: "Laura", age: 30, weight: 69 },
-  { name: "Adrián", age: 15, weight: 78 },
+  { anio: "2018", conclusion: 10, inscripciones: 60 },
+  { anio: "2019", conclusion: 25, inscripciones: 70 },
+  { anio: "2020", conclusion: 15, inscripciones: 65 },
+  { anio: "2021", conclusion: 35, inscripciones: 85 },
+  { anio: "2022", conclusion: 12, inscripciones: 48 },
+  { anio: "2023", conclusion: 30, inscripciones: 69 },
+  { anio: "2024", conclusion: 15, inscripciones: 78 },
 ];
 const Analisis = () => {
   return (
@@ -74,7 +74,26 @@ const Analisis = () => {
                 Habilitados
               </CardSubtitle>
               <CardText>Ver</CardText>
-              <Button className="btn-success">Ver</Button>
+              <Button href="./becarios" className="btn-success">
+                Ver
+              </Button>
+            </CardBody>
+          </Card>
+          <Card
+            color=""
+            style={{
+              color: "black",
+              width: "18rem",
+            }}>
+            <CardBody>
+              <CardTitle tag="h5">Patrocinadores</CardTitle>
+              <CardSubtitle className="mb-2 text-muted" tag="h6">
+                Registrados
+              </CardSubtitle>
+              <CardText>Ver</CardText>
+              <Button href="./patro" className="btn-success">
+                Ver
+              </Button>
             </CardBody>
           </Card>
           <Card
@@ -92,27 +111,14 @@ const Analisis = () => {
               <Button className="btn-success">Ver</Button>
             </CardBody>
           </Card>
-          <Card
-            color=""
-            style={{
-              color: "black",
-              width: "18rem",
-            }}>
-            <CardBody>
-              <CardTitle tag="h5">Infromes</CardTitle>
-              <CardSubtitle className="mb-2 text-muted" tag="h6">
-                Entregados
-              </CardSubtitle>
-              <CardText>Ver</CardText>
-              <Button className="btn-success">Ver</Button>
-            </CardBody>
-          </Card>
         </CardGroup>
         {/* // */}
         <Row>
           <Col sm="6">
             <Card body>
-              <CardTitle tag="h5">Special Title Treatment</CardTitle>
+              <CardTitle tag="h5">
+                Registro inscripciones/conclusion de becas
+              </CardTitle>
               <CardText>
                 With supporting text below as a natural lead-in to additional
                 content.
@@ -129,12 +135,12 @@ const Analisis = () => {
                     bottom: 5,
                   }}>
                   <CartesianGrid strokeDasharray="4 1 2" />
-                  <XAxis dataKey="name" />
+                  <XAxis dataKey="anio" />
                   <YAxis />
                   <Tooltip />
                   <Legend />
-                  <Bar dataKey="weight" fill="#6b48ff" />
-                  <Bar dataKey="age" fill="#1ee3cf" />
+                  <Bar dataKey="inscripciones" fill="#6b48ff" />
+                  <Bar dataKey="conclusion" fill="#1ee3cf" />
                 </BarChart>
               </ResponsiveContainer>
             </Card>
@@ -149,10 +155,10 @@ const Analisis = () => {
               <ResponsiveContainer width="100%" aspect={2}>
                 <PieChart>
                   <Pie
-                    dataKey="weight"
+                    dataKey="inscripciones"
                     data={data}
                     innerRadius={60}
-                    outerRadius={85}
+                    outerRadius={150}
                     fill="#82ca9d">
                     {data.map((entry, index) => (
                       <Cell

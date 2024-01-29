@@ -24,15 +24,17 @@ public function getImagenes(){
 }
 
 
-public function addImagen($nom_usu,$com,$nom_doc){
+public function addImagen($nom_usu,$com,$nom_doc,$detalle,$created_at){
   
   $conexion = new Conexion();
   $db = $conexion->getConexion();
-  $sql = "INSERT INTO comunicado (id_per, nom_doc, archivo_com) VALUES (:nom_usu,:nom_doc,:archivo_com)";
+  $sql = "INSERT INTO comunicado (id_per, nom_doc, archivo_com, detalle, created_at) VALUES (:nom_usu,:nom_doc,:archivo_com,:detalle,:created_at)";
   $consulta = $db->prepare($sql);
   $consulta->bindParam(':nom_usu', $nom_usu);
   $consulta->bindParam(':archivo_com', $com);
   $consulta->bindParam(':nom_doc', $nom_doc);
+  $consulta->bindParam(':detalle', $detalle);
+  $consulta->bindParam(':created_at', $created_at);
   $consulta->execute();
 
   return '{"msg":"comunicado agregado"}';

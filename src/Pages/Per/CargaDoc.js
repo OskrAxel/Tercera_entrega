@@ -77,7 +77,8 @@ const CargaDoc = () => {
   const abrirCerrarModalEliminar = () => {
     setModalEliminar(!modalEliminar);
   };
-  const baseUrl = "http://localhost:80/api/pat/index.php";
+  const baseUrl =
+    "http://localhost/phpmyadmin/index.php?route=/sql&pos=0&db=bqef_2&table=comunicado";
   return (
     <div id="main_content">
       <div className="tra">
@@ -88,8 +89,7 @@ const CargaDoc = () => {
           <Button
             color="primary"
             size="lg"
-            onClick={() => abrirCerrarModalInsertar()}
-          >
+            onClick={() => abrirCerrarModalInsertar()}>
             <FaIcons.FaFileDownload /> Reporte
           </Button>
           <Button>
@@ -101,8 +101,7 @@ const CargaDoc = () => {
             style={{ float: "right" }}
             color="success"
             size="lg"
-            onClick={() => abrirCerrarModalInsertar()}
-          >
+            onClick={() => abrirCerrarModalInsertar()}>
             <FaIcons.FaPlus /> Añadir
           </Button>
         </div>
@@ -125,14 +124,12 @@ const CargaDoc = () => {
                 <td>
                   <Button
                     color="success"
-                    onClick={() => seleccionarUsuario(item, "Editar")}
-                  >
+                    onClick={() => seleccionarUsuario(item, "Editar")}>
                     Visualizar/Descargar
                   </Button>{" "}
                   <Button
                     color="danger"
-                    onClick={() => seleccionarUsuario(item, "Eliminar")}
-                  >
+                    onClick={() => seleccionarUsuario(item, "Eliminar")}>
                     Eliminar
                   </Button>
                 </td>
@@ -143,8 +140,7 @@ const CargaDoc = () => {
         {/* Modal agregar comunicado */}
         <Modal isOpen={modalInsertar}>
           <ModalHeader
-            style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}
-          >
+            style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}>
             Cargar documento
           </ModalHeader>
           <ModalBody>
@@ -195,8 +191,7 @@ const CargaDoc = () => {
             <Button
               color="danger"
               size="lg"
-              onClick={() => abrirCerrarModalInsertar()}
-            >
+              onClick={() => abrirCerrarModalInsertar()}>
               Cancelar
             </Button>
           </ModalFooter>
@@ -204,8 +199,7 @@ const CargaDoc = () => {
         {/* Modal Eliminar */}
         <Modal isOpen={modalEliminar}>
           <ModalHeader
-            style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}
-          >
+            style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}>
             Eliminar comunicado
           </ModalHeader>
           <ModalBody>
@@ -216,15 +210,13 @@ const CargaDoc = () => {
             <Button
               color="success"
               size="lg"
-              onClick={() => deleteComunicado(usuarioSeleccionado.id_com)}
-            >
+              onClick={() => deleteComunicado(usuarioSeleccionado.id_com)}>
               Sí
             </Button>
             <Button
               color="danger"
               size="lg"
-              onClick={() => abrirCerrarModalEliminar()}
-            >
+              onClick={() => abrirCerrarModalEliminar()}>
               No
             </Button>
           </ModalFooter>
@@ -233,8 +225,7 @@ const CargaDoc = () => {
         {/* Modal VER */}
         <Modal isOpen={modalVer}>
           <ModalHeader
-            style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}
-          >
+            style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}>
             Eliminar comunicado
           </ModalHeader>
           <ModalBody>
@@ -245,15 +236,13 @@ const CargaDoc = () => {
             <Button
               color="success"
               size="lg"
-              onClick={() => deleteComunicado(usuarioSeleccionado.id_com)}
-            >
+              onClick={() => deleteComunicado(usuarioSeleccionado.id_com)}>
               Sí
             </Button>
             <Button
               color="danger"
               size="lg"
-              onClick={() => abrirCerrarModalVer()}
-            >
+              onClick={() => abrirCerrarModalVer()}>
               No
             </Button>
           </ModalFooter>

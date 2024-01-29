@@ -378,7 +378,10 @@ function NavbarBec(args) {
           </div>
         </ModalBody>
         <ModalFooter>
-          <Button className="btn btn-success" onClick={() => peticionPuti()}>
+          <Button
+            className="btn btn-success"
+            size="lg"
+            onClick={() => peticionPuti()}>
             Guardar
           </Button>
           <Button
