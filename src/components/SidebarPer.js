@@ -50,6 +50,11 @@ const SidebarPer = () => {
       name: "Análisis Institucional",
       icon: <FaIcons.FaChartLine />,
     },
+    {
+      path: "PDD",
+      name: "prueba pdf",
+      icon: <FaIcons.FaChartLine />,
+    },
   ];
   return (
     <div>

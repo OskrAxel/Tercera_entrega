@@ -7,10 +7,9 @@ import {
   ModalFooter,
   ModalHeader,
 } from "reactstrap";
-import { Table, Button, Label, Input, Row, Col } from "reactstrap";
+import { Table, Button, Label, Input, Row } from "reactstrap";
 import * as FaIcons from "react-icons/fa";
 import axios from "axios";
-import { Link } from "react-router-dom";
 
 const CargaDoc = () => {
   // const user = localStorage.getItem("user");
@@ -57,11 +56,6 @@ const CargaDoc = () => {
     abrirCerrarModalInsertar();
     getComunicado();
   }
-  ////modal editar
-  const [modalEditar, setModalEditar] = useState(false);
-  const abrirCerrarModalEditar = () => {
-    setModalEditar(!modalEditar);
-  };
   const seleccionarUsuario = (Usuario, caso) => {
     setusuarioSeleccionado(Usuario);
 
@@ -113,14 +107,16 @@ const CargaDoc = () => {
           <Button
             color="primary"
             size="lg"
-            onClick={() => abrirCerrarModalInsertar()}>
+            onClick={() => abrirCerrarModalInsertar()}
+          >
             <FaIcons.FaFileDownload /> Reporte
           </Button>
           <Button
             style={{ float: "right" }}
             color="success"
             size="lg"
-            onClick={() => abrirCerrarModalInsertar()}>
+            onClick={() => abrirCerrarModalInsertar()}
+          >
             <FaIcons.FaPlus /> Añadir
           </Button>
         </div>
@@ -143,14 +139,16 @@ const CargaDoc = () => {
                 <td>
                   <Button
                     color="warning"
-                    onClick={() => seleccionarUsuario(item, "Editar")}>
+                    onClick={() => seleccionarUsuario(item, "Editar")}
+                  >
                     <FaIcons.FaRegEye />
                     &nbsp;&nbsp;Visualizar
                   </Button>
                   &nbsp;&nbsp;&nbsp;
                   <Button
                     color="danger"
-                    onClick={() => seleccionarUsuario(item, "Eliminar")}>
+                    onClick={() => seleccionarUsuario(item, "Eliminar")}
+                  >
                     Eliminar
                   </Button>
                 </td>
@@ -161,7 +159,8 @@ const CargaDoc = () => {
         {/* Modal agregar comunicado */}
         <Modal isOpen={modalInsertar}>
           <ModalHeader
-            style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}>
+            style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}
+          >
             Cargar documento
           </ModalHeader>
           <ModalBody>
@@ -212,7 +211,8 @@ const CargaDoc = () => {
             <Button
               color="danger"
               size="lg"
-              onClick={() => abrirCerrarModalInsertar()}>
+              onClick={() => abrirCerrarModalInsertar()}
+            >
               Cancelar
             </Button>
           </ModalFooter>
@@ -220,7 +220,8 @@ const CargaDoc = () => {
         {/* Modal Eliminar */}
         <Modal isOpen={modalEliminar}>
           <ModalHeader
-            style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}>
+            style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}
+          >
             Eliminar comunicado
           </ModalHeader>
           <ModalBody>
@@ -231,13 +232,15 @@ const CargaDoc = () => {
             <Button
               color="success"
               size="lg"
-              onClick={() => deleteComunicado(usuarioSeleccionado.id_com)}>
+              onClick={() => deleteComunicado(usuarioSeleccionado.id_com)}
+            >
               Sí
             </Button>
             <Button
               color="danger"
               size="lg"
-              onClick={() => abrirCerrarModalEliminar()}>
+              onClick={() => abrirCerrarModalEliminar()}
+            >
               No
             </Button>
           </ModalFooter>
@@ -247,7 +250,8 @@ const CargaDoc = () => {
         <Modal isOpen={modalVer} size="xl">
           <ModalHeader
             close={closeBtn}
-            style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}>
+            style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}
+          >
             {usuarioSeleccionado && usuarioSeleccionado.nom_doc}
           </ModalHeader>
           <ModalBody>
@@ -275,7 +279,8 @@ const CargaDoc = () => {
                     type="application/pdf"
                     alt="archivo_per"
                     width="400"
-                    height="600">
+                    height="600"
+                  >
                     <p>
                       Tu navegador no puede mostrar este archivo PDF. Puedes
                       descargarlo
@@ -284,7 +289,8 @@ const CargaDoc = () => {
                           "data:application/pdf;base64," +
                           usuarioSeleccionado.archivo_com
                         }
-                        download>
+                        download
+                      >
                         aquí
                       </a>
                       .
@@ -299,7 +305,8 @@ const CargaDoc = () => {
               style={{ float: "right" }}
               color="success"
               size="lg"
-              onClick={handleDescargarPdf}>
+              onClick={handleDescargarPdf}
+            >
               <FaIcons.FaDownload />
               Download
             </Button>
