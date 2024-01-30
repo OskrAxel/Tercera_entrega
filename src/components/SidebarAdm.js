@@ -50,6 +50,11 @@ const SidebarAdm = () => {
       name: "Informes3",
       icon: <FaIcons.FaEnvelopeOpenText />,
     },
+    {
+      path: "informe",
+      name: "Infor",
+      icon: <FaIcons.FaEnvelopeOpenText />,
+    },
   ];
   return (
     <div>

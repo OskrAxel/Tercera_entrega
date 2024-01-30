@@ -61,7 +61,7 @@ function Informe() {
               className="btn btn-outline-success btn-sm"
               onClick={(e) => addImagen(e)}
             >
-              as
+              ADD
               {/* Add <FaCheckCircle /> */}
             </button>
           </form>
