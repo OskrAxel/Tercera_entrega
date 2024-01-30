@@ -113,16 +113,14 @@ const CargaDoc = () => {
           <Button
             color="primary"
             size="lg"
-            onClick={() => abrirCerrarModalInsertar()}
-          >
+            onClick={() => abrirCerrarModalInsertar()}>
             <FaIcons.FaFileDownload /> Reporte
           </Button>
           <Button
             style={{ float: "right" }}
             color="success"
             size="lg"
-            onClick={() => abrirCerrarModalInsertar()}
-          >
+            onClick={() => abrirCerrarModalInsertar()}>
             <FaIcons.FaPlus /> Añadir
           </Button>
         </div>
@@ -145,14 +143,14 @@ const CargaDoc = () => {
                 <td>
                   <Button
                     color="warning"
-                    onClick={() => seleccionarUsuario(item, "Editar")}
-                  >
-                    <FaIcons.FaRegEye />/<FaIcons.FaDownload />
-                  </Button>{" "}
+                    onClick={() => seleccionarUsuario(item, "Editar")}>
+                    <FaIcons.FaRegEye />
+                    &nbsp;&nbsp;Visualizar
+                  </Button>
+                  &nbsp;&nbsp;&nbsp;
                   <Button
                     color="danger"
-                    onClick={() => seleccionarUsuario(item, "Eliminar")}
-                  >
+                    onClick={() => seleccionarUsuario(item, "Eliminar")}>
                     Eliminar
                   </Button>
                 </td>
@@ -163,8 +161,7 @@ const CargaDoc = () => {
         {/* Modal agregar comunicado */}
         <Modal isOpen={modalInsertar}>
           <ModalHeader
-            style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}
-          >
+            style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}>
             Cargar documento
           </ModalHeader>
           <ModalBody>
@@ -215,8 +212,7 @@ const CargaDoc = () => {
             <Button
               color="danger"
               size="lg"
-              onClick={() => abrirCerrarModalInsertar()}
-            >
+              onClick={() => abrirCerrarModalInsertar()}>
               Cancelar
             </Button>
           </ModalFooter>
@@ -224,8 +220,7 @@ const CargaDoc = () => {
         {/* Modal Eliminar */}
         <Modal isOpen={modalEliminar}>
           <ModalHeader
-            style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}
-          >
+            style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}>
             Eliminar comunicado
           </ModalHeader>
           <ModalBody>
@@ -236,15 +231,13 @@ const CargaDoc = () => {
             <Button
               color="success"
               size="lg"
-              onClick={() => deleteComunicado(usuarioSeleccionado.id_com)}
-            >
+              onClick={() => deleteComunicado(usuarioSeleccionado.id_com)}>
               Sí
             </Button>
             <Button
               color="danger"
               size="lg"
-              onClick={() => abrirCerrarModalEliminar()}
-            >
+              onClick={() => abrirCerrarModalEliminar()}>
               No
             </Button>
           </ModalFooter>
@@ -254,25 +247,23 @@ const CargaDoc = () => {
         <Modal isOpen={modalVer} size="xl">
           <ModalHeader
             close={closeBtn}
-            style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}
-          >
+            style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}>
             {usuarioSeleccionado && usuarioSeleccionado.nom_doc}
           </ModalHeader>
           <ModalBody>
-            <Row className="px-2 text-end d-flex justify-content-end">
+            {/* <Row className="px-2 text-end d-flex justify-content-end">
               <Col
                 lg={2}
                 md={4}
                 sm={2}
                 xs={3}
-                className="p-0 text-end d-flex align-items-center"
-              >
+                className="p-0 text-end d-flex align-items-center">
                 <Button size="sm" color="success" onClick={handleDescargarPdf}>
                   <FaIcons.FaDownload />
                   Download
                 </Button>
               </Col>
-            </Row>
+            </Row> */}
             <Card>
               <CardBody className="p-0">
                 <Row className="justify-content-center">
@@ -284,8 +275,7 @@ const CargaDoc = () => {
                     type="application/pdf"
                     alt="archivo_per"
                     width="400"
-                    height="600"
-                  >
+                    height="600">
                     <p>
                       Tu navegador no puede mostrar este archivo PDF. Puedes
                       descargarlo
@@ -294,8 +284,7 @@ const CargaDoc = () => {
                           "data:application/pdf;base64," +
                           usuarioSeleccionado.archivo_com
                         }
-                        download
-                      >
+                        download>
                         aquí
                       </a>
                       .
@@ -305,22 +294,16 @@ const CargaDoc = () => {
               </CardBody>
             </Card>
           </ModalBody>
-          {/* <ModalFooter>
+          <ModalFooter>
             <Button
+              style={{ float: "right" }}
               color="success"
               size="lg"
-              onClick={() => deleteComunicado(usuarioSeleccionado.id_com)}
-            >
-              Sí
+              onClick={handleDescargarPdf}>
+              <FaIcons.FaDownload />
+              Download
             </Button>
-            <Button
-              color="danger"
-              size="lg"
-              onClick={() => abrirCerrarModalVer()}
-            >
-              No
-            </Button>
-          </ModalFooter> */}
+          </ModalFooter>
         </Modal>
       </div>
     </div>
