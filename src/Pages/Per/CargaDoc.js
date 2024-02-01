@@ -10,6 +10,7 @@ import {
 import { Table, Button, Label, Input, Row } from "reactstrap";
 import * as FaIcons from "react-icons/fa";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const CargaDoc = () => {
   // const user = localStorage.getItem("user");
@@ -104,21 +105,14 @@ const CargaDoc = () => {
           <h2 className>Gestion Comunicados</h2>
         </div>
         <div id="subt">
-          <Button
-            color="primary"
-            size="lg"
-            onClick={() => abrirCerrarModalInsertar()}
+          <Link
+            to={"http://localhost:80/api/PDF/reporte_pdf_comunicados.php"}
+            target="_blank"
           >
-            <FaIcons.FaFileDownload /> Reporte
-          </Button>
-          <Button
-            style={{ float: "right" }}
-            color="success"
-            size="lg"
-            onClick={() => abrirCerrarModalInsertar()}
-          >
-            <FaIcons.FaPlus /> Añadir
-          </Button>
+            <Button color="primary" size="lg">
+              <FaIcons.FaFileDownload /> Reporte
+            </Button>
+          </Link>
         </div>
         <br />
         <Table responsive="sm" id="tabl">

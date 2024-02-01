@@ -3,6 +3,7 @@ import { Table, Button } from "reactstrap";
 import * as FaIcons from "react-icons/fa";
 import axios from "axios";
 import "../Bec/bec.scss";
+import { Link } from "react-router-dom";
 
 function ListPat() {
   const baseUrl = "http://localhost:80/api/pat/";
@@ -35,14 +36,14 @@ function ListPat() {
           <h2 className>Listado Patrocinadores</h2>
         </div>
         <div id="subt">
-          {/* <Link to="user/create"> */}
-          <Button
-            color="primary"
-            size="lg"
-            onClick={() => abrirCerrarModalInsertar()}>
-            <FaIcons.FaFileDownload /> Reporte
-          </Button>
-          {/* </Link> */}
+          <Link
+            to={"http://localhost:80/api/PDF/reporte_pdf_patrocinador.php"}
+            target="_blank"
+          >
+            <Button color="primary" size="lg">
+              <FaIcons.FaFileDownload /> Reporte
+            </Button>
+          </Link>
         </div>
         <br />
         <br />

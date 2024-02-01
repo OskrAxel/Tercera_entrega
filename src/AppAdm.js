@@ -48,7 +48,6 @@ import Nota7 from "./Pages/Bec/Notas/Nota7";
 import Nota8 from "./Pages/Bec/Notas/Nota8";
 import Nota9 from "./Pages/Bec/Notas/Nota9";
 import Nota10 from "./Pages/Bec/Notas/Nota10";
-import PDD from "./Pages/Per/PDF";
 
 function AppAdm() {
   return (
@@ -184,7 +183,6 @@ function AppAdm() {
             />
             <Route path="/pdf2" element={<Protected Component={Pdf2} />} />
             <Route path="/pdfman" element={<Protected Component={Pdfman} />} />
-            <Route path="/PDD" element={<Protected Component={PDD} />} />
           </Route>
         </Routes>
       </div>

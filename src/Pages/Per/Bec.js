@@ -5,6 +5,7 @@ import { Table, Button } from "reactstrap";
 import * as FaIcons from "react-icons/fa";
 import axios from "axios";
 import "../Bec/bec.scss";
+import { Link } from "react-router-dom";
 
 function ListBe() {
   const baseUrl = "http://localhost:80/api/bec/";
@@ -144,14 +145,14 @@ function ListBe() {
           <h2 className>Listado Becarios</h2>
         </div>
         <div id="subt">
-          {/* <Link to="user/create"> */}
-          <Button
-            color="primary"
-            size="lg"
-            onClick={() => abrirCerrarModalInsertar()}>
-            <FaIcons.FaFileDownload /> Reporte
-          </Button>
-          {/* </Link> */}
+          <Link
+            to={"http://localhost:80/api/PDF/reporte_pdf_becarios.php"}
+            target="_blank"
+          >
+            <Button color="primary" size="lg">
+              <FaIcons.FaFileDownload /> Reporte
+            </Button>
+          </Link>
         </div>
         <br />
         <br />
@@ -248,7 +249,8 @@ function ListBe() {
             <Button
               color="danger"
               size="lg"
-              onClick={() => abrirCerrarModalInsertar()}>
+              onClick={() => abrirCerrarModalInsertar()}
+            >
               Cancelar
             </Button>
           </ModalFooter>
@@ -317,7 +319,8 @@ function ListBe() {
             {"   "}
             <button
               className="btn btn-danger"
-              onClick={() => abrirCerrarModalEditar()}>
+              onClick={() => abrirCerrarModalEditar()}
+            >
               Cancelar
             </button>
           </ModalFooter>
@@ -334,7 +337,8 @@ function ListBe() {
             </button>
             <button
               className="btn btn-secondary"
-              onClick={() => abrirCerrarModalEliminar()}>
+              onClick={() => abrirCerrarModalEliminar()}
+            >
               No
             </button>
           </ModalFooter>
