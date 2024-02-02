@@ -4,7 +4,7 @@ import { Card, Button, CardTitle, CardText, Col } from "reactstrap";
 
 function Registro({ nombre }) {
   return (
-    <div className="d-flex p-5 justify-content-center">
+    <div className="d-flex justify-content-center">
       <Col id="colu">
         <Card
           body
@@ -12,7 +12,8 @@ function Registro({ nombre }) {
           style={{
             width: "50rem",
             background: "rgba(232, 232, 232, 0.65)",
-          }}>
+          }}
+        >
           <CardTitle tag="h4">Nota:</CardTitle>
           <CardText>
             <h2>Bienvenido: {nombre}</h2>
@@ -30,7 +31,7 @@ function Registro({ nombre }) {
           </Button>
         </Card>
       </Col>
-      <div id="ali">
+      {/* <div id="ali">
         <a
           href="https://www.freepik.es/foto-gratis/montanas-bolivia_30806351.htm"
           target="_blank"
@@ -38,7 +39,7 @@ function Registro({ nombre }) {
           Imagen de kamchatka
         </a>
         en Freepik;
-      </div>
+      </div> */}
     </div>
   );
 }

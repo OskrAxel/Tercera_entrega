@@ -52,7 +52,8 @@ const Dashboard = () => {
             style={{
               color: "black",
               width: "18rem",
-            }}>
+            }}
+          >
             <CardBody>
               <CardTitle tag="h5">Cuentas</CardTitle>
               <CardSubtitle className="mb-2 text-muted" tag="h6">
@@ -67,7 +68,8 @@ const Dashboard = () => {
             style={{
               color: "black",
               width: "18rem",
-            }}>
+            }}
+          >
             <CardBody>
               <CardTitle tag="h5">Becarios</CardTitle>
               <CardSubtitle className="mb-2 text-muted" tag="h6">
@@ -82,7 +84,8 @@ const Dashboard = () => {
             style={{
               color: "black",
               width: "18rem",
-            }}>
+            }}
+          >
             <CardBody>
               <CardTitle tag="h5">Fecha Entrega</CardTitle>
               <CardSubtitle className="mb-2 text-muted" tag="h6">
@@ -97,7 +100,8 @@ const Dashboard = () => {
             style={{
               color: "black",
               width: "18rem",
-            }}>
+            }}
+          >
             <CardBody>
               <CardTitle tag="h5">Infromes</CardTitle>
               <CardSubtitle className="mb-2 text-muted" tag="h6">
@@ -127,7 +131,8 @@ const Dashboard = () => {
                     right: 30,
                     left: 20,
                     bottom: 5,
-                  }}>
+                  }}
+                >
                   <CartesianGrid strokeDasharray="4 1 2" />
                   <XAxis dataKey="name" />
                   <YAxis />
@@ -153,7 +158,8 @@ const Dashboard = () => {
                     data={data}
                     innerRadius={60}
                     outerRadius={85}
-                    fill="#82ca9d">
+                    fill="#82ca9d"
+                  >
                     {data.map((entry, index) => (
                       <Cell
                         key={`cell-${index}`}

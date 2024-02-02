@@ -101,7 +101,7 @@ function NavbarAdm(args) {
     <div>
       <Navbar expand="md" {...args}>
         <SidebarAdm />
-        <NavbarBrand href="/" className="text-light">
+        <NavbarBrand href="/dashboard" className="text-light">
           <img
             src={Logo}
             alt="logo"
@@ -126,8 +126,6 @@ function NavbarAdm(args) {
                 <DropdownItem>Postulacion</DropdownItem>
                 <DropdownItem>Sobre Nosotros...</DropdownItem>
                 <DropdownItem divider />
-                <DropdownItem>Perfil</DropdownItem>
-                <DropdownItem>Foto</DropdownItem>
                 <DropdownItem onClick={() => abrirCerrarModalContra()}>
                   Cambiar Contraseña
                 </DropdownItem>
@@ -142,7 +140,8 @@ function NavbarAdm(args) {
       {/* MODAL CONTRASEÑA */}
       <Modal isOpen={modalContra}>
         <ModalHeader
-          style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}>
+          style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}
+        >
           Editar Contraseña
         </ModalHeader>
         <ModalBody>
@@ -178,7 +177,8 @@ function NavbarAdm(args) {
           <Button
             color="danger"
             size="lg"
-            onClick={() => abrirCerrarModalContra()}>
+            onClick={() => abrirCerrarModalContra()}
+          >
             Cancelar
           </Button>
         </ModalFooter>
