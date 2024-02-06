@@ -1,6 +1,6 @@
 <?php
 include 'bd/BD.php';
-$fecha = date("Y-m-d");
+$fecha = date("d-m-Y");
 $nombreImagen = "logo.jpg";
 $imagenBase64 = "data:image/jpg;base64," . base64_encode(file_get_contents($nombreImagen));
 ?>
@@ -23,11 +23,25 @@ $imagenBase64 = "data:image/jpg;base64," . base64_encode(file_get_contents($nomb
 
 
 @page {
-	margin: 2cm;
+	margin: 1cm;
+}
+/* //// */
+.tra {
+  border-radius: 3px;
+  background-color: rgba(232, 232, 232, 0.65);
+}
+.title-form {
+  padding: 0.5rem;
+  background: rgba(3, 87, 77, 0.8);
+  color: rgb(255 255 255 / 90%);
+  text-align: center;
+}
+#body td, th {
+    border: solid #aaaaaab3;
 }
 
 body {
-  font-family: sans-serif;
+    font-family: "Rubik", sans-serif;
 	margin: 0.5cm 0;
 	font-size: 10pt;
 }
@@ -59,7 +73,7 @@ div.absolute {
 
 #body {
   position: relative;
-  top:  60px;
+  top:  75px;
 }
 
 #header table,
@@ -110,20 +124,17 @@ hr {
             </tr>
         </table>
     </div>
-    <div id="body">
+    <div id="body" class="tra">
         <table width="100%" cellspacing="0" cellspadding="0">
             <thead>
-                <tr>
-                    <th colspan="7" align="center" bgcolor="rgba(3,87,77,.80)"><strong style="color :white">DATOS PATROCINADORES</strong></th>
-                </tr>
-                <tr>
-                    <th bgcolor="#C8A12E">N°</th>
-                    <th bgcolor="#C8A12E">Nombre</th>
-                    <th bgcolor="#C8A12E">Pais</th>
-                    <th bgcolor="#C8A12E">Email</th>
-                    <th bgcolor="#C8A12E">Direccion</th>
-                    <th bgcolor="#C8A12E">Celular</th>
-                    <th bgcolor="#C8A12E">Institucion</th>
+                <tr class="title-form">
+                    <th>N°</th>
+                    <th>Nombre</th>
+                    <th>Pais</th>
+                    <th>Email</th>
+                    <th>Direccion</th>
+                    <th>Celular</th>
+                    <th>Institucion</th>
                 </tr>
             </thead>
             <tbody>
@@ -146,14 +157,10 @@ hr {
                 <?php }
                 ?>
             </tbody>
-            <tfoot>
-                <tr>
-                    <div id="footer">
-                        <div class="page-number"></div>
-                    </div>
-                </tr>
-            </tfoot>
         </table>
+    </div>
+    <div id="footer">
+        <div class="page-number"></div>
     </div>
 </body>
 </html>
