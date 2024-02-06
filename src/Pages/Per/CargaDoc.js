@@ -113,6 +113,14 @@ const CargaDoc = () => {
               <FaIcons.FaFileDownload /> Reporte
             </Button>
           </Link>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <Button
+            color="success"
+            size="lg"
+            onClick={() => abrirCerrarModalInsertar()}
+          >
+            <FaIcons.FaPlus /> Añadir
+          </Button>
         </div>
         <br />
         <Table responsive="sm" id="tabl">
@@ -249,19 +257,6 @@ const CargaDoc = () => {
             {usuarioSeleccionado && usuarioSeleccionado.nom_doc}
           </ModalHeader>
           <ModalBody>
-            {/* <Row className="px-2 text-end d-flex justify-content-end">
-              <Col
-                lg={2}
-                md={4}
-                sm={2}
-                xs={3}
-                className="p-0 text-end d-flex align-items-center">
-                <Button size="sm" color="success" onClick={handleDescargarPdf}>
-                  <FaIcons.FaDownload />
-                  Download
-                </Button>
-              </Col>
-            </Row> */}
             <Card>
               <CardBody className="p-0">
                 <Row className="justify-content-center">
