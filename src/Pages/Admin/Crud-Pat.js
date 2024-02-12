@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
+import { Input, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import { Table, Button } from "reactstrap";
 import * as FaIcons from "react-icons/fa";
 import axios from "axios";
@@ -49,6 +49,7 @@ function ListUserPat() {
       .get(baseUrl)
       .then((response) => {
         setData(response.data);
+        setTablaUsuarios(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -133,7 +134,37 @@ function ListUserPat() {
   useEffect(() => {
     peticionGet();
   }, []);
+  ////BARRA BUSQUEDA
+  const [busqueda, setBusqueda] = useState("");
+  const [tablaUsuarios, setTablaUsuarios] = useState([]);
+  // const [usuarios, setUsuarios] = useState([]);
 
+  const handleChangeB = (e) => {
+    setBusqueda(e.target.value);
+    filtrar(e.target.value);
+  };
+
+  const filtrar = (terminoBusqueda) => {
+    var resultadosBusqueda = tablaUsuarios.filter((elemento) => {
+      if (
+        elemento.nombre
+          .toString()
+          .toLowerCase()
+          .includes(terminoBusqueda.toLowerCase()) ||
+        elemento.email
+          .toString()
+          .toLowerCase()
+          .includes(terminoBusqueda.toLowerCase()) ||
+        elemento.institucion
+          .toString()
+          .toLowerCase()
+          .includes(terminoBusqueda.toLowerCase())
+      ) {
+        return elemento;
+      }
+    });
+    setData(resultadosBusqueda);
+  };
   return (
     <div id="main_content">
       <div className="tra">
@@ -141,17 +172,25 @@ function ListUserPat() {
           <h2 className>Listado Patrocinadores</h2>
         </div>
         <div id="subt">
-          {/* <Link to="user/create"> */}
           <Button
             color="success"
             size="lg"
-            onClick={() => abrirCerrarModalInsertar()}
-          >
+            onClick={() => abrirCerrarModalInsertar()}>
             <FaIcons.FaPlus /> Añadir
           </Button>
-          {/* </Link> */}
         </div>
-        <br />
+        <div className="containerInput">
+          <Input
+            className="form-control inputBuscar"
+            size="lg"
+            value={busqueda}
+            placeholder="Búsqueda por Nombre, Email o Institución"
+            onChange={handleChangeB}
+          />
+          <Button className="btn btn-success" size="lg">
+            <FaIcons.FaSearch /> Buscar
+          </Button>
+        </div>
         <br />
         <Table responsive="sm" id="tabl">
           <thead>
@@ -179,15 +218,13 @@ function ListUserPat() {
                 <td>
                   <button
                     className="btn btn-warning"
-                    onClick={() => seleccionarUsuario(Usuario, "Editar")}
-                  >
+                    onClick={() => seleccionarUsuario(Usuario, "Editar")}>
                     Editar
                   </button>{" "}
                   {"  "}
                   <button
                     className="btn btn-danger"
-                    onClick={() => seleccionarUsuario(Usuario, "Eliminar")}
-                  >
+                    onClick={() => seleccionarUsuario(Usuario, "Eliminar")}>
                     Eliminar
                   </button>
                 </td>
@@ -197,7 +234,10 @@ function ListUserPat() {
         </Table>
 
         <Modal isOpen={modalInsertar}>
-          <ModalHeader>Insertar Usuario</ModalHeader>
+          <ModalHeader
+            style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}>
+            Insertar Usuario
+          </ModalHeader>
           <ModalBody>
             <div className="form-group">
               <label>Nombres: </label>
@@ -263,15 +303,17 @@ function ListUserPat() {
             <Button
               color="danger"
               size="lg"
-              onClick={() => abrirCerrarModalInsertar()}
-            >
+              onClick={() => abrirCerrarModalInsertar()}>
               Cancelar
             </Button>
           </ModalFooter>
         </Modal>
 
         <Modal isOpen={modalEditar}>
-          <ModalHeader>Editar Usuario</ModalHeader>
+          <ModalHeader
+            style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}>
+            Editar Usuario
+          </ModalHeader>
           <ModalBody>
             <div className="form-group">
               <label>Nombres: </label>
@@ -336,34 +378,37 @@ function ListUserPat() {
             </div>
           </ModalBody>
           <ModalFooter>
-            <button className="btn btn-primary" onClick={() => peticionPut()}>
+            <Button color="success" size="lg" onClick={() => peticionPut()}>
               Editar
-            </button>
-            {"   "}
-            <button
-              className="btn btn-danger"
-              onClick={() => abrirCerrarModalEditar()}
-            >
+            </Button>
+            <Button
+              color="danger"
+              size="lg"
+              onClick={() => abrirCerrarModalEditar()}>
               Cancelar
-            </button>
+            </Button>
           </ModalFooter>
         </Modal>
 
         <Modal isOpen={modalEliminar}>
+          <ModalHeader
+            style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}>
+            Eliminar comunicado
+          </ModalHeader>
           <ModalBody>
             ¿Estás seguro que deseas eliminar el Usuario{" "}
             {usuarioSeleccionado && usuarioSeleccionado.nombre}?
           </ModalBody>
           <ModalFooter>
-            <button className="btn btn-danger" onClick={() => peticionDelete()}>
+            <Button color="success" size="lg" onClick={() => peticionDelete()}>
               Sí
-            </button>
-            <button
-              className="btn btn-secondary"
-              onClick={() => abrirCerrarModalEliminar()}
-            >
+            </Button>
+            <Button
+              color="danger"
+              size="lg"
+              onClick={() => abrirCerrarModalEliminar()}>
               No
-            </button>
+            </Button>
           </ModalFooter>
         </Modal>
       </div>

@@ -18,7 +18,7 @@ if($method=="POST"){
     $foto = (file_get_contents($_FILES['archivo_per']['tmp_name']));
     $descripcion = $_POST['nom_usu'];
     $nom_doc = $_POST['nom_doc'];
-    $f_cargado = date('Y-m-d');
+    $f_cargado = $_POST['f_cargado'];
     $api = new Api();
     $json = $api->addImagen($descripcion,$foto,$nom_doc,$f_cargado);
     echo $json;

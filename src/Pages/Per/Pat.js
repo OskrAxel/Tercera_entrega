@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Table, Button } from "reactstrap";
+import { Table, Button, Input } from "reactstrap";
 import * as FaIcons from "react-icons/fa";
 import axios from "axios";
 import "../Bec/bec.scss";
@@ -8,17 +8,13 @@ import { Link } from "react-router-dom";
 function ListPat() {
   const baseUrl = "http://localhost:80/api/pat/";
   const [data, setData] = useState([]);
-  const [modalInsertar, setModalInsertar] = useState(false);
-
-  const abrirCerrarModalInsertar = () => {
-    setModalInsertar(!modalInsertar);
-  };
 
   const peticionGet = async () => {
     await axios
       .get(baseUrl)
       .then((response) => {
         setData(response.data);
+        setTablaUsuarios(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -28,7 +24,37 @@ function ListPat() {
   useEffect(() => {
     peticionGet();
   }, []);
+  ////BARRA BUSQUEDA
+  const [busqueda, setBusqueda] = useState("");
+  const [tablaUsuarios, setTablaUsuarios] = useState([]);
+  // const [usuarios, setUsuarios] = useState([]);
 
+  const handleChangeB = (e) => {
+    setBusqueda(e.target.value);
+    filtrar(e.target.value);
+  };
+
+  const filtrar = (terminoBusqueda) => {
+    var resultadosBusqueda = tablaUsuarios.filter((elemento) => {
+      if (
+        elemento.nombre
+          .toString()
+          .toLowerCase()
+          .includes(terminoBusqueda.toLowerCase()) ||
+        elemento.email
+          .toString()
+          .toLowerCase()
+          .includes(terminoBusqueda.toLowerCase()) ||
+        elemento.institucion
+          .toString()
+          .toLowerCase()
+          .includes(terminoBusqueda.toLowerCase())
+      ) {
+        return elemento;
+      }
+    });
+    setData(resultadosBusqueda);
+  };
   return (
     <div id="main_content">
       <div className="tra">
@@ -38,14 +64,24 @@ function ListPat() {
         <div id="subt">
           <Link
             to={"http://localhost:80/api/PDF/reporte_pdf_patrocinador.php"}
-            target="_blank"
-          >
+            target="_blank">
             <Button color="primary" size="lg">
               <FaIcons.FaFileDownload /> Reporte
             </Button>
           </Link>
         </div>
-        <br />
+        <div className="containerInput">
+          <Input
+            className="form-control inputBuscar"
+            size="lg"
+            value={busqueda}
+            placeholder="Búsqueda por Nombre, Email o Institución"
+            onChange={handleChangeB}
+          />
+          <Button className="btn btn-success" size="lg">
+            <FaIcons.FaSearch /> Buscar
+          </Button>
+        </div>
         <br />
         <Table responsive="sm" id="tabl">
           <thead>

@@ -70,7 +70,7 @@ function NavbarAdm(args) {
     localStorage.setItem("loginStatus", "Cierre de sesión satisfactoria!");
     naviget("/LoginAdm");
   }
-  const user = localStorage.getItem("user");
+  // const user = localStorage.getItem("user");
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -116,7 +116,11 @@ function NavbarAdm(args) {
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ms-auto" navbar>
             {/* //REVISAR */}
-            <NavbarText className="text-light">{user}</NavbarText>
+            <NavbarText className="text-light">
+              {data.nombre}
+              {"   "}
+              {data.nombre}
+            </NavbarText>
             <UncontrolledDropdown nav direction="down">
               <DropdownToggle nav caret className="text-light">
                 MENU
@@ -140,8 +144,7 @@ function NavbarAdm(args) {
       {/* MODAL CONTRASEÑA */}
       <Modal isOpen={modalContra}>
         <ModalHeader
-          style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}
-        >
+          style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}>
           Editar Contraseña
         </ModalHeader>
         <ModalBody>
@@ -177,8 +180,7 @@ function NavbarAdm(args) {
           <Button
             color="danger"
             size="lg"
-            onClick={() => abrirCerrarModalContra()}
-          >
+            onClick={() => abrirCerrarModalContra()}>
             Cancelar
           </Button>
         </ModalFooter>

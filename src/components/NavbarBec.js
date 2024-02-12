@@ -77,7 +77,7 @@ function NavbarBec(args) {
   function logoutSubmit() {
     localStorage.setItem("login", "");
     localStorage.setItem("loginStatus", "Cierre de sesión satisfactoria!");
-    naviget("/");
+    naviget("/LoginBec");
   }
   const iduser = localStorage.getItem("iduser");
 
@@ -172,7 +172,7 @@ function NavbarBec(args) {
     <div>
       <Navbar expand="md" {...args}>
         <SidebarBec />
-        <NavbarBrand href="/" className="text-light">
+        <NavbarBrand href="/registro" className="text-light">
           <img
             src={Logo}
             alt="logo"
@@ -248,7 +248,10 @@ function NavbarBec(args) {
 
       {/* MODAL INFORME */}
       <Modal isOpen={modalInsertar}>
-        <ModalHeader>Cargar documento</ModalHeader>
+        <ModalHeader
+          style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}>
+          Cargar documento
+        </ModalHeader>
         <ModalBody>
           <div className="form-group">
             <label>Nombre documento: </label>

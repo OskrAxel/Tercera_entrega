@@ -223,7 +223,10 @@ function RegComp() {
               </FormGroup>
             </Col>
           </Row>
-          <Button className="btn btn-success" onClick={() => peticionPut()}>
+          <Button
+            className="btn btn-success"
+            size="lg"
+            onClick={() => peticionPut()}>
             Guardar
           </Button>
         </Form>

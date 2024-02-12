@@ -22,7 +22,7 @@ const SidebarBec = () => {
   //
   const menuItem = [
     {
-      path: "inicio",
+      path: "registro",
       name: "Inicio",
       icon: <FaIcons.FaFlipboard />,
     },

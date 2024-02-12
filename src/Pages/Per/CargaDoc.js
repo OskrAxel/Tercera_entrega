@@ -13,15 +13,37 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 const CargaDoc = () => {
-  // const user = localStorage.getItem("user");
   const [detalle, setDetalle] = useState("");
   const [nom, setNom] = useState("");
-  const [nom_usu, setNomusu] = useState("");
+
   const [comunicado, setComunicado] = useState(null);
 
   const abrirCerrarModalInsertar = () => {
     setModalInsertar(!modalInsertar);
   };
+  /////
+  const [data, setData] = useState({
+    id: "",
+    contrasena: "",
+    contrasena_lit: "",
+  });
+  const peticionGet = async () => {
+    await axios
+      .get(`http://localhost:80/api/per/contraper.php`, {
+        params: {
+          id: localStorage.getItem("user"),
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+        setData(response.data);
+        setTablaUsuarios(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  ////
   //modal ver
   const [modalVer, setModalVer] = useState(false);
   const abrirCerrarModalVer = () => {
@@ -36,8 +58,8 @@ const CargaDoc = () => {
   });
   useEffect(() => {
     getComunicado();
+    peticionGet();
   }, []);
-  ////
   ////Mostrar comunicados
   async function getComunicado() {
     const res = await axios.get("http://localhost:80/api/per/com/");
@@ -51,7 +73,7 @@ const CargaDoc = () => {
     fd.append("archivo_com", comunicado);
     fd.append("detalle", detalle);
     fd.append("nom_doc", nom);
-    fd.append("nom_usu", nom_usu);
+    fd.append("nom_usu", data.nombre + " " + data.apellido);
     const res = await axios.post("http://localhost:80/api/per/com/", fd);
     console.log(res.data);
     abrirCerrarModalInsertar();
@@ -80,7 +102,6 @@ const CargaDoc = () => {
     setModalEliminar(!modalEliminar);
   };
   ////PDF
-
   const handleDescargarPdf = async () => {
     var link = document.createElement("a");
     // Se agregan los prefijos de href para indicar que el contenido que sigue está en formato PDF y
@@ -98,6 +119,33 @@ const CargaDoc = () => {
       &times;
     </Button>
   );
+  ////BARRA BUSQUEDA
+  const [busqueda, setBusqueda] = useState("");
+  const [tablaUsuarios, setTablaUsuarios] = useState([]);
+  // const [usuarios, setUsuarios] = useState([]);
+
+  const handleChangeB = (e) => {
+    setBusqueda(e.target.value);
+    filtrar(e.target.value);
+  };
+
+  const filtrar = (terminoBusqueda) => {
+    var resultadosBusqueda = tablaUsuarios.filter((elemento) => {
+      if (
+        elemento.nom_doc
+          .toString()
+          .toLowerCase()
+          .includes(terminoBusqueda.toLowerCase()) ||
+        elemento.id_per
+          .toString()
+          .toLowerCase()
+          .includes(terminoBusqueda.toLowerCase())
+      ) {
+        return elemento;
+      }
+    });
+    setData(resultadosBusqueda);
+  };
   return (
     <div id="main_content">
       <div className="tra">
@@ -107,8 +155,7 @@ const CargaDoc = () => {
         <div id="subt">
           <Link
             to={"http://localhost:80/api/PDF/reporte_pdf_comunicados.php"}
-            target="_blank"
-          >
+            target="_blank">
             <Button color="primary" size="lg">
               <FaIcons.FaFileDownload /> Reporte
             </Button>
@@ -117,9 +164,20 @@ const CargaDoc = () => {
           <Button
             color="success"
             size="lg"
-            onClick={() => abrirCerrarModalInsertar()}
-          >
+            onClick={() => abrirCerrarModalInsertar()}>
             <FaIcons.FaPlus /> Añadir
+          </Button>
+        </div>
+        <div className="containerInput">
+          <Input
+            className="form-control inputBuscar"
+            size="lg"
+            value={busqueda}
+            placeholder="Búsqueda por Nombre o ID Usuario"
+            onChange={handleChangeB}
+          />
+          <Button className="btn btn-success" size="lg">
+            <FaIcons.FaSearch /> Buscar
           </Button>
         </div>
         <br />
@@ -141,16 +199,14 @@ const CargaDoc = () => {
                 <td>
                   <Button
                     color="warning"
-                    onClick={() => seleccionarUsuario(item, "Editar")}
-                  >
+                    onClick={() => seleccionarUsuario(item, "Editar")}>
                     <FaIcons.FaRegEye />
                     &nbsp;&nbsp;Visualizar
                   </Button>
                   &nbsp;&nbsp;&nbsp;
                   <Button
                     color="danger"
-                    onClick={() => seleccionarUsuario(item, "Eliminar")}
-                  >
+                    onClick={() => seleccionarUsuario(item, "Eliminar")}>
                     Eliminar
                   </Button>
                 </td>
@@ -161,8 +217,7 @@ const CargaDoc = () => {
         {/* Modal agregar comunicado */}
         <Modal isOpen={modalInsertar}>
           <ModalHeader
-            style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}
-          >
+            style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}>
             Cargar documento
           </ModalHeader>
           <ModalBody>
@@ -179,10 +234,12 @@ const CargaDoc = () => {
               <Label>Usuario: </Label>
               <br />
               <Input
+                disabled
                 type="text"
                 className="form-control"
                 name="nom_usu"
-                onChange={(e) => setNomusu(e.target.value)}
+                value={data.nombre + " " + data.apellido}
+                // onChange={(e) => setNomusu(e.target.value)}
               />
               <br />
               <Label>Informe personal: </Label>
@@ -213,8 +270,7 @@ const CargaDoc = () => {
             <Button
               color="danger"
               size="lg"
-              onClick={() => abrirCerrarModalInsertar()}
-            >
+              onClick={() => abrirCerrarModalInsertar()}>
               Cancelar
             </Button>
           </ModalFooter>
@@ -222,8 +278,7 @@ const CargaDoc = () => {
         {/* Modal Eliminar */}
         <Modal isOpen={modalEliminar}>
           <ModalHeader
-            style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}
-          >
+            style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}>
             Eliminar comunicado
           </ModalHeader>
           <ModalBody>
@@ -234,15 +289,13 @@ const CargaDoc = () => {
             <Button
               color="success"
               size="lg"
-              onClick={() => deleteComunicado(usuarioSeleccionado.id_com)}
-            >
+              onClick={() => deleteComunicado(usuarioSeleccionado.id_com)}>
               Sí
             </Button>
             <Button
               color="danger"
               size="lg"
-              onClick={() => abrirCerrarModalEliminar()}
-            >
+              onClick={() => abrirCerrarModalEliminar()}>
               No
             </Button>
           </ModalFooter>
@@ -252,8 +305,7 @@ const CargaDoc = () => {
         <Modal isOpen={modalVer} size="xl">
           <ModalHeader
             close={closeBtn}
-            style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}
-          >
+            style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}>
             {usuarioSeleccionado && usuarioSeleccionado.nom_doc}
           </ModalHeader>
           <ModalBody>
@@ -268,8 +320,7 @@ const CargaDoc = () => {
                     type="application/pdf"
                     alt="archivo_per"
                     width="400"
-                    height="600"
-                  >
+                    height="600">
                     <p>
                       Tu navegador no puede mostrar este archivo PDF. Puedes
                       descargarlo
@@ -278,8 +329,7 @@ const CargaDoc = () => {
                           "data:application/pdf;base64," +
                           usuarioSeleccionado.archivo_com
                         }
-                        download
-                      >
+                        download>
                         aquí
                       </a>
                       .
@@ -294,8 +344,7 @@ const CargaDoc = () => {
               style={{ float: "right" }}
               color="success"
               size="lg"
-              onClick={handleDescargarPdf}
-            >
+              onClick={handleDescargarPdf}>
               <FaIcons.FaDownload />
               Download
             </Button>

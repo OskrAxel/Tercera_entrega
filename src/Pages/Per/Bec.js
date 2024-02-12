@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
+import { Input, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import { Table, Button } from "reactstrap";
 import * as FaIcons from "react-icons/fa";
 import axios from "axios";
@@ -52,6 +52,8 @@ function ListBe() {
       .get(baseUrl)
       .then((response) => {
         setData(response.data);
+        // setUsuarios(response.data); ///para barra busqueda
+        setTablaUsuarios(response.data); ///para barra busqueda
       })
       .catch((error) => {
         console.log(error);
@@ -137,7 +139,37 @@ function ListBe() {
   useEffect(() => {
     peticionGet();
   }, []);
+  ////BARRA BUSQUEDA
+  const [busqueda, setBusqueda] = useState("");
+  const [tablaUsuarios, setTablaUsuarios] = useState([]);
+  // const [usuarios, setUsuarios] = useState([]);
 
+  const handleChangeB = (e) => {
+    setBusqueda(e.target.value);
+    filtrar(e.target.value);
+  };
+
+  const filtrar = (terminoBusqueda) => {
+    var resultadosBusqueda = tablaUsuarios.filter((elemento) => {
+      if (
+        elemento.nombre
+          .toString()
+          .toLowerCase()
+          .includes(terminoBusqueda.toLowerCase()) ||
+        elemento.email
+          .toString()
+          .toLowerCase()
+          .includes(terminoBusqueda.toLowerCase()) ||
+        elemento.apellido
+          .toString()
+          .toLowerCase()
+          .includes(terminoBusqueda.toLowerCase())
+      ) {
+        return elemento;
+      }
+    });
+    setData(resultadosBusqueda);
+  };
   return (
     <div id="main_content">
       <div className="tra">
@@ -147,14 +179,24 @@ function ListBe() {
         <div id="subt">
           <Link
             to={"http://localhost:80/api/PDF/reporte_pdf_becarios.php"}
-            target="_blank"
-          >
+            target="_blank">
             <Button color="primary" size="lg">
               <FaIcons.FaFileDownload /> Reporte
             </Button>
           </Link>
         </div>
-        <br />
+        <div className="containerInput">
+          <Input
+            className="form-control inputBuscar"
+            size="lg"
+            value={busqueda}
+            placeholder="Búsqueda por Nombre, Apellido o Email"
+            onChange={handleChangeB}
+          />
+          <Button className="btn btn-success" size="lg">
+            <FaIcons.FaSearch /> Buscar
+          </Button>
+        </div>
         <br />
         <Table responsive="sm" id="tabl">
           <thead>
@@ -249,8 +291,7 @@ function ListBe() {
             <Button
               color="danger"
               size="lg"
-              onClick={() => abrirCerrarModalInsertar()}
-            >
+              onClick={() => abrirCerrarModalInsertar()}>
               Cancelar
             </Button>
           </ModalFooter>
@@ -319,8 +360,7 @@ function ListBe() {
             {"   "}
             <button
               className="btn btn-danger"
-              onClick={() => abrirCerrarModalEditar()}
-            >
+              onClick={() => abrirCerrarModalEditar()}>
               Cancelar
             </button>
           </ModalFooter>
@@ -337,8 +377,7 @@ function ListBe() {
             </button>
             <button
               className="btn btn-secondary"
-              onClick={() => abrirCerrarModalEliminar()}
-            >
+              onClick={() => abrirCerrarModalEliminar()}>
               No
             </button>
           </ModalFooter>

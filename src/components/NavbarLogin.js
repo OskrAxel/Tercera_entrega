@@ -22,7 +22,7 @@ function NavbarLogin(args) {
   return (
     <div>
       <Navbar expand="md" {...args}>
-        <NavbarBrand href="/" className="text-light">
+        <NavbarBrand href="/LoginBec" className="text-light">
           <img
             src={Logo}
             alt="logo"
@@ -47,7 +47,7 @@ function NavbarLogin(args) {
                   </NavLink>
                 </DropdownItem>
                 <DropdownItem>
-                  <NavLink className="text-light" href="/">
+                  <NavLink className="text-light" href="/LoginBec">
                     Becario
                   </NavLink>
                 </DropdownItem>

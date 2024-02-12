@@ -48,6 +48,7 @@ import Nota7 from "./Pages/Bec/Notas/Nota7";
 import Nota8 from "./Pages/Bec/Notas/Nota8";
 import Nota9 from "./Pages/Bec/Notas/Nota9";
 import Nota10 from "./Pages/Bec/Notas/Nota10";
+import Logout from "./utils/logout";
 
 function AppAdm() {
   return (
@@ -55,9 +56,10 @@ function AppAdm() {
       <div className="content w-100">
         <Routes>
           <Route path="/" element={<NavbarLogin />}>
-            <Route exact path="/" element={<LoginBec />} />
+            <Route exact path="/LoginBec" element={<LoginBec />} />
             <Route path="/LoginAdm" element={<LoginAdm />} />
             <Route path="/LoginPer" element={<LoginPer />} />
+            <Route path="/" element={<Logout />} />
           </Route>
           {/* //// */}
           <Route path="/" element={<NavbarAdm />}>
@@ -92,7 +94,7 @@ function AppAdm() {
           <Route path="/" element={<NavbarBec />}>
             {/* //Becario */}
             <Route
-              path="/inicio"
+              path="/registro"
               element={<Protected Component={Registro} />}
             />
             <Route

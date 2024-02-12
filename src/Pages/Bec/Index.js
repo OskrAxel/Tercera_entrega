@@ -12,8 +12,7 @@ function Registro({ nombre }) {
           style={{
             width: "50rem",
             background: "rgba(232, 232, 232, 0.65)",
-          }}
-        >
+          }}>
           <CardTitle tag="h4">Nota:</CardTitle>
           <CardText>
             <h2>Bienvenido: {nombre}</h2>

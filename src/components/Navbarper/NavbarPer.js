@@ -18,6 +18,8 @@ import {
   ModalBody,
   ModalFooter,
   ModalHeader,
+  Input,
+  Label,
 } from "reactstrap";
 import { Outlet, useNavigate } from "react-router-dom";
 import SidebarPer from "../SidebarPer";
@@ -27,7 +29,6 @@ function NavbarBec(args) {
     id: "",
     contrasena: "",
     contrasena_lit: "",
-    fecha: "",
   });
   const [modalContra, setModalContra] = useState(false);
   const abrirCerrarModalContra = () => {
@@ -47,8 +48,22 @@ function NavbarBec(args) {
     }));
     console.log(data);
   };
-
-  const peticionGet = async () => {
+  ////Mostrar fecha
+  const [usuarioSeleccionado, setusuarioSeleccionado] = useState({
+    id_fech: "",
+    fecha: "",
+    fech_lit: "",
+  });
+  const handleChangefecha = (e) => {
+    const { name, value } = e.target;
+    setusuarioSeleccionado((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+    console.log(usuarioSeleccionado);
+  };
+  /////Mostrar contraseña
+  const peticionGetContraseña = async () => {
     await axios
       .get(`http://localhost:80/api/per/contraper.php`, {
         params: {
@@ -74,7 +89,7 @@ function NavbarBec(args) {
     localStorage.setItem("loginStatus", "Cierre de sesión satisfactoria!");
     naviget("/LoginPer");
   }
-  const user = localStorage.getItem("user");
+  // const user = localStorage.getItem("user");
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -98,26 +113,34 @@ function NavbarBec(args) {
         console.log(error);
       });
   };
-  ////Modificar fecha entrega
-  const peticionPutFecha = async () => {
-    var f = new FormData();
-    ///)
-    f.append("fecha", data.fecha);
-    f.append("METHOD", "PUT");
+  ////Mostrar fecha
+  const [lista, setLista] = useState([]);
+  const peticionGetFecha = async () => {
     await axios
-      .post(`http://localhost:80/api/per/fecha.php`, f)
+      .get(`http://localhost:80/api/per/fe/`)
       .then((response) => {
-        setData(response);
-        act();
+        console.log(response.data);
+        setusuarioSeleccionado(response.data);
+        setLista(response.data);
       })
       .catch((error) => {
         console.log(error);
       });
   };
-
+  ////Modificar Fecha
+  async function addFecha(e) {
+    e.preventDefault();
+    let fd = new FormData();
+    fd.append("fecha", usuarioSeleccionado.fecha);
+    const res = await axios.post("http://localhost:80/api/per/fe/", fd);
+    console.log(res.data);
+    abrirCerrarModalFecha();
+    act();
+  }
   ////
   useEffect(() => {
-    peticionGet();
+    peticionGetFecha();
+    peticionGetContraseña();
   }, []);
   return (
     <div>
@@ -138,7 +161,11 @@ function NavbarBec(args) {
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ms-auto" navbar>
             {/* //REVISAR */}
-            <NavbarText className="text-light">{user}</NavbarText>
+            <NavbarText className="text-light">
+              {data.nombre}
+              {"   "}
+              {data.nombre}
+            </NavbarText>
             <UncontrolledDropdown nav direction="down">
               <DropdownToggle nav caret className="text-light">
                 MENU
@@ -169,8 +196,7 @@ function NavbarBec(args) {
       {/* MODAL CONTRASEÑA */}
       <Modal isOpen={modalContra}>
         <ModalHeader
-          style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}
-        >
+          style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}>
           Editar Contraseña
         </ModalHeader>
         <ModalBody>
@@ -206,8 +232,7 @@ function NavbarBec(args) {
           <Button
             color="danger"
             size="lg"
-            onClick={() => abrirCerrarModalContra()}
-          >
+            onClick={() => abrirCerrarModalContra()}>
             Cancelar
           </Button>
         </ModalFooter>
@@ -216,33 +241,36 @@ function NavbarBec(args) {
       {/* MODAL FECHA */}
       <Modal isOpen={modalFecha}>
         <ModalHeader
-          style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}
-        >
+          style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}>
           Establecer Fecha Entrega
         </ModalHeader>
         <ModalBody>
           <div className="form-group">
-            <label>Nueva Fecha: </label>
+            <Label>Fecha Establecida: </Label>
+            {lista.map((item) => (
+              <h2 className="text-center" key={item.id_fech}>
+                "{item.fech_lit}"
+              </h2>
+            ))}
+            <Label>Nueva Fecha: </Label>
             <br />
-            <input
-              type="date"
+            <Input
+              type="datetime-local"
               className="form-control"
               name="fecha"
-              value={data.fecha}
+              onChange={handleChangefecha}
             />
-            <br />
           </div>
         </ModalBody>
         <ModalFooter>
-          <Button color="success" size="lg" onClick={() => peticionPutFecha()}>
+          <Button color="success" size="lg" onClick={(e) => addFecha(e)}>
             Guardar
           </Button>
           {"   "}
           <Button
             color="danger"
             size="lg"
-            onClick={() => abrirCerrarModalFecha()}
-          >
+            onClick={() => abrirCerrarModalFecha()}>
             Cancelar
           </Button>
         </ModalFooter>

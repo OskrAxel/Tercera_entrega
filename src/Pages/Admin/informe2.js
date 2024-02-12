@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
-import { Table, Button } from "reactstrap";
+import {
+  Card,
+  CardBody,
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+} from "reactstrap";
+import { Table, Button, Label, Input, Row } from "reactstrap";
 import * as FaIcons from "react-icons/fa";
 import axios from "axios";
 import "../Bec/bec.scss";
@@ -18,6 +25,7 @@ function Informe2() {
   async function getImagenes() {
     const res = await axios.get("http://localhost:80/api/inf/");
     setLista(res.data);
+    setTablaUsuarios(res.data);
     console.log(res.data);
   }
 
@@ -27,6 +35,7 @@ function Informe2() {
     fd.append("archivo_per", imagen);
     fd.append("nom_usu", descripcion);
     fd.append("nom_doc", nom);
+    fd.append("f_cargado", usuarioSeleccionado.f_cargado);
     const res = await axios.post("http://localhost:80/api/inf/", fd);
     console.log(res.data);
     abrirCerrarModalInsertar();
@@ -52,7 +61,7 @@ function Informe2() {
   const seleccionarUsuario = (Usuario, caso) => {
     setusuarioSeleccionado(Usuario);
 
-    caso === "Editar" ? abrirCerrarModalEditar() : abrirCerrarModalEliminar();
+    caso === "Editar" ? abrirCerrarModalVer() : abrirCerrarModalEliminar();
   };
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -67,40 +76,86 @@ function Informe2() {
   const abrirCerrarModalInsertar = () => {
     setModalInsertar(!modalInsertar);
   };
-  //modal editar
-  const [modalEditar, setModalEditar] = useState(false);
-  const abrirCerrarModalEditar = () => {
-    setModalEditar(!modalEditar);
-  };
   //modal eliminar
-
   const [modalEliminar, setModalEliminar] = useState(false);
   const abrirCerrarModalEliminar = () => {
     setModalEliminar(!modalEliminar);
   };
   //modal ver
-
   const [modalVer, setModalVer] = useState(false);
   const abrirCerrarModalVer = () => {
     setModalVer(!modalVer);
   };
+  ////
+  const handleDescargarPdf = async () => {
+    var link = document.createElement("a");
+    // Se agregan los prefijos de href para indicar que el contenido que sigue está en formato PDF y
+    // está codificado en Base64.
+    link.setAttribute(
+      "href",
+      "data:application/pdf;base64," + usuarioSeleccionado.archivo_per
+    );
+    link.setAttribute("download", usuarioSeleccionado.nom_doc);
+    link.click();
+  };
+  const closeBtn = (
+    <Button className="close" onClick={() => abrirCerrarModalVer()}>
+      &times;
+    </Button>
+  );
+  ////BARRA BUSQUEDA
+  const [busqueda, setBusqueda] = useState("");
+  const [tablaUsuarios, setTablaUsuarios] = useState([]);
+  // const [usuarios, setUsuarios] = useState([]);
 
+  const handleChangeB = (e) => {
+    setBusqueda(e.target.value);
+    filtrar(e.target.value);
+  };
+
+  const filtrar = (terminoBusqueda) => {
+    var resultadosBusqueda = tablaUsuarios.filter((elemento) => {
+      if (
+        elemento.nom_doc
+          .toString()
+          .toLowerCase()
+          .includes(terminoBusqueda.toLowerCase()) ||
+        elemento.nom_usu
+          .toString()
+          .toLowerCase()
+          .includes(terminoBusqueda.toLowerCase())
+      ) {
+        return elemento;
+      }
+    });
+    setLista(resultadosBusqueda);
+  };
   return (
     <div id="main_content">
       <div className="tra">
         <div className="tra title-form">
-          <h2 className>Listado Patrocinadores</h2>
+          <h2 className>Listado Informes</h2>
         </div>
         <div id="subt">
           <Button
             color="success"
             size="lg"
-            onClick={() => abrirCerrarModalInsertar()}
-          >
+            onClick={() => abrirCerrarModalInsertar()}>
             <FaIcons.FaPlus /> Añadir
           </Button>
         </div>
-        <br />
+        <div className="containerInput">
+          <Input
+            className="form-control inputBuscar"
+            size="lg"
+            value={busqueda}
+            placeholder="Búsqueda por Nombre documento o Nombre usuario"
+            onChange={handleChangeB}
+          />
+          <Button className="btn btn-success" size="lg">
+            <FaIcons.FaSearch /> Buscar
+          </Button>
+        </div>
         <br />
         <Table responsive="sm" id="tabl">
           <thead>
@@ -116,36 +171,22 @@ function Informe2() {
           <tbody>
             {lista.map((item) => (
               <tr className="text-center" key={item.id_doc}>
-                {/* <td>{item.id_doc}</td> */}
                 <td>{item.nom_doc}</td>
                 <td>{item.nom_usu}</td>
                 <td>{item.f_cargado}</td>
-                {/* <td>
-                  <img
-                    src={"data:archivo_per/png;base64," + item.archivo_per}
-                    className=""
-                    alt="archivo_per"
-                  />
-                </td> */}
                 <td>
-                  <button
-                    className="btn btn-success"
-                    onClick={() => abrirCerrarModalVer()}
-                  >
-                    Descargar
-                  </button>{" "}
-                  {/* <button
-                    className="btn btn-warning"
-                    onClick={() => seleccionarUsuario(item, "Editar")}
-                  >
-                    Editar
-                  </button>{" "} */}
-                  <button
-                    className="btn btn-danger"
-                    onClick={() => seleccionarUsuario(item, "Eliminar")}
-                  >
+                  <Button
+                    color="warning"
+                    onClick={() => seleccionarUsuario(item, "Editar")}>
+                    <FaIcons.FaRegEye />
+                    &nbsp;&nbsp;Visualizar
+                  </Button>
+                  &nbsp;&nbsp;&nbsp;
+                  <Button
+                    color="danger"
+                    onClick={() => seleccionarUsuario(item, "Eliminar")}>
                     Eliminar
-                  </button>
+                  </Button>
                 </td>
               </tr>
             ))}
@@ -153,30 +194,33 @@ function Informe2() {
         </Table>
 
         <Modal isOpen={modalInsertar}>
-          <ModalHeader>Cargar documento</ModalHeader>
+          <ModalHeader
+            style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}>
+            Cargar documento
+          </ModalHeader>
           <ModalBody>
             <div className="form-group">
-              <label>Nombre documento: </label>
+              <Label>Nombre documento: </Label>
               <br />
-              <input
+              <Input
                 type="text"
                 className="form-control"
                 name="nom_doc"
                 onChange={(e) => setNom(e.target.value)}
               />
               <br />
-              <label>Usuario: </label>
+              <Label>Usuario: </Label>
               <br />
-              <input
+              <Input
                 type="text"
                 className="form-control"
                 name="nom_usu"
                 onChange={(e) => setDescripcion(e.target.value)}
               />
               <br />
-              <label>Informe personal: </label>
+              <Label>Informe personal: </Label>
               <br />
-              <input
+              <Input
                 type="file"
                 className="form-control"
                 accept="archivo_per/*"
@@ -184,9 +228,9 @@ function Informe2() {
                 multiple
               />
               <br />
-              <label>Fecha cargado: </label>
+              <Label>Fecha cargado: </Label>
               <br />
-              <input
+              <Input
                 type="datetime-local"
                 className="form-control"
                 name="f_cargado"
@@ -202,53 +246,84 @@ function Informe2() {
             <Button
               color="danger"
               size="lg"
-              onClick={() => abrirCerrarModalInsertar()}
-            >
+              onClick={() => abrirCerrarModalInsertar()}>
               Cancelar
             </Button>
           </ModalFooter>
         </Modal>
 
         <Modal isOpen={modalEliminar}>
+          <ModalHeader
+            style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}>
+            Eliminar comunicado
+          </ModalHeader>
           <ModalBody>
             ¿Estás seguro que deseas eliminar el documento{" "}
             {usuarioSeleccionado && usuarioSeleccionado.nom_doc}?
           </ModalBody>
           <ModalFooter>
-            <button
-              className="btn btn-danger"
-              onClick={() => deleteImagen(usuarioSeleccionado.id_doc)}
-            >
+            <Button
+              color="success"
+              size="lg"
+              onClick={() => deleteImagen(usuarioSeleccionado.id_doc)}>
               Sí
-            </button>
-            <button
-              className="btn btn-secondary"
-              onClick={() => abrirCerrarModalEliminar()}
-            >
+            </Button>
+            <Button
+              color="danger"
+              size="lg"
+              onClick={() => abrirCerrarModalEliminar()}>
               No
-            </button>
+            </Button>
           </ModalFooter>
         </Modal>
 
-        {/* //OTRO VER */}
-        <Modal isOpen={modalVer}>
+        {/* Modal VER */}
+        <Modal isOpen={modalVer} size="xl">
+          <ModalHeader
+            close={closeBtn}
+            style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}>
+            {usuarioSeleccionado && usuarioSeleccionado.nom_doc}
+          </ModalHeader>
           <ModalBody>
-            ¿Estás seguro que deseas eliminar el documento{" "}
-            {usuarioSeleccionado && usuarioSeleccionado.nom_doc}?
+            <Card>
+              <CardBody className="p-0">
+                <Row className="justify-content-center">
+                  <object
+                    data={
+                      "data:application/pdf;base64," +
+                      usuarioSeleccionado.archivo_per
+                    }
+                    type="application/pdf"
+                    alt="archivo_per"
+                    width="400"
+                    height="600">
+                    <p>
+                      Tu navegador no puede mostrar este archivo PDF. Puedes
+                      descargarlo
+                      <a
+                        href={
+                          "data:application/pdf;base64," +
+                          usuarioSeleccionado.archivo_per
+                        }
+                        download>
+                        aquí
+                      </a>
+                      .
+                    </p>
+                  </object>
+                </Row>
+              </CardBody>
+            </Card>
           </ModalBody>
           <ModalFooter>
-            <button
-              className="btn btn-danger"
-              onClick={() => deleteImagen(usuarioSeleccionado.id_doc)}
-            >
-              Sí
-            </button>
-            <button
-              className="btn btn-secondary"
-              onClick={() => abrirCerrarModalVer()}
-            >
-              No
-            </button>
+            <Button
+              style={{ float: "right" }}
+              color="success"
+              size="lg"
+              onClick={handleDescargarPdf}>
+              <FaIcons.FaDownload />
+              Download
+            </Button>
           </ModalFooter>
         </Modal>
       </div>
