@@ -142,7 +142,6 @@ function ListBe() {
   ////BARRA BUSQUEDA
   const [busqueda, setBusqueda] = useState("");
   const [tablaUsuarios, setTablaUsuarios] = useState([]);
-  // const [usuarios, setUsuarios] = useState([]);
 
   const handleChangeB = (e) => {
     setBusqueda(e.target.value);

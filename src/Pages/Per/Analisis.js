@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../Bec/bec.scss";
 import {
   Button,
@@ -12,37 +12,249 @@ import {
   Col,
 } from "reactstrap";
 import {
-  Bar,
-  BarChart,
-  CartesianGrid,
-  Legend,
-  ResponsiveContainer,
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
   Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts";
+  Legend,
+  ArcElement,
+} from "chart.js";
+import { Bar, Doughnut } from "react-chartjs-2";
+import axios from "axios";
+import * as FaIcons from "react-icons/fa";
+//
 
-import { PieChart, Pie, Cell } from "recharts";
-//
-const COLORS = [
-  "#ce93d8",
-  "#5c6bc0",
-  "#b39ddb",
-  "#4dd0e1",
-  "#f48fb1",
-  "#d500f9",
-];
-//
-const data = [
-  { anio: "2018", conclusion: 10, inscripciones: 60 },
-  { anio: "2019", conclusion: 25, inscripciones: 70 },
-  { anio: "2020", conclusion: 15, inscripciones: 65 },
-  { anio: "2021", conclusion: 35, inscripciones: 85 },
-  { anio: "2022", conclusion: 12, inscripciones: 48 },
-  { anio: "2023", conclusion: 30, inscripciones: 69 },
-  { anio: "2024", conclusion: 15, inscripciones: 78 },
-];
 const Analisis = () => {
+  ////GET BECARIOS AÑOS
+  const [anio, setAnio] = useState([]);
+  const [anioB, setAnioB] = useState([]);
+
+  const peticionGet1bec = async () => {
+    var f = new FormData();
+    f.append("METHOD", "1BEC");
+    await axios
+      .post("http://localhost:80/api/adm/dashboard/", f)
+      .then((response) => {
+        console.log(response.data);
+        var respuesta = response.data;
+        var auxAnio = [],
+          auxAnioB = [];
+        respuesta.map((elemento) => {
+          auxAnio.push(elemento.anio);
+          auxAnioB.push(elemento.BECARIOS);
+        });
+        setAnio(auxAnio);
+        setAnioB(auxAnioB);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  ////GET BECARIOS CIUDADES
+  const [ciudad, setCiudad] = useState([]);
+  const [region, setRegion] = useState([]);
+
+  const peticionGetbecC = async () => {
+    var f = new FormData();
+    f.append("METHOD", "CIUBEC");
+    await axios
+      .post("http://localhost:80/api/adm/dashboard/", f)
+      .then((response) => {
+        console.log(response.data);
+        var respuesta = response.data;
+        var auxCiu = [],
+          auxReg = [];
+        respuesta.map((elemento) => {
+          auxCiu.push(elemento.ciudad);
+          auxReg.push(elemento.region);
+        });
+        setCiudad(auxCiu);
+        setRegion(auxReg);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  ////GET BECARIOS
+  const [dataB, setDataB] = useState([]);
+
+  const peticionGetB = async () => {
+    var f = new FormData();
+    f.append("METHOD", "BEC");
+    await axios
+      .post("http://localhost:80/api/adm/dashboard/", f)
+      .then((response) => {
+        console.log(response.data);
+        setDataB(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  ////GET PERSONAL
+  const [dataP, setDataP] = useState([]);
+  const peticionGetP = async () => {
+    var f = new FormData();
+    f.append("METHOD", "PER");
+    await axios
+      .post("http://localhost:80/api/adm/dashboard/", f)
+      .then((response) => {
+        console.log(response.data);
+        setDataP(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  ////
+  ////GET FECHA
+  const [dataF, setDataF] = useState([]);
+
+  const peticionGetF = async () => {
+    var f = new FormData();
+    f.append("METHOD", "FEC");
+    await axios
+      .post("http://localhost:80/api/adm/dashboard/", f)
+      .then((response) => {
+        console.log(response.data);
+        setDataF(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  ////
+  ////GET INFORMES
+  const [dataI, setDataI] = useState([]);
+
+  const peticionGetI = async () => {
+    var f = new FormData();
+    f.append("METHOD", "INF");
+    await axios
+      .post("http://localhost:80/api/adm/dashboard/", f)
+      .then((response) => {
+        console.log(response.data);
+        setDataI(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  ////
+  useEffect(() => {
+    peticionGet1bec();
+    peticionGetbecC();
+    peticionGetB();
+    peticionGetP();
+    peticionGetF();
+    peticionGetI();
+  }, []);
+  ////GRAFICO BARRAS
+  ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    Title,
+    Tooltip,
+    ArcElement,
+    Tooltip,
+    Legend
+  );
+  const data = {
+    labels: anio,
+    datasets: [
+      {
+        label: "Incritos",
+        backgroundColor: "rgba(153, 102, 255, 0.5)",
+        borderColor: "rgb(153, 102, 255, 0.7)",
+        borderWidth: 3,
+        hoverBackgroundColor: "rgba(153, 102, 255, 0.8)",
+        hoverBorderColor: "rgba(153, 102, 255)",
+        data: anioB,
+      },
+    ],
+  };
+  const opciones = {
+    maintainAspectRatio: false,
+    responsive: true,
+    ticks: {
+      font: {
+        size: 15,
+        weight: "bold",
+      },
+    },
+    plugins: {
+      legend: {
+        labels: {
+          font: {
+            size: 15,
+            weight: "bold",
+          },
+        },
+      },
+    },
+  };
+  /////GRAFICO PIE
+  const dataPie = {
+    labels: ciudad,
+    datasets: [
+      {
+        label: "# miembros",
+        data: region,
+        backgroundColor: [
+          "rgba(255, 99, 132, 0.5)",
+          "rgba(54, 162, 235, 0.5)",
+          "rgba(255, 206, 86, 0.5)",
+          "rgba(75, 192, 192, 0.5)",
+          "rgba(153, 102, 255, 0.5)",
+          "rgba(255, 159, 64, 0.5)",
+        ],
+        borderColor: [
+          "rgba(255, 99, 132, 0.7)",
+          "rgba(54, 162, 235, 0.7)",
+          "rgba(255, 206, 86, 0.7)",
+          "rgba(75, 192, 192, 0.7)",
+          "rgba(153, 102, 255, 0.7)",
+          "rgba(255, 159, 64, 0.7)",
+        ],
+        hoverBackgroundColor: [
+          "rgba(255, 99, 132, 0.8)",
+          "rgba(54, 162, 235, 0.8)",
+          "rgba(255, 206, 86, 0.8)",
+          "rgba(75, 192, 192, 0.8)",
+          "rgba(153, 102, 255, 0.8)",
+          "rgba(255, 159, 64, 0.8)",
+        ],
+        hoverBorderColor: [
+          "rgba(255, 99, 132)",
+          "rgba(54, 162, 235)",
+          "rgba(255, 206, 86)",
+          "rgba(75, 192, 192)",
+          "rgba(153, 102, 255)",
+          "rgba(255, 159, 64)",
+        ],
+        borderWidth: 3,
+      },
+    ],
+  };
+  const opcionesPie = {
+    maintainAspectRatio: false,
+    responsive: true,
+    plugins: {
+      legend: {
+        labels: {
+          font: {
+            size: 15,
+            weight: "bold",
+          },
+        },
+      },
+    },
+  };
   return (
     <div id="main">
       <div className="tral">
@@ -53,14 +265,76 @@ const Analisis = () => {
               color: "black",
               width: "18rem",
             }}>
-            <CardBody>
-              <CardTitle tag="h5">Cuentas</CardTitle>
-              <CardSubtitle className="mb-2 text-muted" tag="h6">
-                Becarios
-              </CardSubtitle>
-              <CardText>Ver</CardText>
-              <Button className="btn-success">Ver</Button>
-            </CardBody>
+            <div className="row g-0">
+              <CardBody className="col-md-4">
+                <CardTitle tag="h5">Cuentas</CardTitle>
+                <CardSubtitle className="mb-2 text-muted" tag="h6">
+                  Becarios
+                </CardSubtitle>
+                <CardText>
+                  {dataB.map((item) => (
+                    <b key={item.id} style={{ color: "rgb(33 33 185)" }}>
+                      {item.CBec}
+                    </b>
+                  ))}
+                </CardText>
+                <Button className="btn-success" href="./usuarios">
+                  Ver
+                </Button>
+              </CardBody>
+              <CardBody
+                className="col-md-8"
+                style={{
+                  width: "70px",
+                  backgroundColor: "rgba(217, 83, 79, 0.7)",
+                  alignItems: "center",
+                  display: "flex",
+                  justifyContent: "center",
+                  fontSize: "8rem",
+                  boxSizing: "border-box",
+                }}>
+                <FaIcons.FaUserGraduate />
+              </CardBody>
+            </div>
+          </Card>
+
+          <Card
+            color=""
+            style={{
+              color: "black",
+              width: "18rem",
+            }}>
+            <div className="row g-0">
+              <CardBody className="col-md-4">
+                <CardTitle tag="h5">Cuentas</CardTitle>
+                <CardSubtitle className="mb-2 text-muted" tag="h6">
+                  Personal
+                </CardSubtitle>
+                <CardText>
+                  {dataP.map((item) => (
+                    <b key={item.id} style={{ color: "rgb(33 33 185)" }}>
+                      {item.CPer}
+                    </b>
+                  ))}
+                </CardText>
+                <Button className="btn-success" href="./personal">
+                  Ver
+                </Button>
+              </CardBody>
+              <CardBody
+                className="col-md-8"
+                style={{
+                  width: "70px",
+                  backgroundColor: "rgba(217, 83, 79, 0.7)",
+                  alignItems: "center",
+                  display: "flex",
+                  justifyContent: "center",
+                  fontSize: "8rem",
+                  boxSizing: "border-box",
+                }}>
+                <FaIcons.FaUserTie />
+              </CardBody>
+            </div>
           </Card>
           <Card
             color=""
@@ -68,16 +342,37 @@ const Analisis = () => {
               color: "black",
               width: "18rem",
             }}>
-            <CardBody>
-              <CardTitle tag="h5">Becarios</CardTitle>
-              <CardSubtitle className="mb-2 text-muted" tag="h6">
-                Habilitados
-              </CardSubtitle>
-              <CardText>Ver</CardText>
-              <Button href="./becarios" className="btn-success">
-                Ver
-              </Button>
-            </CardBody>
+            <div className="row g-0">
+              <CardBody className="col-md-4">
+                <CardTitle tag="h5">Informes</CardTitle>
+                <CardSubtitle className="mb-2 text-muted" tag="h6">
+                  Entregados
+                </CardSubtitle>
+                <CardText>
+                  {dataI.map((item) => (
+                    <b key={item.id_doc} style={{ color: "rgb(33 33 185)" }}>
+                      {item.CInf}
+                    </b>
+                  ))}
+                </CardText>
+                <Button className="btn-success" href="./informe2">
+                  Ver
+                </Button>
+              </CardBody>
+              <CardBody
+                className="col-md-8"
+                style={{
+                  width: "70px",
+                  backgroundColor: "rgba(217, 83, 79, 0.7)",
+                  alignItems: "center",
+                  display: "flex",
+                  justifyContent: "center",
+                  fontSize: "8rem",
+                  boxSizing: "border-box",
+                }}>
+                <FaIcons.FaReadme />
+              </CardBody>
+            </div>
           </Card>
           <Card
             color=""
@@ -85,137 +380,68 @@ const Analisis = () => {
               color: "black",
               width: "18rem",
             }}>
-            <CardBody>
-              <CardTitle tag="h5">Patrocinadores</CardTitle>
-              <CardSubtitle className="mb-2 text-muted" tag="h6">
-                Registrados
-              </CardSubtitle>
-              <CardText>Ver</CardText>
-              <Button href="./patro" className="btn-success">
-                Ver
-              </Button>
-            </CardBody>
-          </Card>
-          <Card
-            color=""
-            style={{
-              color: "black",
-              width: "18rem",
-            }}>
-            <CardBody>
-              <CardTitle tag="h5">Fecha Entrega</CardTitle>
-              <CardSubtitle className="mb-2 text-muted" tag="h6">
-                Informes
-              </CardSubtitle>
-              <CardText>Ver</CardText>
-              <Button className="btn-success">Ver</Button>
-            </CardBody>
+            <div className="row g-0">
+              <CardBody className="col-md-4">
+                <CardTitle tag="h5">Fecha Entrega</CardTitle>
+                <CardSubtitle className="mb-2 text-muted" tag="h6">
+                  Informes
+                </CardSubtitle>
+                <CardText>
+                  {dataF.map((item) => (
+                    <b key={item.id} style={{ color: "rgb(33 33 185)" }}>
+                      {item.fecha}
+                    </b>
+                  ))}
+                </CardText>
+                <Button disabled className="btn-success">
+                  Ver
+                </Button>
+              </CardBody>
+              <CardBody
+                className="col-md-8"
+                style={{
+                  width: "70px",
+                  backgroundColor: "rgba(217, 83, 79, 0.7)",
+                  alignItems: "center",
+                  display: "flex",
+                  justifyContent: "center",
+                  fontSize: "8rem",
+                  boxSizing: "border-box",
+                }}>
+                <FaIcons.FaRegCalendarCheck />
+              </CardBody>
+            </div>
           </Card>
         </CardGroup>
         {/* // */}
         <Row>
           <Col sm="6">
             <Card body>
-              <CardTitle tag="h5">
-                Registro inscripciones/conclusion de becas
-              </CardTitle>
-              <CardText>
-                With supporting text below as a natural lead-in to additional
-                content.
+              <CardTitle tag="h5">Histórico de registros:</CardTitle>
+              <CardText
+                className="text-center"
+                style={{ color: "rgb(33 33 185)" }}>
+                <b>Becarios</b>
               </CardText>
-              <ResponsiveContainer width="100%" aspect={2}>
-                <BarChart
-                  data={data}
-                  width={300}
-                  height={200}
-                  margin={{
-                    top: 5,
-                    right: 30,
-                    left: 20,
-                    bottom: 5,
-                  }}>
-                  <CartesianGrid strokeDasharray="4 1 2" />
-                  <XAxis dataKey="anio" />
-                  <YAxis />
-                  <Tooltip />
-                  <Legend />
-                  <Bar dataKey="inscripciones" fill="#6b48ff" />
-                  <Bar dataKey="conclusion" fill="#1ee3cf" />
-                </BarChart>
-              </ResponsiveContainer>
+              <div style={{ width: "100%", height: "450px" }}>
+                <Bar data={data} options={opciones} />
+              </div>
             </Card>
           </Col>
           <Col sm="6">
             <Card body>
-              <CardTitle tag="h5">Special Title Treatment</CardTitle>
-              <CardText>
-                With supporting text below as a natural lead-in to additional
-                content.
+              <CardTitle tag="h5">Registro según región:</CardTitle>
+              <CardText
+                className="text-center"
+                style={{ color: "rgb(33 33 185)" }}>
+                <b>Becarios</b>
               </CardText>
-              <ResponsiveContainer width="100%" aspect={2}>
-                <PieChart>
-                  <Pie
-                    dataKey="inscripciones"
-                    data={data}
-                    innerRadius={60}
-                    outerRadius={150}
-                    fill="#82ca9d">
-                    {data.map((entry, index) => (
-                      <Cell
-                        key={`cell-${index}`}
-                        fill={COLORS[index % COLORS.length]}
-                      />
-                    ))}
-                  </Pie>
-                  <Tooltip />
-                </PieChart>
-              </ResponsiveContainer>
+              <div style={{ width: "100%", height: "450px" }}>
+                <Doughnut data={dataPie} options={opcionesPie} />
+              </div>
             </Card>
           </Col>
         </Row>
-        {/* //graficos con rechart */}
-        {/* <ResponsiveContainer width="50%" aspect={2}>
-          <BarChart
-            data={data}
-            width={300}
-            height={200}
-            margin={{
-              top: 5,
-              right: 30,
-              left: 20,
-              bottom: 5,
-            }}
-          >
-            <CartesianGrid strokeDasharray="4 1 2" />
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Bar dataKey="weight" fill="#6b48ff" />
-            <Bar dataKey="age" fill="#1ee3cf" />
-          </BarChart>
-        </ResponsiveContainer> */}
-        {/* <div style={{ width: "50%", height: 400 }}>
-          <ResponsiveContainer>
-            <PieChart>
-              <Pie
-                dataKey="weight"
-                data={data}
-                innerRadius={60}
-                outerRadius={85}
-                fill="#82ca9d"
-              >
-                {data.map((entry, index) => (
-                  <Cell
-                    key={`cell-${index}`}
-                    fill={COLORS[index % COLORS.length]}
-                  />
-                ))}
-              </Pie>
-              <Tooltip />
-            </PieChart>
-          </ResponsiveContainer>
-        </div> */}
       </div>
     </div>
   );
