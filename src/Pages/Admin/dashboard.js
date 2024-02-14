@@ -264,7 +264,8 @@ const Dashboard = () => {
             style={{
               color: "black",
               width: "18rem",
-            }}>
+            }}
+          >
             <div className="row g-0">
               <CardBody className="col-md-4">
                 <CardTitle tag="h5">Cuentas</CardTitle>
@@ -292,7 +293,8 @@ const Dashboard = () => {
                   justifyContent: "center",
                   fontSize: "8rem",
                   boxSizing: "border-box",
-                }}>
+                }}
+              >
                 <FaIcons.FaUserGraduate />
               </CardBody>
             </div>
@@ -303,7 +305,8 @@ const Dashboard = () => {
             style={{
               color: "black",
               width: "18rem",
-            }}>
+            }}
+          >
             <div className="row g-0">
               <CardBody className="col-md-4">
                 <CardTitle tag="h5">Cuentas</CardTitle>
@@ -331,7 +334,8 @@ const Dashboard = () => {
                   justifyContent: "center",
                   fontSize: "8rem",
                   boxSizing: "border-box",
-                }}>
+                }}
+              >
                 <FaIcons.FaUserTie />
               </CardBody>
             </div>
@@ -341,7 +345,8 @@ const Dashboard = () => {
             style={{
               color: "black",
               width: "18rem",
-            }}>
+            }}
+          >
             <div className="row g-0">
               <CardBody className="col-md-4">
                 <CardTitle tag="h5">Informes</CardTitle>
@@ -369,7 +374,8 @@ const Dashboard = () => {
                   justifyContent: "center",
                   fontSize: "8rem",
                   boxSizing: "border-box",
-                }}>
+                }}
+              >
                 <FaIcons.FaReadme />
               </CardBody>
             </div>
@@ -379,7 +385,8 @@ const Dashboard = () => {
             style={{
               color: "black",
               width: "18rem",
-            }}>
+            }}
+          >
             <div className="row g-0">
               <CardBody className="col-md-4">
                 <CardTitle tag="h5">Fecha Entrega</CardTitle>
@@ -407,7 +414,8 @@ const Dashboard = () => {
                   justifyContent: "center",
                   fontSize: "8rem",
                   boxSizing: "border-box",
-                }}>
+                }}
+              >
                 <FaIcons.FaRegCalendarCheck />
               </CardBody>
             </div>
@@ -420,10 +428,11 @@ const Dashboard = () => {
               <CardTitle tag="h5">Histórico de registros:</CardTitle>
               <CardText
                 className="text-center"
-                style={{ color: "rgb(33 33 185)" }}>
+                style={{ color: "rgb(33 33 185)" }}
+              >
                 <b>Becarios</b>
               </CardText>
-              <div style={{ width: "100%", height: "450px" }}>
+              <div style={{ width: "100%", height: "400px" }}>
                 <Bar data={data} options={opciones} />
               </div>
             </Card>
@@ -433,10 +442,11 @@ const Dashboard = () => {
               <CardTitle tag="h5">Registro según región:</CardTitle>
               <CardText
                 className="text-center"
-                style={{ color: "rgb(33 33 185)" }}>
+                style={{ color: "rgb(33 33 185)" }}
+              >
                 <b>Becarios</b>
               </CardText>
-              <div style={{ width: "100%", height: "450px" }}>
+              <div style={{ width: "100%", height: "400px" }}>
                 <Doughnut data={dataPie} options={opcionesPie} />
               </div>
             </Card>

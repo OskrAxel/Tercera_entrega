@@ -10,6 +10,11 @@ import {
   CardGroup,
   Row,
   Col,
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+  Table,
 } from "reactstrap";
 import {
   Chart as ChartJS,
@@ -128,6 +133,22 @@ const Analisis = () => {
       });
   };
   ////
+  ////GET FECHA INFORMES
+  const [dataFI, setDataFI] = useState([]);
+
+  const peticionGetFI = async () => {
+    var f = new FormData();
+    f.append("METHOD", "FINF");
+    await axios
+      .post("http://localhost:80/api/adm/dashboard/", f)
+      .then((response) => {
+        console.log(response.data);
+        setDataFI(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   ////GET INFORMES
   const [dataI, setDataI] = useState([]);
 
@@ -152,7 +173,12 @@ const Analisis = () => {
     peticionGetP();
     peticionGetF();
     peticionGetI();
+    peticionGetFI();
   }, []);
+  const [modalEliminar, setModalEliminar] = useState(false);
+  const abrirCerrarModalEliminar = () => {
+    setModalEliminar(!modalEliminar);
+  };
   ////GRAFICO BARRAS
   ChartJS.register(
     CategoryScale,
@@ -255,6 +281,7 @@ const Analisis = () => {
       },
     },
   };
+  var cont = 1;
   return (
     <div id="main">
       <div className="tral">
@@ -264,7 +291,8 @@ const Analisis = () => {
             style={{
               color: "black",
               width: "18rem",
-            }}>
+            }}
+          >
             <div className="row g-0">
               <CardBody className="col-md-4">
                 <CardTitle tag="h5">Cuentas</CardTitle>
@@ -292,7 +320,8 @@ const Analisis = () => {
                   justifyContent: "center",
                   fontSize: "8rem",
                   boxSizing: "border-box",
-                }}>
+                }}
+              >
                 <FaIcons.FaUserGraduate />
               </CardBody>
             </div>
@@ -303,7 +332,8 @@ const Analisis = () => {
             style={{
               color: "black",
               width: "18rem",
-            }}>
+            }}
+          >
             <div className="row g-0">
               <CardBody className="col-md-4">
                 <CardTitle tag="h5">Cuentas</CardTitle>
@@ -331,7 +361,8 @@ const Analisis = () => {
                   justifyContent: "center",
                   fontSize: "8rem",
                   boxSizing: "border-box",
-                }}>
+                }}
+              >
                 <FaIcons.FaUserTie />
               </CardBody>
             </div>
@@ -341,7 +372,8 @@ const Analisis = () => {
             style={{
               color: "black",
               width: "18rem",
-            }}>
+            }}
+          >
             <div className="row g-0">
               <CardBody className="col-md-4">
                 <CardTitle tag="h5">Informes</CardTitle>
@@ -369,7 +401,8 @@ const Analisis = () => {
                   justifyContent: "center",
                   fontSize: "8rem",
                   boxSizing: "border-box",
-                }}>
+                }}
+              >
                 <FaIcons.FaReadme />
               </CardBody>
             </div>
@@ -379,7 +412,8 @@ const Analisis = () => {
             style={{
               color: "black",
               width: "18rem",
-            }}>
+            }}
+          >
             <div className="row g-0">
               <CardBody className="col-md-4">
                 <CardTitle tag="h5">Fecha Entrega</CardTitle>
@@ -407,7 +441,8 @@ const Analisis = () => {
                   justifyContent: "center",
                   fontSize: "8rem",
                   boxSizing: "border-box",
-                }}>
+                }}
+              >
                 <FaIcons.FaRegCalendarCheck />
               </CardBody>
             </div>
@@ -420,10 +455,11 @@ const Analisis = () => {
               <CardTitle tag="h5">Histórico de registros:</CardTitle>
               <CardText
                 className="text-center"
-                style={{ color: "rgb(33 33 185)" }}>
+                style={{ color: "rgb(33 33 185)" }}
+              >
                 <b>Becarios</b>
               </CardText>
-              <div style={{ width: "100%", height: "450px" }}>
+              <div style={{ width: "100%", height: "400px" }}>
                 <Bar data={data} options={opciones} />
               </div>
             </Card>
@@ -433,16 +469,73 @@ const Analisis = () => {
               <CardTitle tag="h5">Registro según región:</CardTitle>
               <CardText
                 className="text-center"
-                style={{ color: "rgb(33 33 185)" }}>
+                style={{ color: "rgb(33 33 185)" }}
+              >
                 <b>Becarios</b>
               </CardText>
-              <div style={{ width: "100%", height: "450px" }}>
+              <div style={{ width: "100%", height: "400px" }}>
                 <Doughnut data={dataPie} options={opcionesPie} />
               </div>
             </Card>
           </Col>
         </Row>
       </div>
+      <Button
+        className="btn btn-danger btn-lg b-seg"
+        style={{
+          fontSize: 18,
+          bottom: "14%",
+          right: 0,
+          position: "absolute",
+          border: 0,
+          borderRadius: 10,
+        }}
+        onClick={() => abrirCerrarModalEliminar()}
+      >
+        <FaIcons.FaExclamationCircle />
+        &nbsp; AVISO
+      </Button>
+
+      <Modal isOpen={modalEliminar} size="lg">
+        <ModalHeader
+          style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}
+        >
+          Estado Informes
+        </ModalHeader>
+        <ModalBody>
+          <Table responsive="sm" id="tabl">
+            <thead>
+              <tr className="text-center tra title-form">
+                <th>N°</th>
+                <th>Usuario</th>
+                <th>Nom.Doc</th>
+                <th>Fecha E.</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              {dataFI.map((item) => (
+                <tr className="text-center" key={item.id}>
+                  <td>{cont++}</td>
+                  <td>{item.nom_usu}</td>
+                  <td>{item.nom_doc}</td>
+                  <td>{item.f_cargado}</td>
+                  <td>{item.f_cargado}</td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </ModalBody>
+        <ModalFooter>
+          <Button
+            color="danger"
+            size="lg"
+            onClick={() => abrirCerrarModalEliminar()}
+          >
+            Cerrar
+          </Button>
+        </ModalFooter>
+      </Modal>
     </div>
   );
 };

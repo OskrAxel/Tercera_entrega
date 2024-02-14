@@ -60,7 +60,16 @@ if($_POST['METHOD']=='FEC'){
 
 if($_POST['METHOD']=='INF'){
     unset($_POST['METHOD']);
-    $query="SELECT count(id_doc) AS CInf from informe";
+    $query="SELECT nom_usu,nom_doc,f_cargado,count(id_doc) AS CInf from informe";
+    $resultado=metodoGet($query);
+    echo json_encode($resultado->fetchAll()); 
+    header("HTTP/1.1 200 OK");
+    exit();
+}
+
+if($_POST['METHOD']=='FINF'){
+    unset($_POST['METHOD']);
+    $query="SELECT nom_usu,nom_doc,f_cargado from informe";
     $resultado=metodoGet($query);
     echo json_encode($resultado->fetchAll()); 
     header("HTTP/1.1 200 OK");

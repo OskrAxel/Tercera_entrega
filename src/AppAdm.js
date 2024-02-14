@@ -21,7 +21,6 @@ import Horarios7 from "./Pages/Bec/Horarios/Horarios7";
 import Horarios8 from "./Pages/Bec/Horarios/Horarios8";
 import Horarios9 from "./Pages/Bec/Horarios/Horarios9";
 import Horarios10 from "./Pages/Bec/Horarios/Horarios10";
-import Clients from "./Pages/Clients";
 import NavbarBec from "./components/NavbarBec";
 import NavbarAdm from "./components/NavbarAdm";
 import NavbarPer from "./components/Navbarper/NavbarPer";
@@ -150,10 +149,6 @@ function AppAdm() {
             <Route
               path="/horarios10"
               element={<Protected Component={Horarios10} />}
-            />
-            <Route
-              path="/clients"
-              element={<Protected Component={Clients} />}
             />
             <Route
               path="/PdfConv2"
