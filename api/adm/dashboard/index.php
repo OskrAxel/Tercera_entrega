@@ -10,7 +10,7 @@ header("Access-Control-Allow-Methods: *");
 
 if($_POST['METHOD']=='1BEC'){
     unset($_POST['METHOD']);
-    $query="SELECT id,anio, count(*) AS BECARIOS FROM usuarios_bec 
+    $query="SELECT id,anio, count(*) AS Incritos FROM usuarios_bec 
     GROUP BY anio
     HAVING COUNT(*)>0";
     $resultado=metodoGet($query);
@@ -33,7 +33,7 @@ if($_POST['METHOD']=='CIUBEC'){
 
 if($_POST['METHOD']=='BEC'){
     unset($_POST['METHOD']);
-    $query="SELECT count(id) AS CBec from usuarios_bec";
+    $query="SELECT id,count(id) AS CBec from usuarios_bec";
     $resultado=metodoGet($query);
     echo json_encode($resultado->fetchAll()); 
     header("HTTP/1.1 200 OK");
@@ -42,7 +42,7 @@ if($_POST['METHOD']=='BEC'){
 
 if($_POST['METHOD']=='PER'){
     unset($_POST['METHOD']);
-    $query="SELECT count(id) AS CPer from usuarios_per";
+    $query="SELECT id,count(id) AS CPer from usuarios_per";
     $resultado=metodoGet($query);
     echo json_encode($resultado->fetchAll()); 
     header("HTTP/1.1 200 OK");
@@ -60,7 +60,7 @@ if($_POST['METHOD']=='FEC'){
 
 if($_POST['METHOD']=='INF'){
     unset($_POST['METHOD']);
-    $query="SELECT nom_usu,nom_doc,f_cargado,count(id_doc) AS CInf from informe";
+    $query="SELECT id_doc,nom_usu,nom_doc,f_cargado,count(id_doc) AS CInf from informe";
     $resultado=metodoGet($query);
     echo json_encode($resultado->fetchAll()); 
     header("HTTP/1.1 200 OK");
@@ -69,7 +69,7 @@ if($_POST['METHOD']=='INF'){
 
 if($_POST['METHOD']=='FINF'){
     unset($_POST['METHOD']);
-    $query="SELECT nom_usu,nom_doc,f_cargado from informe";
+    $query="SELECT id_doc,nom_usu,nom_doc,f_cargado from informe";
     $resultado=metodoGet($query);
     echo json_encode($resultado->fetchAll()); 
     header("HTTP/1.1 200 OK");

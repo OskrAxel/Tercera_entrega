@@ -29,6 +29,7 @@ import {
 import { Bar, Doughnut } from "react-chartjs-2";
 import axios from "axios";
 import * as FaIcons from "react-icons/fa";
+import { Link } from "react-router-dom";
 //
 
 const Analisis = () => {
@@ -48,7 +49,7 @@ const Analisis = () => {
           auxAnioB = [];
         respuesta.map((elemento) => {
           auxAnio.push(elemento.anio);
-          auxAnioB.push(elemento.BECARIOS);
+          auxAnioB.push(elemento.Incritos);
         });
         setAnio(auxAnio);
         setAnioB(auxAnioB);
@@ -282,6 +283,8 @@ const Analisis = () => {
     },
   };
   var cont = 1;
+  /////
+
   return (
     <div id="main">
       <div className="tral">
@@ -422,7 +425,7 @@ const Analisis = () => {
                 </CardSubtitle>
                 <CardText>
                   {dataF.map((item) => (
-                    <b key={item.id} style={{ color: "rgb(33 33 185)" }}>
+                    <b key={item.id_fech} style={{ color: "rgb(33 33 185)" }}>
                       {item.fecha}
                     </b>
                   ))}
@@ -496,12 +499,23 @@ const Analisis = () => {
         &nbsp; AVISO
       </Button>
 
-      <Modal isOpen={modalEliminar} size="lg">
+      <Modal isOpen={modalEliminar} size="xl">
         <ModalHeader
+          className="text-center"
           style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}
         >
           Estado Informes
         </ModalHeader>
+        <div id="subt">
+          <Link
+            to={"http://localhost:80/api/PDF/reporte_pdf_becarios.php"}
+            target="_blank"
+          >
+            <Button color="primary" size="lg">
+              <FaIcons.FaFileDownload /> Reporte
+            </Button>
+          </Link>
+        </div>
         <ModalBody>
           <Table responsive="sm" id="tabl">
             <thead>
@@ -515,12 +529,22 @@ const Analisis = () => {
             </thead>
             <tbody>
               {dataFI.map((item) => (
-                <tr className="text-center" key={item.id}>
+                <tr className="text-center" key={item.id_doc}>
                   <td>{cont++}</td>
                   <td>{item.nom_usu}</td>
                   <td>{item.nom_doc}</td>
                   <td>{item.f_cargado}</td>
-                  <td>{item.f_cargado}</td>
+                  <td
+                    style={{
+                      color: "white",
+                      background: "#2E8B57",
+                    }}
+                  >
+                    {item.f_cargado}
+                  </td>
+                  <td>
+                    <h1>{item.id_doc === "1" ? "+" : "-"}</h1>
+                  </td>
                 </tr>
               ))}
             </tbody>

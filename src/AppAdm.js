@@ -48,6 +48,7 @@ import Nota8 from "./Pages/Bec/Notas/Nota8";
 import Nota9 from "./Pages/Bec/Notas/Nota9";
 import Nota10 from "./Pages/Bec/Notas/Nota10";
 import Logout from "./utils/logout";
+import ProductRow from "./Pages/Per/prod";
 
 function AppAdm() {
   return (
@@ -179,6 +180,10 @@ function AppAdm() {
               element={<Protected Component={Analisis} />}
             />
             <Route path="/pdf2" element={<Protected Component={Pdf2} />} />
+            <Route
+              path="/ProductRow"
+              element={<Protected Component={ProductRow} />}
+            />
             <Route path="/pdfman" element={<Protected Component={Pdfman} />} />
           </Route>
         </Routes>

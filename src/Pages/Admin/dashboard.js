@@ -10,6 +10,11 @@ import {
   CardGroup,
   Row,
   Col,
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+  Table,
 } from "reactstrap";
 import {
   Chart as ChartJS,
@@ -24,6 +29,7 @@ import {
 import { Bar, Doughnut } from "react-chartjs-2";
 import axios from "axios";
 import * as FaIcons from "react-icons/fa";
+import { Link } from "react-router-dom";
 //
 
 const Dashboard = () => {
@@ -43,7 +49,7 @@ const Dashboard = () => {
           auxAnioB = [];
         respuesta.map((elemento) => {
           auxAnio.push(elemento.anio);
-          auxAnioB.push(elemento.BECARIOS);
+          auxAnioB.push(elemento.Incritos);
         });
         setAnio(auxAnio);
         setAnioB(auxAnioB);
@@ -128,6 +134,22 @@ const Dashboard = () => {
       });
   };
   ////
+  ////GET FECHA INFORMES
+  const [dataFI, setDataFI] = useState([]);
+
+  const peticionGetFI = async () => {
+    var f = new FormData();
+    f.append("METHOD", "FINF");
+    await axios
+      .post("http://localhost:80/api/adm/dashboard/", f)
+      .then((response) => {
+        console.log(response.data);
+        setDataFI(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   ////GET INFORMES
   const [dataI, setDataI] = useState([]);
 
@@ -152,7 +174,12 @@ const Dashboard = () => {
     peticionGetP();
     peticionGetF();
     peticionGetI();
+    peticionGetFI();
   }, []);
+  const [modalEliminar, setModalEliminar] = useState(false);
+  const abrirCerrarModalEliminar = () => {
+    setModalEliminar(!modalEliminar);
+  };
   ////GRAFICO BARRAS
   ChartJS.register(
     CategoryScale,
@@ -255,6 +282,9 @@ const Dashboard = () => {
       },
     },
   };
+  var cont = 1;
+  /////
+
   return (
     <div id="main">
       <div className="tral">
@@ -395,7 +425,7 @@ const Dashboard = () => {
                 </CardSubtitle>
                 <CardText>
                   {dataF.map((item) => (
-                    <b key={item.id} style={{ color: "rgb(33 33 185)" }}>
+                    <b key={item.id_fech} style={{ color: "rgb(33 33 185)" }}>
                       {item.fecha}
                     </b>
                   ))}
@@ -453,8 +483,89 @@ const Dashboard = () => {
           </Col>
         </Row>
       </div>
+      <Button
+        className="btn btn-danger btn-lg b-seg"
+        style={{
+          fontSize: 18,
+          bottom: "14%",
+          right: 0,
+          position: "absolute",
+          border: 0,
+          borderRadius: 10,
+        }}
+        onClick={() => abrirCerrarModalEliminar()}
+      >
+        <FaIcons.FaExclamationCircle />
+        &nbsp; AVISO
+      </Button>
+
+      <Modal isOpen={modalEliminar} size="xl">
+        <ModalHeader
+          className="text-center"
+          style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}
+        >
+          Estado Informes
+        </ModalHeader>
+        <div id="subt">
+          <Link
+            to={"http://localhost:80/api/PDF/reporte_pdf_becarios.php"}
+            target="_blank"
+          >
+            <Button color="primary" size="lg">
+              <FaIcons.FaFileDownload /> Reporte
+            </Button>
+          </Link>
+        </div>
+        <ModalBody>
+          <Table responsive="sm" id="tabl">
+            <thead>
+              <tr className="text-center tra title-form">
+                <th>N°</th>
+                <th>Usuario</th>
+                <th>Nom.Doc</th>
+                <th>Fecha E.</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              {dataFI.map((item) => (
+                <tr className="text-center" key={item.id_doc}>
+                  <td>{cont++}</td>
+                  <td>{item.nom_usu}</td>
+                  <td>{item.nom_doc}</td>
+                  <td>{item.f_cargado}</td>
+                  <td
+                    style={{
+                      color: "white",
+                      background: "#2E8B57",
+                    }}
+                  >
+                    {item.f_cargado}
+                  </td>
+                  <td>
+                    <h1>{item.id_doc === "1" ? "+" : "-"}</h1>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </ModalBody>
+        <ModalFooter>
+          <Button
+            color="danger"
+            size="lg"
+            onClick={() => abrirCerrarModalEliminar()}
+          >
+            Cerrar
+          </Button>
+        </ModalFooter>
+      </Modal>
     </div>
   );
 };
 
 export default Dashboard;
+
+// //////OPCIONES CONSULTA
+// SELECT CONCAT(usuarios_bec.nombre,' ',usuarios_bec.apellido) AS responsable, informe.f_cargado FROM informe
+// RIGHT JOIN usuarios_bec ON usuarios_bec.id = informe.id_doc
