@@ -6,7 +6,7 @@
 if($_SERVER['REQUEST_METHOD']=='GET'){
     if(isset($_GET['id'])){
         $iduser=$_GET['id'];
-        $query="SELECT id, nombre, apellido, email, contrasena, contrasena_lit, celular from usuarios_bec where id_bec='$iduser'";
+        $query="SELECT id, nombre, apellido,id_bec, email, contrasena, contrasena_lit, celular from usuarios_bec where id_bec='$iduser'";
         $resultado=metodoGet($query);
         echo json_encode($resultado->fetch(PDO::FETCH_ASSOC));
     }else{

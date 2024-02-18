@@ -16,11 +16,12 @@ if($method == "GET") {
 if($method=="POST"){
     $json = null;
     $foto = (file_get_contents($_FILES['archivo_per']['tmp_name']));
+    $id_bec=$_POST['id_bec'];
     $descripcion = $_POST['nom_usu'];
     $nom_doc = $_POST['nom_doc'];
     $f_cargado = $_POST['f_cargado'];
     $api = new Api();
-    $json = $api->addImagen($descripcion,$foto,$nom_doc,$f_cargado);
+    $json = $api->addImagen($descripcion,$foto,$nom_doc,$f_cargado,$id_bec);
     echo $json;
 }
 

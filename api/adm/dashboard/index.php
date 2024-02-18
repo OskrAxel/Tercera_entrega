@@ -75,5 +75,14 @@ if($_POST['METHOD']=='FINF'){
     header("HTTP/1.1 200 OK");
     exit();
 }
+///Estimar entrega reportes
+if($_POST['METHOD']=='ENTR'){
+    unset($_POST['METHOD']);
+    $query="SELECT id_doc,nom_usu,nom_doc,f_cargado from informe";
+    $resultado=metodoGet($query);
+    echo json_encode($resultado->fetchAll()); 
+    header("HTTP/1.1 200 OK");
+    exit();
+}
 header("HTTP/1.1 400 Bad Request");
 ?>

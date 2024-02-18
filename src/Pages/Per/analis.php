@@ -41,4 +41,6 @@ while ($row_set = mysqli_fetch_array($execute_result_query)) {
     </tr>
     <?php
 }
+// SELECT CONCAT(usuarios_bec.nombre,' ',usuarios_bec.apellido) AS responsable, informe.f_cargado FROM informe
+// RIGHT JOIN usuarios_bec ON usuarios_bec.id_bec = informe.id_bec WHERE usuarios_bec.anio
 ?>

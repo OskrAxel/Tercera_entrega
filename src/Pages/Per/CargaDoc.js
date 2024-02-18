@@ -146,6 +146,7 @@ const CargaDoc = () => {
     });
     setData(resultadosBusqueda);
   };
+  var cont = 1;
   return (
     <div id="main_content">
       <div className="tra">
@@ -184,6 +185,7 @@ const CargaDoc = () => {
         <Table responsive="sm" id="tabl">
           <thead>
             <tr className="text-center tra title-form">
+              <th>#</th>
               <th>Nombre documento</th>
               <th>ID Usuario</th>
               <th>Detalle</th>
@@ -193,6 +195,7 @@ const CargaDoc = () => {
           <tbody>
             {lista.map((item) => (
               <tr className="text-center" key={item.id_com}>
+                <td>{cont++}</td>
                 <td>{item.nom_doc}</td>
                 <td>{item.id_per}</td>
                 <td>{item.detalle}</td>

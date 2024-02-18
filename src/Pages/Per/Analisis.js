@@ -284,8 +284,17 @@ const Analisis = () => {
   };
   var cont = 1;
   var est = "";
-  /////
-
+  /////dataFI
+  const [modalVer, setModalVer] = useState(false);
+  const abrirCerrarModalVer = () => {
+    setModalVer(!modalVer);
+  };
+  ////
+  const closeBtn = (
+    <Button className="close" onClick={() => abrirCerrarModalVer()}>
+      &times;
+    </Button>
+  );
   return (
     <div id="main">
       <div className="tral">
@@ -484,7 +493,7 @@ const Analisis = () => {
           border: 0,
           borderRadius: 10,
         }}
-        onClick={() => abrirCerrarModalEliminar()}>
+        onClick={() => abrirCerrarModalVer()}>
         <FaIcons.FaExclamationCircle />
         &nbsp; AVISO
       </Button>
@@ -517,8 +526,8 @@ const Analisis = () => {
             </thead>
             <tbody>
               {dataFI.map((item) => (
-                <tr className="text-center">
-                  <td key={item.id_doc}>{cont++}</td>
+                <tr className="text-center" key={item.id_doc}>
+                  <td>{cont++}</td>
                   <td>{item.nom_usu}</td>
                   <td>{item.nom_doc}</td>
                   <td>{item.f_cargado}</td>
@@ -555,6 +564,38 @@ const Analisis = () => {
             Cerrar
           </Button>
         </ModalFooter>
+      </Modal>
+      {/* Modal VER */}
+      <Modal isOpen={modalVer} size="xl">
+        <ModalHeader
+          close={closeBtn}
+          style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}>
+          {/* {usuarioSeleccionado && usuarioSeleccionado.nom_doc} */}
+          TITULO MODAL
+        </ModalHeader>
+        <ModalBody>
+          <Card>
+            <CardBody className="p-0">
+              <Row className="justify-content-center">
+                <object
+                  // data={"data:application/pdf;base64," + dataFI.archivo_com}
+                  // type="application/pdf"
+                  // alt="archivo_per"
+                  data={"http://localhost:80/api/PDF/reporte_pdf_Informes.php"}
+                  type="application/pdf"
+                  width="400"
+                  height="600">
+                  <div
+                    style={{
+                      position: "absolute",
+                      width: "100%",
+                      height: "100%",
+                    }}></div>
+                </object>
+              </Row>
+            </CardBody>
+          </Card>
+        </ModalBody>
       </Modal>
     </div>
   );

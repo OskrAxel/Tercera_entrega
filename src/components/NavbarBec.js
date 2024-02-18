@@ -32,6 +32,7 @@ function NavbarBec(args) {
     id: "",
     contrasena: "",
     contrasena_lit: "",
+    id_bec: "",
   });
 
   const [modalContra, setModalContra] = useState(false);
@@ -93,6 +94,7 @@ function NavbarBec(args) {
     e.preventDefault();
     let fd = new FormData();
     fd.append("archivo_per", imagen);
+    fd.append("id_bec", data.id_bec);
     fd.append("nom_usu", data.nombre + " " + data.apellido);
     fd.append("nom_doc", nom);
     const res = await axios.post("http://localhost:80/api/inf/", fd);
@@ -272,6 +274,14 @@ function NavbarBec(args) {
               className="form-control"
               name="nom_usu"
               value={data.nombre + " " + data.apellido}
+              // onChange={(e) => setDescripcion(e.target.value)}
+            />
+            <input
+              disabled
+              type="text"
+              className="form-control"
+              name="id_bec"
+              value={data.id_bec}
               // onChange={(e) => setDescripcion(e.target.value)}
             />
             <br />

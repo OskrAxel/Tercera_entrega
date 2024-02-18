@@ -55,6 +55,7 @@ function ListPat() {
     });
     setData(resultadosBusqueda);
   };
+  var cont = 1;
   return (
     <div id="main_content">
       <div className="tra">
@@ -98,7 +99,7 @@ function ListPat() {
           <tbody>
             {data.map((Usuario) => (
               <tr className="text-center" key={Usuario.id}>
-                <td>{Usuario.id}</td>
+                <td>{cont++}</td>
                 <td>{Usuario.nombre}</td>
                 <td>{Usuario.pais}</td>
                 <td>{Usuario.email}</td>
