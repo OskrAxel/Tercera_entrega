@@ -4,6 +4,7 @@ import { Table, Button } from "reactstrap";
 import * as FaIcons from "react-icons/fa";
 import axios from "axios";
 import "../Bec/bec.scss";
+import Swal from "sweetalert2";
 
 function ListUser() {
   const baseUrl = "http://localhost:80/api/bec/";
@@ -70,7 +71,7 @@ function ListUser() {
       .then((response) => {
         setData(data.concat(response.data));
         abrirCerrarModalInsertar();
-        act();
+        mostrarAlerta();
       })
       .catch((error) => {
         console.log(error);
@@ -131,6 +132,7 @@ function ListUser() {
 
   useEffect(() => {
     peticionGet();
+    mostrarAlerta();
   }, []);
   ////BARRA BUSQUEDA
   const [busqueda, setBusqueda] = useState("");
@@ -164,6 +166,16 @@ function ListUser() {
     setData(resultadosBusqueda);
   };
   var cont = 1;
+  ////ALERTAS
+  const mostrarAlerta = () => {
+    Swal.fire({
+      confirmButtonColor: "#2E8B57",
+      title: "Éxito!",
+      text: "Nuevo usuario registrado correctamente.",
+      timer: 5000,
+      icon: "success",
+    });
+  };
   return (
     <div id="main_content">
       <div className="tra">

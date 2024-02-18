@@ -14,7 +14,7 @@ if($_SERVER['REQUEST_METHOD']=='GET'){
         $resultado=metodoGet($query);
         echo json_encode($resultado->fetch(PDO::FETCH_ASSOC));
     }else{
-        $query="SELECT id, nombre, apellido, email, contrasena, celular, nota_eva,carrera,anio,ciudad,direccion,nom_pad,nom_mad from usuarios_bec";
+        $query="SELECT id, nombre,id_bec, apellido, email, contrasena, celular, nota_eva,carrera,anio,ciudad,direccion,nom_pad,nom_mad from usuarios_bec";
         $resultado=metodoGet($query);
         echo json_encode($resultado->fetchAll()); 
     }
@@ -26,12 +26,13 @@ if($_POST['METHOD']=='POST'){
     unset($_POST['METHOD']);
     $nombre=$_POST['nombre'];
     $apellido=$_POST['apellido'];
+    $id_bec=$_POST['id_bec'];
     $email=$_POST['email'];
     $contrasena=$_POST['contrasena'];
     $celular=$_POST['celular'];
     $created_at = date('Y-m-d');
     $pass = md5($contrasena);
-    $query="INSERT INTO usuarios_bec(id,nombre, apellido, email, contrasena, contrasena_lit, celular, created_at) values (NULL,'$nombre', '$apellido', '$email', '$pass', '$contrasena', '$celular', '$created_at')";
+    $query="INSERT INTO usuarios_bec(id,nombre, apellido, id_bec,email, contrasena, contrasena_lit, celular, created_at) values (NULL,'$nombre', '$apellido','$id_bec', '$email', '$pass', '$contrasena', '$celular', '$created_at')";
     $queryAutoIncrement="SELECT MAX(id) as id from usuarios_per";
     $resultado=metodoPost($query, $queryAutoIncrement);
     echo json_encode($resultado);
