@@ -130,6 +130,7 @@ function Informe2() {
     });
     setLista(resultadosBusqueda);
   };
+  var cont = 1;
   return (
     <div id="main_content">
       <div className="tra">
@@ -160,7 +161,7 @@ function Informe2() {
         <Table responsive="sm" id="tabl">
           <thead>
             <tr className="text-center">
-              {/* <th>#</th> */}
+              <th>#</th>
               <th>Nombre documento</th>
               <th>Usuario</th>
               <th>Fecha cargado</th>
@@ -171,6 +172,7 @@ function Informe2() {
           <tbody>
             {lista.map((item) => (
               <tr className="text-center" key={item.id_doc}>
+                <td>{cont++}</td>
                 <td>{item.nom_doc}</td>
                 <td>{item.nom_usu}</td>
                 <td>{item.f_cargado}</td>

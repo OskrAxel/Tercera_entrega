@@ -6,7 +6,7 @@
 if($_SERVER['REQUEST_METHOD']=='GET'){
     if(isset($_GET['id'])){
         $iduser=$_GET['id'];
-        $query="SELECT nombre,apellido,email,id_bec,carrera,celular,institucion,anio,ciudad,direccion,nom_pad,nom_mad from usuarios_bec where id_bec='$iduser'";
+        $query="SELECT id,nombre,apellido,email,id_bec,carrera,celular,institucion,anio,ciudad,direccion,nom_pad,nom_mad from usuarios_bec where id_bec='$iduser'";
         $resultado=metodoGet($query);
         echo json_encode($resultado->fetch(PDO::FETCH_ASSOC));
     }else{
@@ -23,7 +23,6 @@ if($_POST['METHOD']=='PUT'){
     $nombre=$_POST['nombre'];
     $apellido=$_POST['apellido'];
     $email=$_POST['email'];
-    $id_bec=$_POST['id_bec'];
     $carrera=$_POST['carrera'];
     $celular=$_POST['celular'];
     $institucion=$_POST['institucion'];
@@ -33,10 +32,10 @@ if($_POST['METHOD']=='PUT'){
     $nom_pad=$_POST['nom_pad'];
     $nom_mad=$_POST['nom_mad'];
     $query="UPDATE usuarios_bec SET nombre='$nombre', apellido='$apellido',
-    email='$email', id_bec='$id_bec', carrera='$carrera',
-    celular='$celular', institucion='$institucion', anio='$anio',
-    ciudad='$ciudad', direccion='$direccion' , nom_pad='$nom_pad'
-    , nom_mad='$nom_mad' WHERE id='$id'";
+     email='$email',carrera='$carrera',institucion='$institucion',
+     celular='$celular',anio='$anio', ciudad='$ciudad', direccion='$direccion',
+     nom_pad='$nom_pad',nom_mad='$nom_mad'
+      WHERE id='$id'";
     $resultado=metodoPut($query);
     echo json_encode($resultado);
     header("HTTP/1.1 200 OK");

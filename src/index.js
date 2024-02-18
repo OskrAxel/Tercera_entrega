@@ -6,7 +6,6 @@ import { BrowserRouter } from "react-router-dom";
 
 import "./App.scss";
 import AppAdm from "./AppAdm";
-import LoginBec from "./utils/loginBec";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

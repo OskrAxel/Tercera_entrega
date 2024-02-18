@@ -46,12 +46,14 @@ function RegComp() {
         console.log(error);
       });
   };
+  const act = () => {
+    window.location.reload();
+  };
   const peticionPut = async () => {
     var f = new FormData();
     f.append("nombre", data.nombre);
     f.append("apellido", data.apellido);
     f.append("email", data.email);
-    f.append("id_bec", data.id_bec);
     f.append("carrera", data.carrera);
     f.append("celular", data.celular);
     f.append("institucion", data.institucion);
@@ -66,7 +68,9 @@ function RegComp() {
         params: { id: data.id },
       })
       .then((response) => {
-        setData(response);
+        setData(response.data);
+        console.log(response.data);
+        act();
       })
       .catch((error) => {
         console.log(error);
@@ -85,7 +89,7 @@ function RegComp() {
           <Row>
             <Col md={4}>
               <FormGroup>
-                <Label>Nombres:</Label>
+                <Label>Nombres:{data.id}</Label>
                 <Input
                   name="nombre"
                   type="text"
@@ -109,9 +113,10 @@ function RegComp() {
               <FormGroup>
                 <Label>ID Usuario:</Label>
                 <Input
+                  disabled
                   name="id_bec"
                   type="text"
-                  onChange={handleChange}
+                  // onChange={handleChange}
                   value={data.id_bec}
                 />
               </FormGroup>
@@ -129,7 +134,7 @@ function RegComp() {
                 />
               </FormGroup>
             </Col>
-            <Col md={4}>
+            <Col md={3}>
               <FormGroup>
                 <Label>Carrera:</Label>
                 <Input
@@ -152,7 +157,7 @@ function RegComp() {
               </FormGroup>
             </Col>
 
-            <Col md={1}>
+            <Col md={2}>
               <FormGroup>
                 <Label>Celular:</Label>
                 <Input

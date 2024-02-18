@@ -161,6 +161,7 @@ function ListUserAdm() {
     });
     setData(resultadosBusqueda);
   };
+  var cont = 1;
   return (
     <div id="main_content">
       <div className="tra">
@@ -191,7 +192,7 @@ function ListUserAdm() {
         <Table responsive="sm" id="tabl">
           <thead>
             <tr className="text-center">
-              {/* <th>#</th> */}
+              <th>#</th>
               <th>Nombres</th>
               <th>Apellidos</th>
               <th>Correo</th>
@@ -204,6 +205,7 @@ function ListUserAdm() {
             {data.map((Usuario) => (
               <tr className="text-center" key={Usuario.id}>
                 {/* <td>{Usuario.id}</td> */}
+                <td>{cont++}</td>
                 <td>{Usuario.nombre}</td>
                 <td>{Usuario.apellido}</td>
                 <td>{Usuario.email}</td>

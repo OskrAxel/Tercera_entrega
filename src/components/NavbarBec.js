@@ -85,7 +85,7 @@ function NavbarBec(args) {
 
   const toggle = () => setIsOpen(!isOpen);
   ////
-  const [descripcion, setDescripcion] = useState("");
+  // const [descripcion, setDescripcion] = useState("");
   const [nom, setNom] = useState("");
   const [imagen, setImagen] = useState(null);
   ////CARGAR ARCHIVO
@@ -93,7 +93,7 @@ function NavbarBec(args) {
     e.preventDefault();
     let fd = new FormData();
     fd.append("archivo_per", imagen);
-    fd.append("nom_usu", descripcion);
+    fd.append("nom_usu", data.nombre + " " + data.apellido);
     fd.append("nom_doc", nom);
     const res = await axios.post("http://localhost:80/api/inf/", fd);
     console.log(res.data);
@@ -211,6 +211,7 @@ function NavbarBec(args) {
                       border: "5px solid rgba(1, 67, 59, 1)",
                     }}
                     width="100%"
+                    onClick={() => abrirCerrarModalFoto()}
                   />
                 </div>
               ))}
@@ -266,10 +267,12 @@ function NavbarBec(args) {
             <label>Usuario: </label>
             <br />
             <input
+              disabled
               type="text"
               className="form-control"
               name="nom_usu"
-              onChange={(e) => setDescripcion(e.target.value)}
+              value={data.nombre + " " + data.apellido}
+              // onChange={(e) => setDescripcion(e.target.value)}
             />
             <br />
             <label>Informe personal: </label>

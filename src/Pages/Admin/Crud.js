@@ -15,6 +15,7 @@ function ListUser() {
     id: "",
     nombre: "",
     apellido: "",
+    id_bec: "",
     email: "",
     contrasena: "",
     celular: "",
@@ -59,6 +60,7 @@ function ListUser() {
     var f = new FormData();
     f.append("nombre", usuarioSeleccionado.nombre);
     f.append("apellido", usuarioSeleccionado.apellido);
+    f.append("id_bec", usuarioSeleccionado.id_bec);
     f.append("email", usuarioSeleccionado.email);
     f.append("contrasena", usuarioSeleccionado.contrasena);
     f.append("celular", usuarioSeleccionado.celular);
@@ -161,6 +163,7 @@ function ListUser() {
     });
     setData(resultadosBusqueda);
   };
+  var cont = 1;
   return (
     <div id="main_content">
       <div className="tra">
@@ -196,6 +199,7 @@ function ListUser() {
               <th>#</th>
               <th>Nombres</th>
               <th>Apellidos</th>
+              <th>ID Usuario</th>
               <th>Correo</th>
               <th>Clave</th>
               <th>Celular</th>
@@ -205,9 +209,10 @@ function ListUser() {
           <tbody>
             {data.map((Usuario) => (
               <tr className="text-center" key={Usuario.id}>
-                <td>{Usuario.id}</td>
+                <td>{cont++}</td>
                 <td>{Usuario.nombre}</td>
                 <td>{Usuario.apellido}</td>
+                <td>{Usuario.id_bec}</td>
                 <td>{Usuario.email}</td>
                 <td>{Usuario.contrasena}</td>
                 <td>{Usuario.celular}</td>
@@ -251,6 +256,15 @@ function ListUser() {
                 type="text"
                 className="form-control"
                 name="apellido"
+                onChange={handleChange}
+              />
+              <br />
+              <label>Id Usuario: </label>
+              <br />
+              <input
+                type="text"
+                className="form-control"
+                name="id_bec"
                 onChange={handleChange}
               />
               <br />

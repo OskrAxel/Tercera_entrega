@@ -17,12 +17,9 @@ function Registro({ nombre }) {
           <CardText>
             <h2>Bienvenido: {nombre}</h2>
             En caso de que haya sido aceptado para recibir y participar de la
-            Beca en la institucion BQEF deberá ingresar el
-            <b> CODIGO DE REGISTRO </b>
-            otorgado por el administrador del sistema. Caso contrario deberá
-            solicitarlo.
+            Beca en la institucion BQEF deberá completar el registro de sus
+            datos.
             <br />
-            <p></p>
             <b>Por favor haga clic en el botón a continuación</b>
           </CardText>
           <Button id="but" href="/RegComp">
