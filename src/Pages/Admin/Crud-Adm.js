@@ -4,6 +4,7 @@ import { Table, Button } from "reactstrap";
 import * as FaIcons from "react-icons/fa";
 import axios from "axios";
 import "../Bec/bec.scss";
+import Swal from "sweetalert2";
 
 function ListUserAdm() {
   const baseUrl = "http://localhost:80/api/per/";
@@ -68,7 +69,7 @@ function ListUserAdm() {
       .then((response) => {
         setData(data.concat(response.data));
         abrirCerrarModalInsertar();
-        act();
+        mostrarAlertaN();
       })
       .catch((error) => {
         console.log(error);
@@ -98,7 +99,7 @@ function ListUserAdm() {
         });
         setData(dataNueva);
         abrirCerrarModalEditar();
-        act();
+        mostrarAlertaU();
       })
       .catch((error) => {
         console.log(error);
@@ -115,6 +116,7 @@ function ListUserAdm() {
           data.filter((Usuario) => Usuario.id !== usuarioSeleccionado.id)
         );
         abrirCerrarModalEliminar();
+        mostrarAlertaD();
       })
       .catch((error) => {
         console.log(error);
@@ -162,6 +164,34 @@ function ListUserAdm() {
     setData(resultadosBusqueda);
   };
   var cont = 1;
+  ////ALERTAS
+  const mostrarAlertaN = () => {
+    Swal.fire({
+      confirmButtonColor: "#2E8B57",
+      title: "Éxito!",
+      text: "Nuevo usuario registrado correctamente.",
+      timer: 5000,
+      icon: "success",
+    });
+  };
+  const mostrarAlertaU = () => {
+    Swal.fire({
+      confirmButtonColor: "#2E8B57",
+      title: "Éxito!",
+      text: "Usuario Modificado.",
+      timer: 5000,
+      icon: "info",
+    });
+  };
+  const mostrarAlertaD = () => {
+    Swal.fire({
+      confirmButtonColor: "#2E8B57",
+      title: "Eliminado!",
+      text: "Usuario Eliminado.",
+      timer: 5000,
+      icon: "success",
+    });
+  };
   return (
     <div id="main_content">
       <div className="tra">

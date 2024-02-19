@@ -149,6 +149,7 @@ hr {
                     <th>Nom.Doc</th>
                     <th>Fecha E.</th>
                     <th>Estado</th>
+                    <th>Análisis Sist.</th>
                 </tr>
             </thead>
             <tbody>
@@ -161,16 +162,21 @@ hr {
                 $mysql_query_command_1 = $consulta_1;
                 $execute_result_query = mysqli_query($conn, $mysql_query_command_1);
                 $est = '';
+                $num=0;
                 while ($row_set = mysqli_fetch_array($execute_result_query)) {
                   //condicion
                   if ($row_set['f_cargado'] == $fech['fecha']) {
                     $est = '<td align="center" style="background-color:#2E8B57;color:#fff">' . 'ENTREGADO' . '</td>';
+                    $num=50;
                   } elseif ($row_set['f_cargado'] > $fech['fecha']) {
                     $est = '<td align="center" style="background-color:#CD5C5C;color:#fff">' . 'RETRASO' . '</td>';
+                    $num=30;
                   } elseif ($row_set['f_cargado'] == 0) {
                     $est = '<td align="center" style="background-color:#db922e;color:#fff">' . 'PENDIENTE' . '</td>';
+                    $num=10;
                   } else {
                     $est = '<td align="center" style="background-color:#2E8B57;color:#fff">' . 'ENTREGADO' . '</td>';
+                    $num=50;
                   }
                 ?>
                     <tr>
@@ -179,6 +185,16 @@ hr {
                         <td><?php echo $row_set['nom_doc']  ?></td>
                         <td><?php echo $row_set['f_cargado'] ?></td>
                         <?php echo $est ?>
+                        <?php 
+                        if ($num == 50) {
+                    $num = '<td align="center" style="color:#2E8B57">' . 'Aprobado' . '</td>';
+                  } elseif ($num == 30) {
+                    $num = '<td align="center" style="color:#db922e">' . 'Advertencia' . '</td>';
+                  }elseif ($num == 10) {
+                    $num = '<td align="center" style="color:#CD5C5C">' . 'Se debe tomar en cuenta para retiro del beneficio' . '</td>';
+                  }
+                  echo $num;
+                        ?>
                     </tr>
                 <?php }
                 ?>

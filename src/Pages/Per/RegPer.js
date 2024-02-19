@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { FormGroup, Input, Row, Form, Col, Label, Button } from "reactstrap";
 import "../Bec/bec.scss";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 function Regper() {
   const [data, setData] = useState({
@@ -41,6 +42,11 @@ function Regper() {
     var f = new FormData();
     f.append("nombre", data.nombre);
     f.append("apellido", data.apellido);
+    f.append("carrera", data.carrera);
+    f.append("celular", data.celular);
+    f.append("institucion", data.institucion);
+    f.append("anio_inicio", data.anio_inicio);
+    f.append("email", data.email);
     f.append("METHOD", "PUT");
     await axios
       .post(`http://localhost:80/api/per/per.php`, f, {
@@ -49,6 +55,7 @@ function Regper() {
       .then((response) => {
         setData(response);
         peticionGet();
+        mostrarAlertaU();
       })
       .catch((error) => {
         console.log(error);
@@ -57,6 +64,16 @@ function Regper() {
   useEffect(() => {
     peticionGet();
   }, []);
+  ////ALERTAS
+  const mostrarAlertaU = () => {
+    Swal.fire({
+      confirmButtonColor: "#2E8B57",
+      title: "Éxito!",
+      text: "Registro Modificado.",
+      timer: 5000,
+      icon: "success",
+    });
+  };
   return (
     <div id="main_content">
       <div className="tra">
@@ -93,6 +110,7 @@ function Regper() {
               <FormGroup>
                 <Label>ID Usuario:</Label>
                 <Input
+                  disabled
                   name="id_per"
                   type="text"
                   onChange={handleChange}

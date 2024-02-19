@@ -548,9 +548,9 @@ const Analisis = () => {
                       ENTREGADO
                     </td>
                   }
-                  {/* <td>
+                  <td>
                     <p>{item.id_doc === "1" ? "Entregado" : "Pendiente"}</p>
-                  </td> */}
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -570,17 +570,13 @@ const Analisis = () => {
         <ModalHeader
           close={closeBtn}
           style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}>
-          {/* {usuarioSeleccionado && usuarioSeleccionado.nom_doc} */}
-          TITULO MODAL
+          Reporte Entrega Informes
         </ModalHeader>
         <ModalBody>
           <Card>
             <CardBody className="p-0">
               <Row className="justify-content-center">
                 <object
-                  // data={"data:application/pdf;base64," + dataFI.archivo_com}
-                  // type="application/pdf"
-                  // alt="archivo_per"
                   data={"http://localhost:80/api/PDF/reporte_pdf_Informes.php"}
                   type="application/pdf"
                   width="400"

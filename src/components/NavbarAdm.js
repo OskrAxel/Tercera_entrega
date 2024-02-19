@@ -21,6 +21,7 @@ import {
 } from "reactstrap";
 import { Outlet, useNavigate } from "react-router-dom";
 import SidebarAdm from "./SidebarAdm";
+import Swal from "sweetalert2";
 
 function NavbarAdm(args) {
   ////
@@ -88,7 +89,8 @@ function NavbarAdm(args) {
       })
       .then((response) => {
         setData(response);
-        act();
+        mostrarAlertaU();
+        abrirCerrarModalContra();
       })
       .catch((error) => {
         console.log(error);
@@ -97,6 +99,16 @@ function NavbarAdm(args) {
   useEffect(() => {
     peticionGet();
   }, []);
+  ////ALERTAS
+  const mostrarAlertaU = () => {
+    Swal.fire({
+      confirmButtonColor: "#2E8B57",
+      title: "Éxito!",
+      text: "Contraseña Actualizada.",
+      timer: 5000,
+      icon: "success",
+    });
+  };
   return (
     <div>
       <Navbar expand="md" {...args}>
@@ -126,8 +138,12 @@ function NavbarAdm(args) {
                 MENU
               </DropdownToggle>
               <DropdownMenu className="drop-menu">
-                <DropdownItem>Instrucciones</DropdownItem>
-                <DropdownItem>Postulacion</DropdownItem>
+                <DropdownItem href="./pdfman2" target="_blank">
+                  Instrucciones
+                </DropdownItem>
+                <DropdownItem href="./PdfConv2M" target="_blank">
+                  Postulacion
+                </DropdownItem>
                 <DropdownItem>Sobre Nosotros...</DropdownItem>
                 <DropdownItem divider />
                 <DropdownItem onClick={() => abrirCerrarModalContra()}>

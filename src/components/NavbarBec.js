@@ -25,6 +25,7 @@ import {
 } from "reactstrap";
 import { Outlet, useNavigate } from "react-router-dom";
 import SidebarBec from "./SidebarBec";
+import Swal from "sweetalert2";
 
 function NavbarBec(args) {
   ////
@@ -100,6 +101,7 @@ function NavbarBec(args) {
     const res = await axios.post("http://localhost:80/api/inf/", fd);
     console.log(res.data);
     abrirCerrarModalInsertar();
+    mostrarAlertaC();
   }
   const [modalInsertar, setModalInsertar] = useState(false);
   const abrirCerrarModalInsertar = () => {
@@ -118,7 +120,8 @@ function NavbarBec(args) {
       })
       .then((response) => {
         setData(response);
-        act();
+        mostrarAlertaPA();
+        abrirCerrarModalContra();
       })
       .catch((error) => {
         console.log(error);
@@ -163,13 +166,41 @@ function NavbarBec(args) {
       .then((response) => {
         setData(response);
         abrirCerrarModalFoto();
-        act();
+        mostrarAlertaF();
+        getImagenes();
       })
       .catch((error) => {
         console.log(error);
       });
   };
-  ////
+  ////ALERTAS
+  const mostrarAlertaC = () => {
+    Swal.fire({
+      confirmButtonColor: "#2E8B57",
+      title: "Éxito!",
+      text: "Documento Cargado.",
+      timer: 5000,
+      icon: "success",
+    });
+  };
+  const mostrarAlertaF = () => {
+    Swal.fire({
+      confirmButtonColor: "#2E8B57",
+      title: "Éxito!",
+      text: "Foto Actualizada",
+      timer: 5000,
+      icon: "success",
+    });
+  };
+  const mostrarAlertaPA = () => {
+    Swal.fire({
+      confirmButtonColor: "#2E8B57",
+      title: "Éxito!",
+      text: "Constraseña Actualizada",
+      timer: 5000,
+      icon: "success",
+    });
+  };
   return (
     <div>
       <Navbar expand="md" {...args}>
@@ -276,6 +307,9 @@ function NavbarBec(args) {
               value={data.nombre + " " + data.apellido}
               // onChange={(e) => setDescripcion(e.target.value)}
             />
+            <br />
+            <label>ID Usuario: </label>
+            <br />
             <input
               disabled
               type="text"

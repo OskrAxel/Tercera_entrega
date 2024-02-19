@@ -17,6 +17,7 @@ import * as FaIcons from "react-icons/fa";
 import axios from "axios";
 import "../Bec/bec.scss";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 function Evalua() {
   const baseUrl = "http://localhost:80/api/bec/";
@@ -88,6 +89,7 @@ function Evalua() {
       })
       .then((response) => {
         setData(data.concat(response.data));
+        mostrarAlertaEv();
         abrirCerrarModalEditar();
         act();
       })
@@ -135,6 +137,16 @@ function Evalua() {
     setData(resultadosBusqueda);
   };
   var cont = 1;
+  ////ALERTAS
+  const mostrarAlertaEv = () => {
+    Swal.fire({
+      confirmButtonColor: "#2E8B57",
+      title: "Éxito!",
+      text: "Registro Guardado.",
+      timer: 5000,
+      icon: "success",
+    });
+  };
   return (
     <div id="main_content">
       <div className="tra">
@@ -143,7 +155,7 @@ function Evalua() {
         </div>
         <div id="subt">
           <Link
-            to={"http://localhost:80/api/PDF/reporte_pdf_becarios.php"}
+            to={"http://localhost:80/api/PDF/reporte_pdf_Evaluacion.php"}
             target="_blank">
             <Button color="primary" size="lg">
               <FaIcons.FaFileDownload /> Reporte
@@ -172,7 +184,7 @@ function Evalua() {
               <th>Telf/Cel</th>
               <th>Acciones</th>
               <th>Evaluación Sist.</th>
-              <th>Evaluación</th>
+              <th>Evaluación P.</th>
               <th>Nota Final</th>
             </tr>
           </thead>
@@ -193,7 +205,7 @@ function Evalua() {
                     &nbsp;EVALUAR
                   </Button>
                 </td>
-                <td>{Usuario.nota_eva}</td>
+                <td>{Usuario.not_sist}</td>
                 <td>{Usuario.nota_eva}</td>
                 <td>
                   <strong>{Usuario.nota_eva}</strong>

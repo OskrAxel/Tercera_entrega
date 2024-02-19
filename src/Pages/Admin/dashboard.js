@@ -283,8 +283,18 @@ const Dashboard = () => {
     },
   };
   var cont = 1;
-  /////
-
+  var est = "";
+  /////dataFI
+  const [modalVer, setModalVer] = useState(false);
+  const abrirCerrarModalVer = () => {
+    setModalVer(!modalVer);
+  };
+  ////
+  const closeBtn = (
+    <Button className="close" onClick={() => abrirCerrarModalVer()}>
+      &times;
+    </Button>
+  );
   return (
     <div id="main">
       <div className="tral">
@@ -294,8 +304,7 @@ const Dashboard = () => {
             style={{
               color: "black",
               width: "18rem",
-            }}
-          >
+            }}>
             <div className="row g-0">
               <CardBody className="col-md-4">
                 <CardTitle tag="h5">Cuentas</CardTitle>
@@ -323,8 +332,7 @@ const Dashboard = () => {
                   justifyContent: "center",
                   fontSize: "8rem",
                   boxSizing: "border-box",
-                }}
-              >
+                }}>
                 <FaIcons.FaUserGraduate />
               </CardBody>
             </div>
@@ -335,8 +343,7 @@ const Dashboard = () => {
             style={{
               color: "black",
               width: "18rem",
-            }}
-          >
+            }}>
             <div className="row g-0">
               <CardBody className="col-md-4">
                 <CardTitle tag="h5">Cuentas</CardTitle>
@@ -364,8 +371,7 @@ const Dashboard = () => {
                   justifyContent: "center",
                   fontSize: "8rem",
                   boxSizing: "border-box",
-                }}
-              >
+                }}>
                 <FaIcons.FaUserTie />
               </CardBody>
             </div>
@@ -375,8 +381,7 @@ const Dashboard = () => {
             style={{
               color: "black",
               width: "18rem",
-            }}
-          >
+            }}>
             <div className="row g-0">
               <CardBody className="col-md-4">
                 <CardTitle tag="h5">Informes</CardTitle>
@@ -404,8 +409,7 @@ const Dashboard = () => {
                   justifyContent: "center",
                   fontSize: "8rem",
                   boxSizing: "border-box",
-                }}
-              >
+                }}>
                 <FaIcons.FaReadme />
               </CardBody>
             </div>
@@ -415,8 +419,7 @@ const Dashboard = () => {
             style={{
               color: "black",
               width: "18rem",
-            }}
-          >
+            }}>
             <div className="row g-0">
               <CardBody className="col-md-4">
                 <CardTitle tag="h5">Fecha Entrega</CardTitle>
@@ -444,8 +447,7 @@ const Dashboard = () => {
                   justifyContent: "center",
                   fontSize: "8rem",
                   boxSizing: "border-box",
-                }}
-              >
+                }}>
                 <FaIcons.FaRegCalendarCheck />
               </CardBody>
             </div>
@@ -458,8 +460,7 @@ const Dashboard = () => {
               <CardTitle tag="h5">Histórico de registros:</CardTitle>
               <CardText
                 className="text-center"
-                style={{ color: "rgb(33 33 185)" }}
-              >
+                style={{ color: "rgb(33 33 185)" }}>
                 <b>Becarios</b>
               </CardText>
               <div style={{ width: "100%", height: "400px" }}>
@@ -472,8 +473,7 @@ const Dashboard = () => {
               <CardTitle tag="h5">Registro según región:</CardTitle>
               <CardText
                 className="text-center"
-                style={{ color: "rgb(33 33 185)" }}
-              >
+                style={{ color: "rgb(33 33 185)" }}>
                 <b>Becarios</b>
               </CardText>
               <div style={{ width: "100%", height: "400px" }}>
@@ -493,8 +493,7 @@ const Dashboard = () => {
           border: 0,
           borderRadius: 10,
         }}
-        onClick={() => abrirCerrarModalEliminar()}
-      >
+        onClick={() => abrirCerrarModalVer()}>
         <FaIcons.FaExclamationCircle />
         &nbsp; AVISO
       </Button>
@@ -502,15 +501,13 @@ const Dashboard = () => {
       <Modal isOpen={modalEliminar} size="xl">
         <ModalHeader
           className="text-center"
-          style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}
-        >
+          style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}>
           Estado Informes
         </ModalHeader>
         <div id="subt">
           <Link
             to={"http://localhost:80/api/PDF/reporte_pdf_becarios.php"}
-            target="_blank"
-          >
+            target="_blank">
             <Button color="primary" size="lg">
               <FaIcons.FaFileDownload /> Reporte
             </Button>
@@ -538,12 +535,21 @@ const Dashboard = () => {
                     style={{
                       color: "white",
                       background: "#2E8B57",
-                    }}
-                  >
+                    }}>
                     {item.f_cargado}
                   </td>
+                  if ({item.id_doc === "1"}){" "}
+                  {
+                    <td
+                      style={{
+                        color: "white",
+                        background: "#2E8B57",
+                      }}>
+                      ENTREGADO
+                    </td>
+                  }
                   <td>
-                    <h1>{item.id_doc === "1" ? "+" : "-"}</h1>
+                    <p>{item.id_doc === "1" ? "Entregado" : "Pendiente"}</p>
                   </td>
                 </tr>
               ))}
@@ -554,18 +560,41 @@ const Dashboard = () => {
           <Button
             color="danger"
             size="lg"
-            onClick={() => abrirCerrarModalEliminar()}
-          >
+            onClick={() => abrirCerrarModalEliminar()}>
             Cerrar
           </Button>
         </ModalFooter>
+      </Modal>
+      {/* Modal VER */}
+      <Modal isOpen={modalVer} size="xl">
+        <ModalHeader
+          close={closeBtn}
+          style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}>
+          Reporte Entrega Informes
+        </ModalHeader>
+        <ModalBody>
+          <Card>
+            <CardBody className="p-0">
+              <Row className="justify-content-center">
+                <object
+                  data={"http://localhost:80/api/PDF/reporte_pdf_Informes.php"}
+                  type="application/pdf"
+                  width="400"
+                  height="600">
+                  <div
+                    style={{
+                      position: "absolute",
+                      width: "100%",
+                      height: "100%",
+                    }}></div>
+                </object>
+              </Row>
+            </CardBody>
+          </Card>
+        </ModalBody>
       </Modal>
     </div>
   );
 };
 
 export default Dashboard;
-
-// //////OPCIONES CONSULTA
-// SELECT CONCAT(usuarios_bec.nombre,' ',usuarios_bec.apellido) AS responsable, informe.f_cargado FROM informe
-// RIGHT JOIN usuarios_bec ON usuarios_bec.id = informe.id_doc

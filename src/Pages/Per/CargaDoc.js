@@ -11,6 +11,7 @@ import { Table, Button, Label, Input, Row } from "reactstrap";
 import * as FaIcons from "react-icons/fa";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const CargaDoc = () => {
   const [detalle, setDetalle] = useState("");
@@ -76,6 +77,7 @@ const CargaDoc = () => {
     fd.append("nom_usu", data.nombre + " " + data.apellido);
     const res = await axios.post("http://localhost:80/api/per/com/", fd);
     console.log(res.data);
+    mostrarAlertaN();
     abrirCerrarModalInsertar();
     getComunicado();
   }
@@ -91,6 +93,7 @@ const CargaDoc = () => {
     );
     abrirCerrarModalEliminar();
     getComunicado();
+    mostrarAlertaD();
     console.log(res.data);
   }
   ////
@@ -147,6 +150,25 @@ const CargaDoc = () => {
     setData(resultadosBusqueda);
   };
   var cont = 1;
+  ////ALERTAS
+  const mostrarAlertaN = () => {
+    Swal.fire({
+      confirmButtonColor: "#2E8B57",
+      title: "Éxito!",
+      text: "Registro Guardado.",
+      timer: 5000,
+      icon: "success",
+    });
+  };
+  const mostrarAlertaD = () => {
+    Swal.fire({
+      confirmButtonColor: "#2E8B57",
+      title: "Eliminado!",
+      text: "Registro Eliminado.",
+      timer: 5000,
+      icon: "success",
+    });
+  };
   return (
     <div id="main_content">
       <div className="tra">

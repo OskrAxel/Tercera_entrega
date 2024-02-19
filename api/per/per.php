@@ -21,7 +21,14 @@ if($_POST['METHOD']=='PUT'){
     $id=$_GET['id'];
     $nombre=$_POST['nombre'];
     $apellido=$_POST['apellido'];
-    $query="UPDATE usuarios_per SET nombre='$nombre', apellido='$apellido' WHERE id='$id'";
+    $carrera=$_POST['carrera'];
+    $celular=$_POST['celular'];
+    $institucion=$_POST['institucion'];
+    $anio_inicio=$_POST['anio_inicio'];
+    $email=$_POST['email'];
+    $query="UPDATE usuarios_per SET nombre='$nombre', apellido='$apellido',
+     carrera='$carrera', celular='$celular', institucion='$institucion',
+      anio_inicio='$anio_inicio', email='$email' WHERE id='$id'";
     $resultado=metodoPut($query);
     echo json_encode($resultado);
     header("HTTP/1.1 200 OK");

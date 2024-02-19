@@ -44,3 +44,20 @@ while ($row_set = mysqli_fetch_array($execute_result_query)) {
 // SELECT CONCAT(usuarios_bec.nombre,' ',usuarios_bec.apellido) AS responsable, informe.f_cargado FROM informe
 // RIGHT JOIN usuarios_bec ON usuarios_bec.id_bec = informe.id_bec WHERE usuarios_bec.anio
 ?>
+<!-- ////MACHINE LEARNING -->
+<!-- // Create a Neural Network
+const network = new brain.NeuralNetwork();
+
+// Train the Network with 4 input objects
+network.train([
+ {input:[0,0], output:{zero:1}},
+ {input:[0,1], output:{one:1}},
+ {input:[1,0], output:{one:1},
+ {input:[1,1], output:{zero:1},
+]);
+
+// What is the expected output of [1,0]?
+result = network.run([1,0]);
+
+// Display the probability for "zero" and "one"
+... result["one"] + " " + result["zero"]; -->

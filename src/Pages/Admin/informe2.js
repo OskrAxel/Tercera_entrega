@@ -11,6 +11,7 @@ import { Table, Button, Label, Input, Row } from "reactstrap";
 import * as FaIcons from "react-icons/fa";
 import axios from "axios";
 import "../Bec/bec.scss";
+import Swal from "sweetalert2";
 
 function Informe2() {
   const [lista, setLista] = useState([]);
@@ -39,6 +40,8 @@ function Informe2() {
     const res = await axios.post("http://localhost:80/api/inf/", fd);
     console.log(res.data);
     abrirCerrarModalInsertar();
+
+    mostrarAlertaN();
     getImagenes();
   }
 
@@ -47,6 +50,7 @@ function Informe2() {
       "http://localhost:80/api/inf/?id_doc=" + id_doc
     );
     abrirCerrarModalEliminar();
+    mostrarAlertaD();
     getImagenes();
     console.log(res.data);
   }
@@ -131,6 +135,25 @@ function Informe2() {
     setLista(resultadosBusqueda);
   };
   var cont = 1;
+  ////ALERTAS
+  const mostrarAlertaN = () => {
+    Swal.fire({
+      confirmButtonColor: "#2E8B57",
+      title: "Éxito!",
+      text: "Documento cargado",
+      timer: 5000,
+      icon: "success",
+    });
+  };
+  const mostrarAlertaD = () => {
+    Swal.fire({
+      confirmButtonColor: "#2E8B57",
+      title: "Eliminado!",
+      text: "Documento Eliminado.",
+      timer: 5000,
+      icon: "success",
+    });
+  };
   return (
     <div id="main_content">
       <div className="tra">

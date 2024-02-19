@@ -31,8 +31,7 @@ import ListPat from "./Pages/Per/Pat";
 import Evalua from "./Pages/Per/Evalua";
 import CargaDoc from "./Pages/Per/CargaDoc";
 import Analisis from "./Pages/Per/Analisis";
-import Pdf2 from "./Pages/Per/pdfconv";
-import Pdfman from "./Pages/Per/pdfman";
+import Pdfman from "./Pages/Per/manual/pdfman";
 import Ini from "./Pages/Per/Index";
 import RegPer from "./Pages/Per/RegPer";
 import PdfConv2 from "./Pages/Bec/PdfConv2";
@@ -48,7 +47,9 @@ import Nota8 from "./Pages/Bec/Notas/Nota8";
 import Nota9 from "./Pages/Bec/Notas/Nota9";
 import Nota10 from "./Pages/Bec/Notas/Nota10";
 import Logout from "./utils/logout";
-import ProductRow from "./Pages/Per/prod";
+import Pdfman2 from "./Pages/Admin/manual/Pdfman2";
+import PdfConv2M from "./Pages/Admin/manual/PdfConv2M";
+import Pdf2 from "./Pages/Per/manual/pdfconv";
 
 function AppAdm() {
   return (
@@ -89,6 +90,14 @@ function AppAdm() {
               element={<Protected Component={Informe2} />}
             />
             <Route path="/pdf" element={<Protected Component={CardPdf} />} />
+            <Route
+              path="/PdfConv2M"
+              element={<Protected Component={PdfConv2M} />}
+            />
+            <Route
+              path="/pdfman2"
+              element={<Protected Component={Pdfman2} />}
+            />
           </Route>
           {/* //// */}
           <Route path="/" element={<NavbarBec />}>
@@ -179,11 +188,7 @@ function AppAdm() {
               path="/analisis"
               element={<Protected Component={Analisis} />}
             />
-            <Route path="/pdf2" element={<Protected Component={Pdf2} />} />
-            <Route
-              path="/ProductRow"
-              element={<Protected Component={ProductRow} />}
-            />
+            <Route path="/Pdf2" element={<Protected Component={Pdf2} />} />
             <Route path="/pdfman" element={<Protected Component={Pdfman} />} />
           </Route>
         </Routes>

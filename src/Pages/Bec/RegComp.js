@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { FormGroup, Input, Row, Form, Col, Label, Button } from "reactstrap";
 import "./bec.scss";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 function RegComp() {
   const [data, setData] = useState({
@@ -70,6 +71,7 @@ function RegComp() {
       .then((response) => {
         setData(response.data);
         console.log(response.data);
+        mostrarAlertaU();
         act();
       })
       .catch((error) => {
@@ -79,6 +81,16 @@ function RegComp() {
   useEffect(() => {
     peticionGet();
   }, []);
+  ////ALERTAS
+  const mostrarAlertaU = () => {
+    Swal.fire({
+      confirmButtonColor: "#2E8B57",
+      title: "Éxito!",
+      text: "Registro Actualizado.",
+      timer: 5000,
+      icon: "success",
+    });
+  };
   return (
     <div id="main_content">
       <div className="tra">

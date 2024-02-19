@@ -71,7 +71,7 @@ function ListUser() {
       .then((response) => {
         setData(data.concat(response.data));
         abrirCerrarModalInsertar();
-        mostrarAlerta();
+        mostrarAlertaN();
       })
       .catch((error) => {
         console.log(error);
@@ -101,7 +101,7 @@ function ListUser() {
         });
         setData(dataNueva);
         abrirCerrarModalEditar();
-        act();
+        mostrarAlertaU();
       })
       .catch((error) => {
         console.log(error);
@@ -118,6 +118,7 @@ function ListUser() {
           data.filter((Usuario) => Usuario.id !== usuarioSeleccionado.id)
         );
         abrirCerrarModalEliminar();
+        mostrarAlertaD();
       })
       .catch((error) => {
         console.log(error);
@@ -132,7 +133,7 @@ function ListUser() {
 
   useEffect(() => {
     peticionGet();
-    mostrarAlerta();
+    // mostrarAlerta();
   }, []);
   ////BARRA BUSQUEDA
   const [busqueda, setBusqueda] = useState("");
@@ -167,11 +168,29 @@ function ListUser() {
   };
   var cont = 1;
   ////ALERTAS
-  const mostrarAlerta = () => {
+  const mostrarAlertaN = () => {
     Swal.fire({
       confirmButtonColor: "#2E8B57",
       title: "Éxito!",
       text: "Nuevo usuario registrado correctamente.",
+      timer: 5000,
+      icon: "success",
+    });
+  };
+  const mostrarAlertaU = () => {
+    Swal.fire({
+      confirmButtonColor: "#2E8B57",
+      title: "Éxito!",
+      text: "Usuario Modificado.",
+      timer: 5000,
+      icon: "info",
+    });
+  };
+  const mostrarAlertaD = () => {
+    Swal.fire({
+      confirmButtonColor: "#2E8B57",
+      title: "Eliminado!",
+      text: "Usuario Eliminado.",
       timer: 5000,
       icon: "success",
     });

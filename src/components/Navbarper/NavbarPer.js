@@ -23,6 +23,8 @@ import {
 } from "reactstrap";
 import { Outlet, useNavigate } from "react-router-dom";
 import SidebarPer from "../SidebarPer";
+import Swal from "sweetalert2";
+
 function NavbarBec(args) {
   ////
   const [data, setData] = useState({
@@ -107,7 +109,8 @@ function NavbarBec(args) {
       })
       .then((response) => {
         setData(response);
-        act();
+        mostrarAlertaU();
+        abrirCerrarModalContra();
       })
       .catch((error) => {
         console.log(error);
@@ -134,6 +137,7 @@ function NavbarBec(args) {
     fd.append("fecha", usuarioSeleccionado.fecha);
     const res = await axios.post("http://localhost:80/api/per/fe/", fd);
     console.log(res.data);
+    mostrarAlertaFec();
     abrirCerrarModalFecha();
     act();
   }
@@ -142,6 +146,25 @@ function NavbarBec(args) {
     peticionGetFecha();
     peticionGetContraseña();
   }, []);
+  ////ALERTAS
+  const mostrarAlertaU = () => {
+    Swal.fire({
+      confirmButtonColor: "#2E8B57",
+      title: "Éxito!",
+      text: "Contraseña Actualizada.",
+      timer: 5000,
+      icon: "success",
+    });
+  };
+  const mostrarAlertaFec = () => {
+    Swal.fire({
+      confirmButtonColor: "#2E8B57",
+      title: "Éxito!",
+      text: "Fecha Actualizada.",
+      timer: 5000,
+      icon: "success",
+    });
+  };
   return (
     <div>
       <Navbar expand="md" {...args}>
@@ -164,7 +187,7 @@ function NavbarBec(args) {
             <NavbarText className="text-light">
               {data.nombre}
               {"   "}
-              {data.nombre}
+              {data.apellido}
             </NavbarText>
             <UncontrolledDropdown nav direction="down">
               <DropdownToggle nav caret className="text-light">
@@ -174,7 +197,7 @@ function NavbarBec(args) {
                 <DropdownItem href="./pdfman" target="_blank">
                   Instrucciones
                 </DropdownItem>
-                <DropdownItem href="./pdf2" target="_blank">
+                <DropdownItem href="./Pdf2" target="_blank">
                   Postulacion
                 </DropdownItem>
                 <DropdownItem onClick={() => abrirCerrarModalFecha()}>
