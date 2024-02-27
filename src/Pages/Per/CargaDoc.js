@@ -178,7 +178,8 @@ const CargaDoc = () => {
         <div id="subt">
           <Link
             to={"http://localhost:80/api/PDF/reporte_pdf_comunicados.php"}
-            target="_blank">
+            target="_blank"
+          >
             <Button color="primary" size="lg">
               <FaIcons.FaFileDownload /> Reporte
             </Button>
@@ -187,7 +188,8 @@ const CargaDoc = () => {
           <Button
             color="success"
             size="lg"
-            onClick={() => abrirCerrarModalInsertar()}>
+            onClick={() => abrirCerrarModalInsertar()}
+          >
             <FaIcons.FaPlus /> Añadir
           </Button>
         </div>
@@ -224,14 +226,16 @@ const CargaDoc = () => {
                 <td>
                   <Button
                     color="warning"
-                    onClick={() => seleccionarUsuario(item, "Editar")}>
+                    onClick={() => seleccionarUsuario(item, "Editar")}
+                  >
                     <FaIcons.FaRegEye />
                     &nbsp;&nbsp;Visualizar
                   </Button>
                   &nbsp;&nbsp;&nbsp;
                   <Button
                     color="danger"
-                    onClick={() => seleccionarUsuario(item, "Eliminar")}>
+                    onClick={() => seleccionarUsuario(item, "Eliminar")}
+                  >
                     Eliminar
                   </Button>
                 </td>
@@ -241,10 +245,7 @@ const CargaDoc = () => {
         </Table>
         {/* Modal agregar comunicado */}
         <Modal isOpen={modalInsertar}>
-          <ModalHeader
-            style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}>
-            Cargar documento
-          </ModalHeader>
+          <ModalHeader className="header_m">Cargar documento</ModalHeader>
           <ModalBody>
             <div className="form-group">
               <Label>Nombre documento: </Label>
@@ -295,17 +296,15 @@ const CargaDoc = () => {
             <Button
               color="danger"
               size="lg"
-              onClick={() => abrirCerrarModalInsertar()}>
+              onClick={() => abrirCerrarModalInsertar()}
+            >
               Cancelar
             </Button>
           </ModalFooter>
         </Modal>
         {/* Modal Eliminar */}
         <Modal isOpen={modalEliminar}>
-          <ModalHeader
-            style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}>
-            Eliminar comunicado
-          </ModalHeader>
+          <ModalHeader className="header_m">Eliminar comunicado</ModalHeader>
           <ModalBody>
             ¿Estás seguro que deseas eliminar el documento{" "}
             {usuarioSeleccionado && usuarioSeleccionado.nom_doc}?
@@ -314,13 +313,15 @@ const CargaDoc = () => {
             <Button
               color="success"
               size="lg"
-              onClick={() => deleteComunicado(usuarioSeleccionado.id_com)}>
+              onClick={() => deleteComunicado(usuarioSeleccionado.id_com)}
+            >
               Sí
             </Button>
             <Button
               color="danger"
               size="lg"
-              onClick={() => abrirCerrarModalEliminar()}>
+              onClick={() => abrirCerrarModalEliminar()}
+            >
               No
             </Button>
           </ModalFooter>
@@ -328,9 +329,7 @@ const CargaDoc = () => {
 
         {/* Modal VER */}
         <Modal isOpen={modalVer} size="xl">
-          <ModalHeader
-            close={closeBtn}
-            style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}>
+          <ModalHeader className="header_m" close={closeBtn}>
             {usuarioSeleccionado && usuarioSeleccionado.nom_doc}
           </ModalHeader>
           <ModalBody>
@@ -345,7 +344,8 @@ const CargaDoc = () => {
                     type="application/pdf"
                     alt="archivo_per"
                     width="400"
-                    height="600">
+                    height="600"
+                  >
                     <p>
                       Tu navegador no puede mostrar este archivo PDF. Puedes
                       descargarlo
@@ -354,7 +354,8 @@ const CargaDoc = () => {
                           "data:application/pdf;base64," +
                           usuarioSeleccionado.archivo_com
                         }
-                        download>
+                        download
+                      >
                         aquí
                       </a>
                       .
@@ -369,7 +370,8 @@ const CargaDoc = () => {
               style={{ float: "right" }}
               color="success"
               size="lg"
-              onClick={handleDescargarPdf}>
+              onClick={handleDescargarPdf}
+            >
               <FaIcons.FaDownload />
               Download
             </Button>

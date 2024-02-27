@@ -156,7 +156,8 @@ function Evalua() {
         <div id="subt">
           <Link
             to={"http://localhost:80/api/PDF/reporte_pdf_Evaluacion.php"}
-            target="_blank">
+            target="_blank"
+          >
             <Button color="primary" size="lg">
               <FaIcons.FaFileDownload /> Reporte
             </Button>
@@ -200,7 +201,8 @@ function Evalua() {
                 <td>
                   <Button
                     className="btn btn-secondary"
-                    onClick={() => seleccionarUsuario(Usuario)}>
+                    onClick={() => seleccionarUsuario(Usuario)}
+                  >
                     <FaIcons.FaClipboardCheck />
                     &nbsp;EVALUAR
                   </Button>
@@ -217,7 +219,8 @@ function Evalua() {
 
         <Modal isOpen={modalEditar}>
           <ModalHeader
-            style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}>
+            style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}
+          >
             Evaluar Becario
           </ModalHeader>
           <ModalBody>
@@ -426,7 +429,8 @@ function Evalua() {
             {"   "}
             <button
               className="btn btn-danger"
-              onClick={() => abrirCerrarModalEditar()}>
+              onClick={() => abrirCerrarModalEditar()}
+            >
               Cancelar
             </button>
           </ModalFooter>

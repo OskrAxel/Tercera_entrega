@@ -1,17 +1,16 @@
 .navbar {
-  // background-color: rgba(3, 87, 77, 0.8);
-  background-color: rgba(10, 49, 67, 0.8);
+  background-image: linear-gradient(20deg, #00000042, rgba(10, 49, 67, 1)90%);
   box-shadow: 7px 1px 15px rgba(0, 0, 0, 0.911);
 }
 .dropdown-menu {
-  --bs-dropdown-link-hover-bg: rgba(39, 110, 144, 1);
+  --bs-dropdown-link-hover-bg: rgba(0, 0, 0, 0.25);
 }
 .drop-menu.show {
-  // background-color: rgba(3, 87, 77, 0.8);
-  background-color: rgba(10, 49, 67, 0.9);
-  // .DropItem{
-  //   color: #ffffff;
-  // }
+  background-image: linear-gradient(30deg, #00000042, rgba(10, 49, 67, 1) 80%);
   --bs-dropdown-link-active-bg: rgba(10, 49, 67, 0.8);
   --bs-dropdown-link-color: #ffffff;
+}
+.header_mo {
+  color: white;
+  background-color: rgba(10, 49, 67, 0.85);
 }

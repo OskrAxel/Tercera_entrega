@@ -65,7 +65,8 @@ function ListPat() {
         <div id="subt">
           <Link
             to={"http://localhost:80/api/PDF/reporte_pdf_patrocinador.php"}
-            target="_blank">
+            target="_blank"
+          >
             <Button color="primary" size="lg">
               <FaIcons.FaFileDownload /> Reporte
             </Button>

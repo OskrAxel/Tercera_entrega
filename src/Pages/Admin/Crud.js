@@ -206,7 +206,8 @@ function ListUser() {
           <Button
             color="success"
             size="lg"
-            onClick={() => abrirCerrarModalInsertar()}>
+            onClick={() => abrirCerrarModalInsertar()}
+          >
             <FaIcons.FaPlus /> Añadir
           </Button>
           {/* </Link> */}
@@ -250,13 +251,15 @@ function ListUser() {
                 <td>
                   <button
                     className="btn btn-warning"
-                    onClick={() => seleccionarUsuario(Usuario, "Editar")}>
+                    onClick={() => seleccionarUsuario(Usuario, "Editar")}
+                  >
                     Editar
                   </button>{" "}
                   {"  "}
                   <button
                     className="btn btn-danger"
-                    onClick={() => seleccionarUsuario(Usuario, "Eliminar")}>
+                    onClick={() => seleccionarUsuario(Usuario, "Eliminar")}
+                  >
                     Eliminar
                   </button>
                 </td>
@@ -266,10 +269,7 @@ function ListUser() {
         </Table>
 
         <Modal isOpen={modalInsertar}>
-          <ModalHeader
-            style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}>
-            Insertar Usuario
-          </ModalHeader>
+          <ModalHeader className="header_mo">Insertar Usuario</ModalHeader>
           <ModalBody>
             <div className="form-group">
               <label>Nombres: </label>
@@ -335,17 +335,15 @@ function ListUser() {
             <Button
               color="danger"
               size="lg"
-              onClick={() => abrirCerrarModalInsertar()}>
+              onClick={() => abrirCerrarModalInsertar()}
+            >
               Cancelar
             </Button>
           </ModalFooter>
         </Modal>
 
         <Modal isOpen={modalEditar}>
-          <ModalHeader
-            style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}>
-            Editar Usuario
-          </ModalHeader>
+          <ModalHeader className="header_mo">Editar Usuario</ModalHeader>
           <ModalBody>
             <div className="form-group">
               <label>Nombres: </label>
@@ -407,17 +405,15 @@ function ListUser() {
             <Button
               color="danger"
               size="lg"
-              onClick={() => abrirCerrarModalEditar()}>
+              onClick={() => abrirCerrarModalEditar()}
+            >
               Cancelar
             </Button>
           </ModalFooter>
         </Modal>
 
         <Modal isOpen={modalEliminar}>
-          <ModalHeader
-            style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}>
-            Eliminar comunicado
-          </ModalHeader>
+          <ModalHeader className="header_mo">Eliminar comunicado</ModalHeader>
           <ModalBody>
             ¿Estás seguro que deseas eliminar el Usuario{" "}
             {usuarioSeleccionado && usuarioSeleccionado.nombre}?
@@ -429,7 +425,8 @@ function ListUser() {
             <Button
               color="danger"
               size="lg"
-              onClick={() => abrirCerrarModalEliminar()}>
+              onClick={() => abrirCerrarModalEliminar()}
+            >
               No
             </Button>
           </ModalFooter>

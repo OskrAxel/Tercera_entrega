@@ -179,7 +179,8 @@ function ListBe() {
         <div id="subt">
           <Link
             to={"http://localhost:80/api/PDF/reporte_pdf_becarios.php"}
-            target="_blank">
+            target="_blank"
+          >
             <Button color="primary" size="lg">
               <FaIcons.FaFileDownload /> Reporte
             </Button>
@@ -234,7 +235,7 @@ function ListBe() {
         </Table>
 
         <Modal isOpen={modalInsertar}>
-          <ModalHeader>Insertar Usuario</ModalHeader>
+          <ModalHeader className="header_mo">Insertar Usuario</ModalHeader>
           <ModalBody>
             <div className="form-group">
               <label>Nombre Becario: </label>
@@ -291,14 +292,15 @@ function ListBe() {
             <Button
               color="danger"
               size="lg"
-              onClick={() => abrirCerrarModalInsertar()}>
+              onClick={() => abrirCerrarModalInsertar()}
+            >
               Cancelar
             </Button>
           </ModalFooter>
         </Modal>
 
         <Modal isOpen={modalEditar}>
-          <ModalHeader>Editar Usuario</ModalHeader>
+          <ModalHeader className="header_mo">Editar Usuario</ModalHeader>
           <ModalBody>
             <div className="form-group">
               <label>Nombres: </label>
@@ -360,7 +362,8 @@ function ListBe() {
             {"   "}
             <button
               className="btn btn-danger"
-              onClick={() => abrirCerrarModalEditar()}>
+              onClick={() => abrirCerrarModalEditar()}
+            >
               Cancelar
             </button>
           </ModalFooter>
@@ -377,7 +380,8 @@ function ListBe() {
             </button>
             <button
               className="btn btn-secondary"
-              onClick={() => abrirCerrarModalEliminar()}>
+              onClick={() => abrirCerrarModalEliminar()}
+            >
               No
             </button>
           </ModalFooter>

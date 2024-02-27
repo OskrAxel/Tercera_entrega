@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Style.scss";
 import * as FaIcons from "react-icons/fa";
-import { Button, Input } from "reactstrap";
+import { Button, Input, InputGroup, InputGroupText } from "reactstrap";
 
 function LoginBec() {
   const naviget = useNavigate();
@@ -108,24 +108,32 @@ function LoginBec() {
             <span className="success">{msg}</span>
           )}
         </p>
-
-        <Input
-          className="form-control"
-          type="text"
-          placeholder="Usuario"
-          value={iduser}
-          onChange={(e) => handleInputChange(e, "iduser")}
-        />
+        <InputGroup>
+          <InputGroupText>
+            <FaIcons.FaUserAlt style={{ color: "rgb(17, 119, 167)" }} />
+          </InputGroupText>
+          <Input
+            className="form-control"
+            type="text"
+            placeholder="Usuario"
+            value={iduser}
+            onChange={(e) => handleInputChange(e, "iduser")}
+          />
+        </InputGroup>
         <br />
-        <Input
-          className="form-control"
-          type="password"
-          placeholder="Contraseña"
-          value={pass}
-          onChange={(e) => handleInputChange(e, "pass")}
-        />
+        <InputGroup>
+          <InputGroupText>
+            <FaIcons.FaLock style={{ color: "rgb(17, 119, 167)" }} />
+          </InputGroupText>
+          <Input
+            className="form-control"
+            type="password"
+            placeholder="Contraseña"
+            value={pass}
+            onChange={(e) => handleInputChange(e, "pass")}
+          />
+        </InputGroup>
         <br />
-
         <Button className="bt" onClick={loginSubmit}>
           INGRESAR
         </Button>

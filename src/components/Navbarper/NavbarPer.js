@@ -218,10 +218,7 @@ function NavbarBec(args) {
 
       {/* MODAL CONTRASEÑA */}
       <Modal isOpen={modalContra}>
-        <ModalHeader
-          style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}>
-          Editar Contraseña
-        </ModalHeader>
+        <ModalHeader className="header_mo">Editar Contraseña</ModalHeader>
         <ModalBody>
           <div className="form-group">
             <label>Clave Actual: </label>
@@ -255,7 +252,8 @@ function NavbarBec(args) {
           <Button
             color="danger"
             size="lg"
-            onClick={() => abrirCerrarModalContra()}>
+            onClick={() => abrirCerrarModalContra()}
+          >
             Cancelar
           </Button>
         </ModalFooter>
@@ -263,8 +261,7 @@ function NavbarBec(args) {
 
       {/* MODAL FECHA */}
       <Modal isOpen={modalFecha}>
-        <ModalHeader
-          style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}>
+        <ModalHeader className="header_mo">
           Establecer Fecha Entrega
         </ModalHeader>
         <ModalBody>
@@ -293,7 +290,8 @@ function NavbarBec(args) {
           <Button
             color="danger"
             size="lg"
-            onClick={() => abrirCerrarModalFecha()}>
+            onClick={() => abrirCerrarModalFecha()}
+          >
             Cancelar
           </Button>
         </ModalFooter>

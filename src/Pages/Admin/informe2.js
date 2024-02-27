@@ -164,7 +164,8 @@ function Informe2() {
           <Button
             color="success"
             size="lg"
-            onClick={() => abrirCerrarModalInsertar()}>
+            onClick={() => abrirCerrarModalInsertar()}
+          >
             <FaIcons.FaPlus /> Añadir
           </Button>
         </div>
@@ -202,14 +203,16 @@ function Informe2() {
                 <td>
                   <Button
                     color="warning"
-                    onClick={() => seleccionarUsuario(item, "Editar")}>
+                    onClick={() => seleccionarUsuario(item, "Editar")}
+                  >
                     <FaIcons.FaRegEye />
                     &nbsp;&nbsp;Visualizar
                   </Button>
                   &nbsp;&nbsp;&nbsp;
                   <Button
                     color="danger"
-                    onClick={() => seleccionarUsuario(item, "Eliminar")}>
+                    onClick={() => seleccionarUsuario(item, "Eliminar")}
+                  >
                     Eliminar
                   </Button>
                 </td>
@@ -219,10 +222,7 @@ function Informe2() {
         </Table>
 
         <Modal isOpen={modalInsertar}>
-          <ModalHeader
-            style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}>
-            Cargar documento
-          </ModalHeader>
+          <ModalHeader className="header_mo">Cargar documento</ModalHeader>
           <ModalBody>
             <div className="form-group">
               <Label>Nombre documento: </Label>
@@ -271,17 +271,15 @@ function Informe2() {
             <Button
               color="danger"
               size="lg"
-              onClick={() => abrirCerrarModalInsertar()}>
+              onClick={() => abrirCerrarModalInsertar()}
+            >
               Cancelar
             </Button>
           </ModalFooter>
         </Modal>
 
         <Modal isOpen={modalEliminar}>
-          <ModalHeader
-            style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}>
-            Eliminar comunicado
-          </ModalHeader>
+          <ModalHeader className="header_mo">Eliminar comunicado</ModalHeader>
           <ModalBody>
             ¿Estás seguro que deseas eliminar el documento{" "}
             {usuarioSeleccionado && usuarioSeleccionado.nom_doc}?
@@ -290,13 +288,15 @@ function Informe2() {
             <Button
               color="success"
               size="lg"
-              onClick={() => deleteImagen(usuarioSeleccionado.id_doc)}>
+              onClick={() => deleteImagen(usuarioSeleccionado.id_doc)}
+            >
               Sí
             </Button>
             <Button
               color="danger"
               size="lg"
-              onClick={() => abrirCerrarModalEliminar()}>
+              onClick={() => abrirCerrarModalEliminar()}
+            >
               No
             </Button>
           </ModalFooter>
@@ -304,9 +304,7 @@ function Informe2() {
 
         {/* Modal VER */}
         <Modal isOpen={modalVer} size="xl">
-          <ModalHeader
-            close={closeBtn}
-            style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}>
+          <ModalHeader close={closeBtn} className="header_mo">
             {usuarioSeleccionado && usuarioSeleccionado.nom_doc}
           </ModalHeader>
           <ModalBody>
@@ -321,7 +319,8 @@ function Informe2() {
                     type="application/pdf"
                     alt="archivo_per"
                     width="400"
-                    height="600">
+                    height="600"
+                  >
                     <p>
                       Tu navegador no puede mostrar este archivo PDF. Puedes
                       descargarlo
@@ -330,7 +329,8 @@ function Informe2() {
                           "data:application/pdf;base64," +
                           usuarioSeleccionado.archivo_per
                         }
-                        download>
+                        download
+                      >
                         aquí
                       </a>
                       .
@@ -345,7 +345,8 @@ function Informe2() {
               style={{ float: "right" }}
               color="success"
               size="lg"
-              onClick={handleDescargarPdf}>
+              onClick={handleDescargarPdf}
+            >
               <FaIcons.FaDownload />
               Download
             </Button>

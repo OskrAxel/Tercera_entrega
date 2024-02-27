@@ -57,8 +57,14 @@ function NavbarLogin(args) {
                   </NavLink>
                 </DropdownItem>
                 <DropdownItem divider />
-                <DropdownItem href="http://www.bqef.org/" target="_blank">
-                  Sobre Nosotros...
+                <DropdownItem>
+                  <NavLink
+                    className="text-light"
+                    href="http://www.bqef.org/"
+                    target="_blank"
+                  >
+                    Sobre Nosotros...
+                  </NavLink>
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
