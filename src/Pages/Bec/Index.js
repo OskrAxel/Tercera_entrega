@@ -11,7 +11,7 @@ function Registro({ nombre }) {
           className="text-center"
           style={{
             width: "50rem",
-            background: "rgba(232, 232, 232, 0.65)",
+            background: "rgba(206, 207, 201, 1)",
           }}>
           <CardTitle tag="h4">Nota:</CardTitle>
           <CardText>

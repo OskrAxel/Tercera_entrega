@@ -144,7 +144,9 @@ function NavbarAdm(args) {
                 <DropdownItem href="./PdfConv2M" target="_blank">
                   Postulacion
                 </DropdownItem>
-                <DropdownItem>Sobre Nosotros...</DropdownItem>
+                <DropdownItem href="http://www.bqef.org/" target="_blank">
+                  Sobre Nosotros...
+                </DropdownItem>
                 <DropdownItem divider />
                 <DropdownItem onClick={() => abrirCerrarModalContra()}>
                   Cambiar Contraseña

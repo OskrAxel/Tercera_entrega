@@ -241,7 +241,7 @@ function NavbarBec(args) {
                       height: 50,
                       width: 50,
                       marginTop: "2px",
-                      border: "5px solid rgba(1, 67, 59, 1)",
+                      border: "5px solid rgba(10, 49, 67, 0.9)",
                     }}
                     width="100%"
                     onClick={() => abrirCerrarModalFoto()}
@@ -264,7 +264,9 @@ function NavbarBec(args) {
                 <DropdownItem href="./PdfConv2" target="_blank">
                   Postulacion
                 </DropdownItem>
-                <DropdownItem>Sobre Nosotros...</DropdownItem>
+                <DropdownItem href="http://www.bqef.org/" target="_blank">
+                  Sobre Nosotros...
+                </DropdownItem>
                 <DropdownItem divider />
                 <DropdownItem onClick={() => abrirCerrarModalFoto()}>
                   Foto

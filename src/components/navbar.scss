@@ -1,11 +1,17 @@
 .navbar {
-  background-color: rgba(3, 87, 77, 0.8);
+  // background-color: rgba(3, 87, 77, 0.8);
+  background-color: rgba(10, 49, 67, 0.8);
   box-shadow: 7px 1px 15px rgba(0, 0, 0, 0.911);
 }
-.drop-menu.dropdown-menu.show{
-  background-color: rgba(3, 87, 77, 0.8);
+.dropdown-menu {
+  --bs-dropdown-link-hover-bg: rgba(39, 110, 144, 1);
+}
+.drop-menu.show {
+  // background-color: rgba(3, 87, 77, 0.8);
+  background-color: rgba(10, 49, 67, 0.9);
   // .DropItem{
   //   color: #ffffff;
   // }
-    --bs-dropdown-link-color: #ffffff;
+  --bs-dropdown-link-active-bg: rgba(10, 49, 67, 0.8);
+  --bs-dropdown-link-color: #ffffff;
 }
