@@ -33,7 +33,7 @@ if($_POST['METHOD']=='CIUBEC'){
 
 if($_POST['METHOD']=='BEC'){
     unset($_POST['METHOD']);
-    $query="SELECT id,count(id) AS CBec from usuarios_bec";
+    $query="SELECT id,nombre,count(id) AS CBec from usuarios_bec";
     $resultado=metodoGet($query);
     echo json_encode($resultado->fetchAll()); 
     header("HTTP/1.1 200 OK");
@@ -79,6 +79,15 @@ if($_POST['METHOD']=='FINF'){
 if($_POST['METHOD']=='ENTR'){
     unset($_POST['METHOD']);
     $query="SELECT id_doc,nom_usu,nom_doc,f_cargado from informe";
+    $resultado=metodoGet($query);
+    echo json_encode($resultado->fetchAll()); 
+    header("HTTP/1.1 200 OK");
+    exit();
+}
+////listado logs
+if($_POST['METHOD']=='LOGS'){
+    unset($_POST['METHOD']);
+    $query="SELECT id,detalle, fecha_hora from log";
     $resultado=metodoGet($query);
     echo json_encode($resultado->fetchAll()); 
     header("HTTP/1.1 200 OK");

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./navbar.scss";
-import Logo from "./img/logo.png";
+import Logo from "./img/base/111.png";
 import {
   Collapse,
   Navbar,
@@ -28,8 +28,8 @@ function NavbarLogin(args) {
             alt="logo"
             className="me-2"
             style={{
-              height: 40,
-              width: 100,
+              height: 60,
+              width: 120,
             }}
           />
         </NavbarBrand>

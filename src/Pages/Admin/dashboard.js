@@ -133,7 +133,6 @@ const Dashboard = () => {
         console.log(error);
       });
   };
-  ////
   ////GET FECHA INFORMES
   const [dataFI, setDataFI] = useState([]);
 
@@ -166,6 +165,22 @@ const Dashboard = () => {
         console.log(error);
       });
   };
+  ////GET BECARIOS
+  const [dataL, setDataL] = useState([]);
+
+  const peticionGetLog = async () => {
+    var f = new FormData();
+    f.append("METHOD", "LOGS");
+    await axios
+      .post("http://localhost:80/api/adm/dashboard/", f)
+      .then((response) => {
+        console.log(response.data);
+        setDataL(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   ////
   useEffect(() => {
     peticionGet1bec();
@@ -175,6 +190,7 @@ const Dashboard = () => {
     peticionGetF();
     peticionGetI();
     peticionGetFI();
+    peticionGetLog();
   }, []);
   ////GRAFICO BARRAS
   ChartJS.register(
@@ -459,7 +475,7 @@ const Dashboard = () => {
         </CardGroup>
         {/* // */}
         <Row>
-          <Col sm="6">
+          <Col sm="4">
             <Card body>
               <CardTitle tag="h5">Histórico de registros:</CardTitle>
               <CardText
@@ -473,7 +489,7 @@ const Dashboard = () => {
               </div>
             </Card>
           </Col>
-          <Col sm="6">
+          <Col sm="4">
             <Card body>
               <CardTitle tag="h5">Registro según región:</CardTitle>
               <CardText
@@ -484,6 +500,37 @@ const Dashboard = () => {
               </CardText>
               <div style={{ width: "100%", height: "400px" }}>
                 <Doughnut data={dataPie} options={opcionesPie} />
+              </div>
+            </Card>
+          </Col>
+          <Col sm="4">
+            <Card body>
+              <CardTitle tag="h5">Actividades recientes:</CardTitle>
+              <div style={{ width: "100%", height: "400px" }}>
+                <Table
+                  responsive="sm"
+                  id="tabl"
+                  style={{ backgroundColor: "lightgray" }}
+                >
+                  <thead className="tra title-form">
+                    <tr className="text-center ">
+                      <th>#</th>
+                      <th>Usuario</th>
+                      <th>Detalle</th>
+                      <th>Fecha</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {dataL.map((item) => (
+                      <tr className="text-center" key={item.id}>
+                        <td>{cont++}</td>
+                        <td>{item.usuario}</td>
+                        <td>{item.detalle}</td>
+                        <td>{item.fecha_hora}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </Table>
               </div>
             </Card>
           </Col>

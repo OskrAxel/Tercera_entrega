@@ -134,35 +134,37 @@ function Nota9() {
             </DropdownMenu>
           </UncontrolledDropdown>
           <hr></hr>
-          <Row
-            className="text-center"
-            style={{ background: "rgba(18, 80, 61, .60)" }}>
+          <Row className="text-center header_mo ">
             <Col
               md={6}
               style={{
                 border: "1.5px solid #1a5a41",
-              }}>
+              }}
+            >
               <h5>Materia</h5>
             </Col>
             <Col
               md={2}
               style={{
                 border: "1.5px solid #1a5a41",
-              }}>
+              }}
+            >
               <h5>Nota</h5>
             </Col>
             <Col
               md={2}
               style={{
                 border: "1.5px solid #1a5a41",
-              }}>
+              }}
+            >
               <h5>Semestre</h5>
             </Col>
             <Col
               md={2}
               style={{
                 border: "1.5px solid #1a5a41",
-              }}>
+              }}
+            >
               <h5>Año</h5>
             </Col>
           </Row>
@@ -171,14 +173,16 @@ function Nota9() {
               md={6}
               style={{
                 border: "1.5px solid #1a5a41",
-              }}>
+              }}
+            >
               {data.mat_a1}
             </Col>
             <Col
               md={2}
               style={{
                 border: "1.5px solid #1a5a41",
-              }}>
+              }}
+            >
               <Input
                 name="nota_a1"
                 type="text"
@@ -191,7 +195,8 @@ function Nota9() {
               style={{
                 textAlign: "center",
                 border: "1.5px solid #1a5a41",
-              }}>
+              }}
+            >
               {data.semestre}
             </Col>
             <Col
@@ -199,7 +204,8 @@ function Nota9() {
               style={{
                 textAlign: "center",
                 border: "1.5px solid #1a5a41",
-              }}>
+              }}
+            >
               {data.anio}
             </Col>
           </Row>
@@ -208,14 +214,16 @@ function Nota9() {
               md={6}
               style={{
                 border: "1.5px solid #1a5a41",
-              }}>
+              }}
+            >
               {data.mat_b1}
             </Col>
             <Col
               md={2}
               style={{
                 border: "1.5px solid #1a5a41",
-              }}>
+              }}
+            >
               <Input
                 name="nota_b1"
                 type="text"
@@ -228,7 +236,8 @@ function Nota9() {
               style={{
                 textAlign: "center",
                 border: "1.5px solid #1a5a41",
-              }}>
+              }}
+            >
               {data.semestre}
             </Col>
             <Col
@@ -236,7 +245,8 @@ function Nota9() {
               style={{
                 textAlign: "center",
                 border: "1.5px solid #1a5a41",
-              }}>
+              }}
+            >
               {data.anio}
             </Col>
           </Row>
@@ -245,14 +255,16 @@ function Nota9() {
               md={6}
               style={{
                 border: "1.5px solid #1a5a41",
-              }}>
+              }}
+            >
               {data.mat_c1}
             </Col>
             <Col
               md={2}
               style={{
                 border: "1.5px solid #1a5a41",
-              }}>
+              }}
+            >
               <Input
                 name="nota_c1"
                 type="text"
@@ -265,7 +277,8 @@ function Nota9() {
               style={{
                 textAlign: "center",
                 border: "1.5px solid #1a5a41",
-              }}>
+              }}
+            >
               {data.semestre}
             </Col>
             <Col
@@ -273,7 +286,8 @@ function Nota9() {
               style={{
                 textAlign: "center",
                 border: "1.5px solid #1a5a41",
-              }}>
+              }}
+            >
               {data.anio}
             </Col>
           </Row>
@@ -282,14 +296,16 @@ function Nota9() {
               md={6}
               style={{
                 border: "1.5px solid #1a5a41",
-              }}>
+              }}
+            >
               {data.mat_d1}
             </Col>
             <Col
               md={2}
               style={{
                 border: "1.5px solid #1a5a41",
-              }}>
+              }}
+            >
               <Input
                 name="nota_d1"
                 type="text"
@@ -302,7 +318,8 @@ function Nota9() {
               style={{
                 textAlign: "center",
                 border: "1.5px solid #1a5a41",
-              }}>
+              }}
+            >
               {data.semestre}
             </Col>
             <Col
@@ -310,7 +327,8 @@ function Nota9() {
               style={{
                 textAlign: "center",
                 border: "1.5px solid #1a5a41",
-              }}>
+              }}
+            >
               {data.anio}
             </Col>
           </Row>
@@ -319,14 +337,16 @@ function Nota9() {
               md={6}
               style={{
                 border: "1.5px solid #1a5a41",
-              }}>
+              }}
+            >
               {data.mat_e1}
             </Col>
             <Col
               md={2}
               style={{
                 border: "1.5px solid #1a5a41",
-              }}>
+              }}
+            >
               <Input
                 name="nota_e1"
                 type="text"
@@ -339,7 +359,8 @@ function Nota9() {
               style={{
                 textAlign: "center",
                 border: "1.5px solid #1a5a41",
-              }}>
+              }}
+            >
               {data.semestre}
             </Col>
             <Col
@@ -347,7 +368,8 @@ function Nota9() {
               style={{
                 textAlign: "center",
                 border: "1.5px solid #1a5a41",
-              }}>
+              }}
+            >
               {data.anio}
             </Col>
           </Row>
@@ -356,14 +378,16 @@ function Nota9() {
               md={6}
               style={{
                 border: "1.5px solid #1a5a41",
-              }}>
+              }}
+            >
               {data.mat_f1}
             </Col>
             <Col
               md={2}
               style={{
                 border: "1.5px solid #1a5a41",
-              }}>
+              }}
+            >
               <Input
                 name="nota_f1"
                 type="text"
@@ -376,7 +400,8 @@ function Nota9() {
               style={{
                 textAlign: "center",
                 border: "1.5px solid #1a5a41",
-              }}>
+              }}
+            >
               {data.semestre}
             </Col>
             <Col
@@ -384,7 +409,8 @@ function Nota9() {
               style={{
                 textAlign: "center",
                 border: "1.5px solid #1a5a41",
-              }}>
+              }}
+            >
               {data.anio}
             </Col>
           </Row>
@@ -393,14 +419,16 @@ function Nota9() {
               md={6}
               style={{
                 border: "1.5px solid #1a5a41",
-              }}>
+              }}
+            >
               {data.mat_g1}
             </Col>
             <Col
               md={2}
               style={{
                 border: "1.5px solid #1a5a41",
-              }}>
+              }}
+            >
               <Input
                 name="nota_g1"
                 type="text"
@@ -413,7 +441,8 @@ function Nota9() {
               style={{
                 textAlign: "center",
                 border: "1.5px solid #1a5a41",
-              }}>
+              }}
+            >
               {data.semestre}
             </Col>
             <Col
@@ -421,7 +450,8 @@ function Nota9() {
               style={{
                 textAlign: "center",
                 border: "1.5px solid #1a5a41",
-              }}>
+              }}
+            >
               {data.anio}
             </Col>
           </Row>
