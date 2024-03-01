@@ -109,8 +109,25 @@ function NavbarAdm(args) {
       icon: "success",
     });
   };
+  /////
+  const [message, setMessage] = useState("");
+
+  const handleClick = () => {
+    axios
+      .get("http://localhost:80/sidebar/export.php")
+      .then((response) => {
+        setMessage(response.data.message);
+      })
+      .catch((error) => {
+        setMessage("Error: " + error.message);
+      });
+  };
   return (
     <div>
+      <div>
+        <button onClick={handleClick}>Export MySQL Database</button>
+        <p>{message}</p>
+      </div>
       <Navbar expand="md" {...args}>
         <SidebarAdm />
         <NavbarBrand href="/dashboard" className="text-light">
