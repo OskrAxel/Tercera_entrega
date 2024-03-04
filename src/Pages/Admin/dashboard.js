@@ -207,7 +207,7 @@ const Dashboard = () => {
     labels: anio,
     datasets: [
       {
-        label: "Incritos",
+        label: "Inscritos",
         backgroundColor: "rgba(153, 102, 255, 0.5)",
         borderColor: "rgb(153, 102, 255, 0.7)",
         borderWidth: 3,
@@ -316,8 +316,7 @@ const Dashboard = () => {
             style={{
               color: "black",
               width: "18rem",
-            }}
-          >
+            }}>
             <div className="row g-0">
               <CardBody className="col-md-4">
                 <CardTitle tag="h5">Cuentas</CardTitle>
@@ -345,8 +344,7 @@ const Dashboard = () => {
                   justifyContent: "center",
                   fontSize: "8rem",
                   boxSizing: "border-box",
-                }}
-              >
+                }}>
                 <FaIcons.FaUserGraduate />
               </CardBody>
             </div>
@@ -357,8 +355,7 @@ const Dashboard = () => {
             style={{
               color: "black",
               width: "18rem",
-            }}
-          >
+            }}>
             <div className="row g-0">
               <CardBody className="col-md-4">
                 <CardTitle tag="h5">Cuentas</CardTitle>
@@ -386,8 +383,7 @@ const Dashboard = () => {
                   justifyContent: "center",
                   fontSize: "8rem",
                   boxSizing: "border-box",
-                }}
-              >
+                }}>
                 <FaIcons.FaUserTie />
               </CardBody>
             </div>
@@ -397,8 +393,7 @@ const Dashboard = () => {
             style={{
               color: "black",
               width: "18rem",
-            }}
-          >
+            }}>
             <div className="row g-0">
               <CardBody className="col-md-4">
                 <CardTitle tag="h5">Informes</CardTitle>
@@ -426,8 +421,7 @@ const Dashboard = () => {
                   justifyContent: "center",
                   fontSize: "8rem",
                   boxSizing: "border-box",
-                }}
-              >
+                }}>
                 <FaIcons.FaReadme />
               </CardBody>
             </div>
@@ -437,8 +431,7 @@ const Dashboard = () => {
             style={{
               color: "black",
               width: "18rem",
-            }}
-          >
+            }}>
             <div className="row g-0">
               <CardBody className="col-md-4">
                 <CardTitle tag="h5">Fecha Entrega</CardTitle>
@@ -466,8 +459,7 @@ const Dashboard = () => {
                   justifyContent: "center",
                   fontSize: "8rem",
                   boxSizing: "border-box",
-                }}
-              >
+                }}>
                 <FaIcons.FaRegCalendarCheck />
               </CardBody>
             </div>
@@ -480,8 +472,7 @@ const Dashboard = () => {
               <CardTitle tag="h5">Histórico de registros:</CardTitle>
               <CardText
                 className="text-center"
-                style={{ color: "rgb(33 33 185)" }}
-              >
+                style={{ color: "rgb(33 33 185)" }}>
                 <b>Becarios</b>
               </CardText>
               <div style={{ width: "100%", height: "400px" }}>
@@ -494,8 +485,7 @@ const Dashboard = () => {
               <CardTitle tag="h5">Registro según región:</CardTitle>
               <CardText
                 className="text-center"
-                style={{ color: "rgb(33 33 185)" }}
-              >
+                style={{ color: "rgb(33 33 185)" }}>
                 <b>Becarios</b>
               </CardText>
               <div style={{ width: "100%", height: "400px" }}>
@@ -510,8 +500,7 @@ const Dashboard = () => {
                 <Table
                   responsive="sm"
                   id="tabl"
-                  style={{ backgroundColor: "lightgray" }}
-                >
+                  style={{ backgroundColor: "lightgray" }}>
                   <thead className="tra title-form">
                     <tr className="text-center ">
                       <th>#</th>
@@ -546,8 +535,7 @@ const Dashboard = () => {
           border: 0,
           borderRadius: 10,
         }}
-        onClick={() => abrirCerrarModalVer()}
-      >
+        onClick={() => abrirCerrarModalVer()}>
         <FaIcons.FaExclamationCircle />
         &nbsp; AVISO
       </Button>
@@ -565,15 +553,13 @@ const Dashboard = () => {
                   data={"http://localhost:80/api/PDF/reporte_pdf_Informes.php"}
                   type="application/pdf"
                   width="400"
-                  height="600"
-                >
+                  height="600">
                   <div
                     style={{
                       position: "absolute",
                       width: "100%",
                       height: "100%",
-                    }}
-                  ></div>
+                    }}></div>
                 </object>
               </Row>
             </CardBody>

@@ -69,7 +69,7 @@ function LoginBec() {
         .then((response) => {
           console.log(response);
           if (
-            response[0].result === "Nombre de usuario no válido!" ||
+            response[0].result === "Usuario no válido!" ||
             response[0].result === "Contraseña no válida!"
           ) {
             setError(response[0].result);
@@ -87,7 +87,7 @@ function LoginBec() {
           console.log(err);
         });
     } else {
-      setError("Todos los campos son obligatorios!");
+      setError("Llenar todos los campos!");
     }
   }
   return (

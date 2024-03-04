@@ -12,7 +12,7 @@
   margin-top: 10%;
   margin-left: 40%;
   box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.7);
-  background-image: linear-gradient(210deg,#00000042, rgba(10, 49, 67, 1)90%);
+  background-image: linear-gradient(210deg, #00000042, rgba(10, 49, 67, 1) 90%);
   color: white;
 }
 label {
@@ -20,16 +20,16 @@ label {
 }
 p {
   font-size: 25px;
-  color: blue;
+  color: rgba(10, 49, 67, 1);
   cursor: pointer;
 }
 .error {
   font-size: 25px;
-  color: red;
+  color: #df5200;
 }
 .success {
   font-size: 25px;
-  color: rgb(81, 255, 81);
+  color: rgb(255, 255, 255);
 }
 ///
 .bt {

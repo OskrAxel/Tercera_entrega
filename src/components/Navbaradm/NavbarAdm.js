@@ -22,6 +22,7 @@ import {
 import { Outlet, useNavigate } from "react-router-dom";
 import SidebarAdm from "./SidebarAdm";
 import Swal from "sweetalert2";
+import "./backup.php";
 
 function NavbarAdm(args) {
   ////
@@ -109,25 +110,42 @@ function NavbarAdm(args) {
       icon: "success",
     });
   };
+  const mostrarAlertaBack = () => {
+    Swal.fire({
+      confirmButtonColor: "#2E8B57",
+      title: "Éxito!",
+      text: "Backup generado correctamente.",
+      timer: 5000,
+      icon: "success",
+    });
+  };
+  const mostrarAlertaBackE = () => {
+    Swal.fire({
+      confirmButtonColor: "#dc3545",
+      title: "Oops...",
+      text: "Error en la operación",
+      timer: 5000,
+      icon: "error",
+    });
+  };
   /////
   const [message, setMessage] = useState("");
 
   const handleClick = () => {
     axios
-      .get("http://localhost:80/sidebar/export.php")
+      .get("http://localhost:80/api/adm/backup.php")
       .then((response) => {
         setMessage(response.data.message);
+        mostrarAlertaBack();
       })
       .catch((error) => {
-        setMessage("Error: " + error.message);
+        console.log(error.message);
+        // setMessage("Error: " + error.message);
+        mostrarAlertaBackE();
       });
   };
   return (
     <div>
-      <div>
-        <button onClick={handleClick}>Export MySQL Database</button>
-        <p>{message}</p>
-      </div>
       <Navbar expand="md" {...args}>
         <SidebarAdm />
         <NavbarBrand href="/dashboard" className="text-light">
@@ -167,6 +185,9 @@ function NavbarAdm(args) {
                 <DropdownItem divider />
                 <DropdownItem onClick={() => abrirCerrarModalContra()}>
                   Cambiar Contraseña
+                </DropdownItem>
+                <DropdownItem onClick={() => handleClick()}>
+                  Generar Backup
                 </DropdownItem>
                 <DropdownItem divider />
                 <DropdownItem onClick={logoutSubmit}>Salir</DropdownItem>
@@ -212,8 +233,7 @@ function NavbarAdm(args) {
           <Button
             color="danger"
             size="lg"
-            onClick={() => abrirCerrarModalContra()}
-          >
+            onClick={() => abrirCerrarModalContra()}>
             Cancelar
           </Button>
         </ModalFooter>

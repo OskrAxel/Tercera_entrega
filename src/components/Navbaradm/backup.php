@@ -1,13 +1,9 @@
 <?php
-header('Access-Control-Allow-Origin: *');
-header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method");
-header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
-header("Allow: GET, POST, OPTIONS, PUT, DELETE");
-$method = $_SERVER['REQUEST_METHOD'];
-if($method == "OPTIONS") {
-    die();
-}
-
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: *");
+header("Access-Control-Allow-Methods: *");
 // variables
 $dbhost = 'localhost';
 $database = 'bqef_2';
@@ -18,7 +14,7 @@ $backup_file = $database.'_' . date("d-m-Y-H-i-s") . '.sql';
 // comandos a ejecutar
 $cmd ='D:\programas\XAMPP\mysql\bin\mysqldump --user="root" --password=""  "bqef_2" > ./backup/'.$backup_file;
 exec($cmd);
-
+header("Content-type: application/octet-stream");
 header("Location: ./backup/$backup_file");
 
 ///BACKUP ESTRUCTURA

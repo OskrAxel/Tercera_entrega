@@ -28,11 +28,11 @@ if(mysqli_connect_error()){
                     $result = "Contraseña no válida!";
                 }
                 else{
-                    $result = "Iniciar sesión con éxito! Redireccionando...";
+                    $result = "Inicio sesión con éxito!";
                 }
             }
             else{
-                $result = "Nombre de usuario no válido!";
+                $result = "Usuario no válido!";
             }
         }
         else{
