@@ -221,7 +221,7 @@ function ListUserAdm() {
         </div>
         <br />
         <Table responsive="sm" id="tabl">
-          <thead>
+          <thead id="stahead">
             <tr className="text-center">
               <th>#</th>
               <th>Nombres</th>

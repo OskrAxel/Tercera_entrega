@@ -87,7 +87,7 @@ if($_POST['METHOD']=='ENTR'){
 ////listado logs
 if($_POST['METHOD']=='LOGS'){
     unset($_POST['METHOD']);
-    $query="SELECT id,detalle, fecha_hora from log";
+    $query="SELECT id,usuario_mod,detalle,fecha_hora from log";
     $resultado=metodoGet($query);
     echo json_encode($resultado->fetchAll()); 
     header("HTTP/1.1 200 OK");

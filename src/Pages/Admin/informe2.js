@@ -183,7 +183,7 @@ function Informe2() {
         </div>
         <br />
         <Table responsive="sm" id="tabl">
-          <thead>
+          <thead id="stahead">
             <tr className="text-center">
               <th>#</th>
               <th>Nombre documento</th>

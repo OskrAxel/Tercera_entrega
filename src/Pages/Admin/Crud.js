@@ -45,6 +45,24 @@ function ListUser() {
   const act = () => {
     window.location.reload();
   };
+  ////Datos usuario Administrador
+  const [dataAdm, setDataAdm] = useState({});
+  const peticionGetAdm = async () => {
+    await axios
+      .get(`http://localhost:80/api/adm/contraadm.php`, {
+        params: {
+          id: localStorage.getItem("user"),
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+        setDataAdm(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  /////Listado usuarios becarios
   const peticionGet = async () => {
     await axios
       .get(baseUrl)
@@ -56,7 +74,7 @@ function ListUser() {
         console.log(error);
       });
   };
-
+  /////Crear Usuario becario
   const peticionPost = async () => {
     var f = new FormData();
     f.append("nombre", usuarioSeleccionado.nombre);
@@ -65,6 +83,7 @@ function ListUser() {
     f.append("email", usuarioSeleccionado.email);
     f.append("contrasena", usuarioSeleccionado.contrasena);
     f.append("celular", usuarioSeleccionado.celular);
+    f.append("usu_creacion", dataAdm.id_adm);
     f.append("METHOD", "POST");
     await axios
       .post(baseUrl, f)
@@ -77,7 +96,7 @@ function ListUser() {
         console.log(error);
       });
   };
-
+  /////Modificar Usuario becario
   const peticionPut = async () => {
     var f = new FormData();
     f.append("nombre", usuarioSeleccionado.nombre);
@@ -85,6 +104,7 @@ function ListUser() {
     f.append("email", usuarioSeleccionado.email);
     f.append("contrasena", usuarioSeleccionado.contrasena);
     f.append("celular", usuarioSeleccionado.celular);
+    f.append("usu_modificacion", dataAdm.id_adm);
     f.append("METHOD", "PUT");
     await axios
       .post(baseUrl, f, { params: { id: usuarioSeleccionado.id } })
@@ -107,9 +127,10 @@ function ListUser() {
         console.log(error);
       });
   };
-
+  /////Eliminar Usuario becario
   const peticionDelete = async () => {
     var f = new FormData();
+    f.append("usu_modificacion", dataAdm.id_adm);
     f.append("METHOD", "DELETE");
     await axios
       .post(baseUrl, f, { params: { id: usuarioSeleccionado.id } })
@@ -133,6 +154,7 @@ function ListUser() {
 
   useEffect(() => {
     peticionGet();
+    peticionGetAdm();
     // mostrarAlerta();
   }, []);
   ////BARRA BUSQUEDA
@@ -226,7 +248,7 @@ function ListUser() {
         </div>
         <br />
         <Table responsive="sm" id="tabl">
-          <thead>
+          <thead id="stahead">
             <tr className="text-center">
               <th>#</th>
               <th>Nombres</th>

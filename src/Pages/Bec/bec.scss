@@ -50,6 +50,7 @@
 #tabl {
   --bs-table-bg: rgba(232, 232, 232, 0.65);
   font-size: 0.9rem;
+  border-color: rgba(10, 49, 67);
 }
 //dashboard
 #main {
@@ -95,4 +96,10 @@
 .header_m{
   color:white;
   background-color: rgba(10, 49, 67, 0.85);
+}
+
+#stahead {
+  position: sticky;
+  top: 0;
+  background-color: rgba(10, 49, 67);
 }
