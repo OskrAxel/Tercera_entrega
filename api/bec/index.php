@@ -36,7 +36,7 @@ if($_POST['METHOD']=='POST'){
     $usu_creacion=$_POST['usu_creacion'];
     $pass = md5($contrasena);
     $query="INSERT INTO usuarios_bec(id,nombre, apellido, id_bec,email, contrasena, contrasena_lit, celular,ciudad, created_at, usu_creacion,anio) values (NULL,'$nombre', '$apellido','$id_bec', '$email', '$pass', '$contrasena', '$celular', '$ciudad', '$created_at', '$usu_creacion', '$anio')";
-    $queryAutoIncrement="SELECT MAX(id) as id from usuarios_per";
+    $queryAutoIncrement="SELECT MAX(id) as id from usuarios_bec";
     $resultado=metodoPost($query, $queryAutoIncrement);
     echo json_encode($resultado);
     header("HTTP/1.1 200 OK");

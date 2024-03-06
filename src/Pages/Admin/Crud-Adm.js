@@ -44,6 +44,24 @@ function ListUserAdm() {
   const act = () => {
     window.location.reload();
   };
+  ////Datos usuario Administrador
+  const [dataAdm, setDataAdm] = useState({});
+  const peticionGetAdm = async () => {
+    await axios
+      .get(`http://localhost:80/api/adm/contraadm.php`, {
+        params: {
+          id: localStorage.getItem("user"),
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+        setDataAdm(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  /////Listado usuarios administrativo
   const peticionGet = async () => {
     await axios
       .get(baseUrl)
@@ -55,14 +73,16 @@ function ListUserAdm() {
         console.log(error);
       });
   };
-
+  /////Crear Usuario administrativo
   const peticionPost = async () => {
     var f = new FormData();
     f.append("nombre", usuarioSeleccionado.nombre);
     f.append("apellido", usuarioSeleccionado.apellido);
+    f.append("id_per", usuarioSeleccionado.id_per);
     f.append("email", usuarioSeleccionado.email);
     f.append("contrasena", usuarioSeleccionado.contrasena);
     f.append("celular", usuarioSeleccionado.celular);
+    f.append("usu_creacion", dataAdm.id_adm);
     f.append("METHOD", "POST");
     await axios
       .post(baseUrl, f)
@@ -75,7 +95,7 @@ function ListUserAdm() {
         console.log(error);
       });
   };
-
+  /////Modificar Usuario administrativo
   const peticionPut = async () => {
     var f = new FormData();
     f.append("nombre", usuarioSeleccionado.nombre);
@@ -83,6 +103,7 @@ function ListUserAdm() {
     f.append("email", usuarioSeleccionado.email);
     f.append("contrasena", usuarioSeleccionado.contrasena);
     f.append("celular", usuarioSeleccionado.celular);
+    f.append("usu_modificacion", dataAdm.id_adm);
     f.append("METHOD", "PUT");
     await axios
       .post(baseUrl, f, { params: { id: usuarioSeleccionado.id } })
@@ -108,6 +129,7 @@ function ListUserAdm() {
 
   const peticionDelete = async () => {
     var f = new FormData();
+    f.append("usu_modificacion", dataAdm.id_adm);
     f.append("METHOD", "DELETE");
     await axios
       .post(baseUrl, f, { params: { id: usuarioSeleccionado.id } })
@@ -131,6 +153,7 @@ function ListUserAdm() {
 
   useEffect(() => {
     peticionGet();
+    peticionGetAdm();
   }, []);
   ////BARRA BUSQUEDA
   const [busqueda, setBusqueda] = useState("");
@@ -202,8 +225,7 @@ function ListUserAdm() {
           <Button
             color="success"
             size="lg"
-            onClick={() => abrirCerrarModalInsertar()}
-          >
+            onClick={() => abrirCerrarModalInsertar()}>
             <FaIcons.FaPlus /> Añadir
           </Button>
         </div>
@@ -226,6 +248,7 @@ function ListUserAdm() {
               <th>#</th>
               <th>Nombres</th>
               <th>Apellidos</th>
+              <th>ID Usuario</th>
               <th>Correo</th>
               <th>Clave</th>
               <th>Celular</th>
@@ -239,21 +262,20 @@ function ListUserAdm() {
                 <td>{cont++}</td>
                 <td>{Usuario.nombre}</td>
                 <td>{Usuario.apellido}</td>
+                <td>{Usuario.id_per}</td>
                 <td>{Usuario.email}</td>
                 <td>{Usuario.contrasena}</td>
                 <td>{Usuario.celular}</td>
                 <td>
                   <Button
                     color="warning"
-                    onClick={() => seleccionarUsuario(Usuario, "Editar")}
-                  >
+                    onClick={() => seleccionarUsuario(Usuario, "Editar")}>
                     Editar
                   </Button>{" "}
                   {"  "}
                   <Button
                     color="danger"
-                    onClick={() => seleccionarUsuario(Usuario, "Eliminar")}
-                  >
+                    onClick={() => seleccionarUsuario(Usuario, "Eliminar")}>
                     Eliminar
                   </Button>
                 </td>
@@ -281,6 +303,15 @@ function ListUserAdm() {
                 type="text"
                 className="form-control"
                 name="apellido"
+                onChange={handleChange}
+              />
+              <br />
+              <label>Id Usuario: </label>
+              <br />
+              <input
+                type="text"
+                className="form-control"
+                name="id_per"
                 onChange={handleChange}
               />
               <br />
@@ -320,8 +351,7 @@ function ListUserAdm() {
             <Button
               color="danger"
               size="lg"
-              onClick={() => abrirCerrarModalInsertar()}
-            >
+              onClick={() => abrirCerrarModalInsertar()}>
               Cancelar
             </Button>
           </ModalFooter>
@@ -390,8 +420,7 @@ function ListUserAdm() {
             <Button
               color="danger"
               size="lg"
-              onClick={() => abrirCerrarModalEditar()}
-            >
+              onClick={() => abrirCerrarModalEditar()}>
               Cancelar
             </Button>
           </ModalFooter>
@@ -409,8 +438,7 @@ function ListUserAdm() {
             </button>
             <button
               className="btn btn-secondary"
-              onClick={() => abrirCerrarModalEliminar()}
-            >
+              onClick={() => abrirCerrarModalEliminar()}>
               No
             </button>
           </ModalFooter>

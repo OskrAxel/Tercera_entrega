@@ -21,19 +21,38 @@ function Informe2() {
 
   useEffect(() => {
     getImagenes();
+    peticionGetAdm();
   }, []);
-
+  ////Datos usuario Administrador
+  const [dataAdm, setDataAdm] = useState({});
+  const peticionGetAdm = async () => {
+    await axios
+      .get(`http://localhost:80/api/adm/contraadm.php`, {
+        params: {
+          id: localStorage.getItem("user"),
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+        setDataAdm(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  /////Listado informes
   async function getImagenes() {
     const res = await axios.get("http://localhost:80/api/inf/");
     setLista(res.data);
     setTablaUsuarios(res.data);
     console.log(res.data);
   }
-
+  /////Cargar informes
   async function addImagen(e) {
     e.preventDefault();
     let fd = new FormData();
     fd.append("archivo_per", imagen);
+    fd.append("usu_creacion", dataAdm.id_adm);
     fd.append("nom_usu", descripcion);
     fd.append("nom_doc", nom);
     fd.append("f_cargado", usuarioSeleccionado.f_cargado);
@@ -44,7 +63,7 @@ function Informe2() {
     mostrarAlertaN();
     getImagenes();
   }
-
+  /////Eliminar patrocinador
   async function deleteImagen(id_doc) {
     const res = await axios.delete(
       "http://localhost:80/api/inf/?id_doc=" + id_doc
@@ -164,8 +183,7 @@ function Informe2() {
           <Button
             color="success"
             size="lg"
-            onClick={() => abrirCerrarModalInsertar()}
-          >
+            onClick={() => abrirCerrarModalInsertar()}>
             <FaIcons.FaPlus /> Añadir
           </Button>
         </div>
@@ -203,16 +221,14 @@ function Informe2() {
                 <td>
                   <Button
                     color="warning"
-                    onClick={() => seleccionarUsuario(item, "Editar")}
-                  >
+                    onClick={() => seleccionarUsuario(item, "Editar")}>
                     <FaIcons.FaRegEye />
                     &nbsp;&nbsp;Visualizar
                   </Button>
                   &nbsp;&nbsp;&nbsp;
                   <Button
                     color="danger"
-                    onClick={() => seleccionarUsuario(item, "Eliminar")}
-                  >
+                    onClick={() => seleccionarUsuario(item, "Eliminar")}>
                     Eliminar
                   </Button>
                 </td>
@@ -271,8 +287,7 @@ function Informe2() {
             <Button
               color="danger"
               size="lg"
-              onClick={() => abrirCerrarModalInsertar()}
-            >
+              onClick={() => abrirCerrarModalInsertar()}>
               Cancelar
             </Button>
           </ModalFooter>
@@ -288,15 +303,13 @@ function Informe2() {
             <Button
               color="success"
               size="lg"
-              onClick={() => deleteImagen(usuarioSeleccionado.id_doc)}
-            >
+              onClick={() => deleteImagen(usuarioSeleccionado.id_doc)}>
               Sí
             </Button>
             <Button
               color="danger"
               size="lg"
-              onClick={() => abrirCerrarModalEliminar()}
-            >
+              onClick={() => abrirCerrarModalEliminar()}>
               No
             </Button>
           </ModalFooter>
@@ -319,8 +332,7 @@ function Informe2() {
                     type="application/pdf"
                     alt="archivo_per"
                     width="400"
-                    height="600"
-                  >
+                    height="600">
                     <p>
                       Tu navegador no puede mostrar este archivo PDF. Puedes
                       descargarlo
@@ -329,8 +341,7 @@ function Informe2() {
                           "data:application/pdf;base64," +
                           usuarioSeleccionado.archivo_per
                         }
-                        download
-                      >
+                        download>
                         aquí
                       </a>
                       .
@@ -345,8 +356,7 @@ function Informe2() {
               style={{ float: "right" }}
               color="success"
               size="lg"
-              onClick={handleDescargarPdf}
-            >
+              onClick={handleDescargarPdf}>
               <FaIcons.FaDownload />
               Download
             </Button>

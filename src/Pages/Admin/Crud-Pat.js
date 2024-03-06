@@ -45,6 +45,24 @@ function ListUserPat() {
   const act = () => {
     window.location.reload();
   };
+  ////Datos usuario Administrador
+  const [dataAdm, setDataAdm] = useState({});
+  const peticionGetAdm = async () => {
+    await axios
+      .get(`http://localhost:80/api/adm/contraadm.php`, {
+        params: {
+          id: localStorage.getItem("user"),
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+        setDataAdm(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  /////Listado usuarios patrocinador
   const peticionGet = async () => {
     await axios
       .get(baseUrl)
@@ -56,14 +74,16 @@ function ListUserPat() {
         console.log(error);
       });
   };
-
+  /////Crear Usuario patrocinador
   const peticionPost = async () => {
     var f = new FormData();
     f.append("nombre", usuarioSeleccionado.nombre);
+    f.append("id_pat", usuarioSeleccionado.id_pat);
     f.append("pais", usuarioSeleccionado.pais);
     f.append("email", usuarioSeleccionado.email);
     f.append("direccion", usuarioSeleccionado.direccion);
     f.append("celular", usuarioSeleccionado.celular);
+    f.append("usu_creacion", dataAdm.id_adm);
     f.append("institucion", usuarioSeleccionado.institucion);
     f.append("METHOD", "POST");
     await axios
@@ -77,7 +97,7 @@ function ListUserPat() {
         console.log(error);
       });
   };
-
+  /////Modificar Usuario patrocinador
   const peticionPut = async () => {
     var f = new FormData();
     f.append("nombre", usuarioSeleccionado.nombre);
@@ -85,6 +105,7 @@ function ListUserPat() {
     f.append("email", usuarioSeleccionado.email);
     f.append("direccion", usuarioSeleccionado.direccion);
     f.append("celular", usuarioSeleccionado.celular);
+    f.append("usu_modificacion", dataAdm.id_adm);
     f.append("institucion", usuarioSeleccionado.institucion);
     f.append("METHOD", "PUT");
     await axios
@@ -109,9 +130,10 @@ function ListUserPat() {
         console.log(error);
       });
   };
-
+  /////Eliminar Usuario patrocinador
   const peticionDelete = async () => {
     var f = new FormData();
+    f.append("usu_modificacion", dataAdm.id_adm);
     f.append("METHOD", "DELETE");
     await axios
       .post(baseUrl, f, { params: { id: usuarioSeleccionado.id } })
@@ -135,6 +157,7 @@ function ListUserPat() {
 
   useEffect(() => {
     peticionGet();
+    peticionGetAdm();
   }, []);
   ////BARRA BUSQUEDA
   const [busqueda, setBusqueda] = useState("");
@@ -206,8 +229,7 @@ function ListUserPat() {
           <Button
             color="success"
             size="lg"
-            onClick={() => abrirCerrarModalInsertar()}
-          >
+            onClick={() => abrirCerrarModalInsertar()}>
             <FaIcons.FaPlus /> Añadir
           </Button>
         </div>
@@ -229,6 +251,7 @@ function ListUserPat() {
             <tr className="text-center">
               <th>#</th>
               <th>Nombres</th>
+              <th>ID Patrocinador</th>
               <th>Pais</th>
               <th>Correo</th>
               <th>Direccion</th>
@@ -242,6 +265,7 @@ function ListUserPat() {
               <tr className="text-center" key={Usuario.id}>
                 <td>{cont++}</td>
                 <td>{Usuario.nombre}</td>
+                <td>{Usuario.id_pat}</td>
                 <td>{Usuario.pais}</td>
                 <td>{Usuario.email}</td>
                 <td>{Usuario.direccion}</td>
@@ -250,15 +274,13 @@ function ListUserPat() {
                 <td>
                   <button
                     className="btn btn-warning"
-                    onClick={() => seleccionarUsuario(Usuario, "Editar")}
-                  >
+                    onClick={() => seleccionarUsuario(Usuario, "Editar")}>
                     Editar
                   </button>{" "}
                   {"  "}
                   <button
                     className="btn btn-danger"
-                    onClick={() => seleccionarUsuario(Usuario, "Eliminar")}
-                  >
+                    onClick={() => seleccionarUsuario(Usuario, "Eliminar")}>
                     Eliminar
                   </button>
                 </td>
@@ -268,7 +290,7 @@ function ListUserPat() {
         </Table>
 
         <Modal isOpen={modalInsertar}>
-          <ModalHeader className="header_mo">Insertar Usuario</ModalHeader>
+          <ModalHeader className="header_mo">Insertar Patrocinador</ModalHeader>
           <ModalBody>
             <div className="form-group">
               <label>Nombres: </label>
@@ -277,6 +299,15 @@ function ListUserPat() {
                 type="text"
                 className="form-control"
                 name="nombre"
+                onChange={handleChange}
+              />
+              <br />
+              <label>Id Usuario: </label>
+              <br />
+              <input
+                type="text"
+                className="form-control"
+                name="id_pat"
                 onChange={handleChange}
               />
               <br />
@@ -334,8 +365,7 @@ function ListUserPat() {
             <Button
               color="danger"
               size="lg"
-              onClick={() => abrirCerrarModalInsertar()}
-            >
+              onClick={() => abrirCerrarModalInsertar()}>
               Cancelar
             </Button>
           </ModalFooter>
@@ -413,8 +443,7 @@ function ListUserPat() {
             <Button
               color="danger"
               size="lg"
-              onClick={() => abrirCerrarModalEditar()}
-            >
+              onClick={() => abrirCerrarModalEditar()}>
               Cancelar
             </Button>
           </ModalFooter>
@@ -433,8 +462,7 @@ function ListUserPat() {
             <Button
               color="danger"
               size="lg"
-              onClick={() => abrirCerrarModalEliminar()}
-            >
+              onClick={() => abrirCerrarModalEliminar()}>
               No
             </Button>
           </ModalFooter>

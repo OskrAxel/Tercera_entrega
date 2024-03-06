@@ -25,14 +25,16 @@ if($_SERVER['REQUEST_METHOD']=='GET'){
 if($_POST['METHOD']=='POST'){
     unset($_POST['METHOD']);
     $nombre=$_POST['nombre'];
+    $id_pat=$_POST['id_pat'];
     $pais=$_POST['pais'];
     $email=$_POST['email'];
     $direccion=$_POST['direccion'];
     $celular=$_POST['celular'];
+    $usu_creacion=$_POST['usu_creacion'];
     $created_at = date('Y-m-d');
     $institucion = $_POST['institucion'];
-    $query="INSERT INTO patrocinador(id,nombre, pais, email, direccion, celular, institucion, created_at)
-    values (NULL,'$nombre', '$pais', '$email', '$direccion', '$celular', '$institucion', '$created_at')";
+    $query="INSERT INTO patrocinador(id,nombre,id_pat, pais, email, direccion, celular, institucion, usu_creacion, created_at)
+    values (NULL,'$nombre', '$id_pat', '$pais', '$email', '$direccion', '$celular', '$institucion', '$usu_creacion', '$created_at')";
     $queryAutoIncrement="SELECT MAX(id) as id from patrocinador";
     $resultado=metodoPost($query, $queryAutoIncrement);
     echo json_encode($resultado);
@@ -48,9 +50,10 @@ if($_POST['METHOD']=='PUT'){
     $email=$_POST['email'];
     $direccion=$_POST['direccion'];
     $celular=$_POST['celular'];
+    $usu_modificacion=$_POST['usu_modificacion'];
     $institucion = $_POST['institucion'];
     $updated_at = date('Y-m-d');
-    $query="UPDATE patrocinador SET nombre='$nombre', pais='$pais', email='$email', direccion='$direccion', celular='$celular', institucion='$institucion', updated_at='$updated_at' WHERE id='$id'";
+    $query="UPDATE patrocinador SET nombre='$nombre', pais='$pais', email='$email', direccion='$direccion', celular='$celular', institucion='$institucion', updated_at='$updated_at', usu_modificacion='$usu_modificacion' WHERE id='$id'";
     $resultado=metodoPut($query);
     echo json_encode($resultado);
     header("HTTP/1.1 200 OK");
@@ -60,6 +63,9 @@ if($_POST['METHOD']=='PUT'){
 if($_POST['METHOD']=='DELETE'){
     unset($_POST['METHOD']);
     $id=$_GET['id'];
+    $usu_modificacion=$_POST['usu_modificacion'];
+    $query2="UPDATE patrocinador SET usu_modificacion='$usu_modificacion' WHERE id='$id'";
+    $resultado=metodoPut($query2);
     $query="DELETE FROM patrocinador WHERE id='$id'";
     $resultado=metodoDelete($query);
     echo json_encode($resultado);

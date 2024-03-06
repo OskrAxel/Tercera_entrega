@@ -30,7 +30,6 @@ if($_POST['METHOD']=='CIUBEC'){
     exit();
 }
 
-
 if($_POST['METHOD']=='BEC'){
     unset($_POST['METHOD']);
     $query="SELECT id,nombre,count(id) AS CBec from usuarios_bec";
@@ -87,7 +86,7 @@ if($_POST['METHOD']=='ENTR'){
 ////listado logs
 if($_POST['METHOD']=='LOGS'){
     unset($_POST['METHOD']);
-    $query="SELECT id,usuario_mod,detalle,fecha_hora from log";
+    $query="SELECT * from log ORDER BY id DESC LIMIT 25";
     $resultado=metodoGet($query);
     echo json_encode($resultado->fetchAll()); 
     header("HTTP/1.1 200 OK");

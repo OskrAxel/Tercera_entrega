@@ -24,17 +24,18 @@ public function getImagenes(){
 }
 
 
-public function addImagen($descripcion,$foto,$nom_doc,$f_cargado,$id_bec){
+public function addImagen($descripcion,$foto,$nom_doc,$usu_creacion,$f_cargado,$id_bec){
   
   $conexion = new Conexion();
   $db = $conexion->getConexion();
-  $sql = "INSERT INTO informe (nom_usu, nom_doc,id_bec, archivo_per, f_cargado) VALUES (:nom_usu,:nom_doc,:id_bec,:archivo_per,:f_cargado)";
+  $sql = "INSERT INTO informe (nom_usu, nom_doc,id_bec, archivo_per, f_cargado, usu_creacion) VALUES (:nom_usu,:nom_doc,:id_bec,:archivo_per,:f_cargado,:usu_creacion)";
   $consulta = $db->prepare($sql);
   $consulta->bindParam(':id_bec', $id_bec);
   $consulta->bindParam(':nom_usu', $descripcion);
   $consulta->bindParam(':archivo_per', $foto);
   $consulta->bindParam(':nom_doc', $nom_doc);
   $consulta->bindParam(':f_cargado', $f_cargado);
+  $consulta->bindParam(':usu_creacion', $usu_creacion);
   $consulta->execute();
 
   return '{"msg":"imagen agregada"}';
