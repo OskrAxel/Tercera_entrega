@@ -10,7 +10,7 @@ if($_SERVER['REQUEST_METHOD']=='GET'){
         $resultado=metodoGet($query);
         echo json_encode($resultado->fetch(PDO::FETCH_ASSOC));
     }else{
-        $query="SELECT id, nombre, apellido, email, contrasena, contrasena_lit, celular from usuarios_adm";
+        $query="SELECT id, nombre, apellido, email, contrasena, contrasena_lit, celular,id_adm from usuarios_adm";
         $resultado=metodoGet($query);
         echo json_encode($resultado->fetchAll());
     }
@@ -22,9 +22,10 @@ if($_SERVER['REQUEST_METHOD']=='GET'){
 if($_POST['METHOD']=='PUT'){
     unset($_POST['METHOD']);
     $id=$_GET['idb'];
+    $usu_modificacion=$_POST['usu_modificacion'];
     $contrasena=$_POST['contrasena'];
     $pass = md5($contrasena);
-    $query="UPDATE usuarios_adm SET contrasena='$pass',contrasena_lit='$contrasena' WHERE id='$id'";
+    $query="UPDATE usuarios_adm SET contrasena='$pass',contrasena_lit='$contrasena', usu_modificacion='$usu_modificacion' WHERE id='$id'";
     $resultado=metodoPut($query);
     echo json_encode($resultado);
     header("HTTP/1.1 200 OK");

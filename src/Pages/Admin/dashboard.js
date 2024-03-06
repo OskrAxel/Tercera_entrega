@@ -207,11 +207,11 @@ const Dashboard = () => {
     datasets: [
       {
         label: "Inscritos",
-        backgroundColor: "rgba(153, 102, 255, 0.5)",
-        borderColor: "rgb(153, 102, 255, 0.7)",
+        backgroundColor: "rgba(49, 51, 124, 0.7)",
+        borderColor: "rgb(49, 51, 124)",
         borderWidth: 3,
-        hoverBackgroundColor: "rgba(153, 102, 255, 0.8)",
-        hoverBorderColor: "rgba(153, 102, 255)",
+        hoverBackgroundColor: "rgba(49, 51, 124, 0.8)",
+        hoverBorderColor: "rgba(49, 51, 124)",
         data: anioB,
       },
     ],
@@ -244,32 +244,32 @@ const Dashboard = () => {
         label: "# miembros",
         data: region,
         backgroundColor: [
-          "rgba(255, 99, 132, 0.5)",
-          "rgba(54, 162, 235, 0.5)",
-          "rgba(255, 206, 86, 0.5)",
-          "rgba(75, 192, 192, 0.5)",
-          "rgba(153, 102, 255, 0.5)",
-          "rgba(255, 159, 64, 0.5)",
+          "rgba(217, 83, 79, 0.6)",
+          "rgba(10, 49, 67, 0.6)",
+          "rgba(255, 206, 86, 0.6)",
+          "rgba(75, 192, 192, 0.6)",
+          "rgba(153, 102, 255, 0.6)",
+          "rgba(255, 159, 64, 0.6)",
         ],
         borderColor: [
-          "rgba(255, 99, 132, 0.7)",
-          "rgba(54, 162, 235, 0.7)",
-          "rgba(255, 206, 86, 0.7)",
-          "rgba(75, 192, 192, 0.7)",
-          "rgba(153, 102, 255, 0.7)",
-          "rgba(255, 159, 64, 0.7)",
-        ],
-        hoverBackgroundColor: [
-          "rgba(255, 99, 132, 0.8)",
-          "rgba(54, 162, 235, 0.8)",
+          "rgba(217, 83, 79, 0.8)",
+          "rgba(10, 49, 67, 0.8)",
           "rgba(255, 206, 86, 0.8)",
           "rgba(75, 192, 192, 0.8)",
           "rgba(153, 102, 255, 0.8)",
           "rgba(255, 159, 64, 0.8)",
         ],
+        hoverBackgroundColor: [
+          "rgba(217, 83, 79, 0.9)",
+          "rgba(10, 49, 67, 0.9)",
+          "rgba(255, 206, 86, 0.9)",
+          "rgba(75, 192, 192, 0.9)",
+          "rgba(153, 102, 255, 0.9)",
+          "rgba(255, 159, 64, 0.9)",
+        ],
         hoverBorderColor: [
-          "rgba(255, 99, 132)",
-          "rgba(54, 162, 235)",
+          "rgba(217, 83, 79)",
+          "rgba(10, 49, 67)",
           "rgba(255, 206, 86)",
           "rgba(75, 192, 192)",
           "rgba(153, 102, 255)",
@@ -294,7 +294,7 @@ const Dashboard = () => {
     },
   };
   var cont = 1;
-  var est = "";
+  var num = 0;
   /////dataFI
   const [modalVer, setModalVer] = useState(false);
   const abrirCerrarModalVer = () => {
@@ -306,6 +306,11 @@ const Dashboard = () => {
       &times;
     </Button>
   );
+  ////Modal REPORTE INFORMES
+  const [modalEliminar, setModalEliminar] = useState(false);
+  const abrirCerrarModalEliminar = () => {
+    setModalEliminar(!modalEliminar);
+  };
   return (
     <div id="main">
       <div className="tral">
@@ -315,7 +320,8 @@ const Dashboard = () => {
             style={{
               color: "black",
               width: "18rem",
-            }}>
+            }}
+          >
             <div className="row g-0">
               <CardBody className="col-md-4">
                 <CardTitle tag="h5">Cuentas</CardTitle>
@@ -343,7 +349,8 @@ const Dashboard = () => {
                   justifyContent: "center",
                   fontSize: "8rem",
                   boxSizing: "border-box",
-                }}>
+                }}
+              >
                 <FaIcons.FaUserGraduate />
               </CardBody>
             </div>
@@ -354,7 +361,8 @@ const Dashboard = () => {
             style={{
               color: "black",
               width: "18rem",
-            }}>
+            }}
+          >
             <div className="row g-0">
               <CardBody className="col-md-4">
                 <CardTitle tag="h5">Cuentas</CardTitle>
@@ -382,7 +390,8 @@ const Dashboard = () => {
                   justifyContent: "center",
                   fontSize: "8rem",
                   boxSizing: "border-box",
-                }}>
+                }}
+              >
                 <FaIcons.FaUserTie />
               </CardBody>
             </div>
@@ -392,7 +401,8 @@ const Dashboard = () => {
             style={{
               color: "black",
               width: "18rem",
-            }}>
+            }}
+          >
             <div className="row g-0">
               <CardBody className="col-md-4">
                 <CardTitle tag="h5">Informes</CardTitle>
@@ -420,7 +430,8 @@ const Dashboard = () => {
                   justifyContent: "center",
                   fontSize: "8rem",
                   boxSizing: "border-box",
-                }}>
+                }}
+              >
                 <FaIcons.FaReadme />
               </CardBody>
             </div>
@@ -430,7 +441,8 @@ const Dashboard = () => {
             style={{
               color: "black",
               width: "18rem",
-            }}>
+            }}
+          >
             <div className="row g-0">
               <CardBody className="col-md-4">
                 <CardTitle tag="h5">Fecha Entrega</CardTitle>
@@ -458,7 +470,8 @@ const Dashboard = () => {
                   justifyContent: "center",
                   fontSize: "8rem",
                   boxSizing: "border-box",
-                }}>
+                }}
+              >
                 <FaIcons.FaRegCalendarCheck />
               </CardBody>
             </div>
@@ -471,7 +484,8 @@ const Dashboard = () => {
               <CardTitle tag="h5">Histórico de registros:</CardTitle>
               <CardText
                 className="text-center"
-                style={{ color: "rgb(33 33 185)" }}>
+                style={{ color: "rgb(33 33 185)" }}
+              >
                 <b>Becarios</b>
               </CardText>
               <div style={{ width: "100%", height: "400px" }}>
@@ -484,7 +498,8 @@ const Dashboard = () => {
               <CardTitle tag="h5">Registro según región:</CardTitle>
               <CardText
                 className="text-center"
-                style={{ color: "rgb(33 33 185)" }}>
+                style={{ color: "rgb(33 33 185)" }}
+              >
                 <b>Becarios</b>
               </CardText>
               <div style={{ width: "100%", height: "400px" }}>
@@ -507,9 +522,9 @@ const Dashboard = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {dataL.map((user) => (
+                      {dataL.map((user, index) => (
                         <tr className="text-center" key={user.id}>
-                          <td>{cont++}</td>
+                          <td>{index + 1}</td>
                           <td>{user.usuario_mod}</td>
                           <td>{user.detalle}</td>
                           <td>{user.fecha_hora}</td>
@@ -533,9 +548,10 @@ const Dashboard = () => {
           border: 0,
           borderRadius: 10,
         }}
-        onClick={() => abrirCerrarModalVer()}>
+        onClick={() => abrirCerrarModalEliminar()}
+      >
         <FaIcons.FaExclamationCircle />
-        &nbsp; AVISO
+        &nbsp; INFORMES
       </Button>
 
       {/* Modal VER */}
@@ -551,18 +567,110 @@ const Dashboard = () => {
                   data={"http://localhost:80/api/PDF/reporte_pdf_Informes.php"}
                   type="application/pdf"
                   width="400"
-                  height="600">
+                  height="600"
+                >
                   <div
                     style={{
                       position: "absolute",
                       width: "100%",
                       height: "100%",
-                    }}></div>
+                    }}
+                  ></div>
                 </object>
               </Row>
             </CardBody>
           </Card>
         </ModalBody>
+      </Modal>
+
+      {/* Modal VER REPORTE INFORMES*/}
+      <Modal isOpen={modalEliminar} size="xl">
+        <ModalHeader
+          className="text-center"
+          style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}
+        >
+          Estado Informes
+        </ModalHeader>
+        <div id="subt">
+          <Link
+            to={"http://localhost:80/api/PDF/reporte_pdf_Informes.php"}
+            target="_blank"
+          >
+            <Button color="primary" size="lg">
+              <FaIcons.FaFileDownload /> Reporte
+            </Button>
+          </Link>
+        </div>
+        <ModalBody>
+          <Table responsive="sm" id="tabl">
+            <thead>
+              <tr className="text-center tra title-form">
+                <th>N°</th>
+                <th>Usuario</th>
+                <th>Nom.Doc</th>
+                <th>Fecha E.</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              {dataF.map((itemF, indexF) => (
+                <>
+                  <tr key={itemF.id_fech}></tr>
+                  {dataFI.map((item, index) => {
+                    const fechaActual = new Date(itemF.fecha);
+                    const fechaDocumento = new Date(item.f_cargado);
+                    const fnull = new Date(0);
+
+                    let estado = "";
+                    let color = "";
+
+                    if (
+                      fechaDocumento.toISOString() === fechaActual.toISOString()
+                    ) {
+                      estado = "ENTREGADO";
+                      color = "#2E8B57";
+                    } else if (fechaDocumento > fechaActual) {
+                      estado = "RETRASO";
+                      color = "#CD5C5C";
+                    } else if (
+                      fechaDocumento.toISOString() === fnull.toISOString()
+                    ) {
+                      estado = "PENDIENTE";
+                      color = "#db922e";
+                    } else {
+                      estado = "ENTREGADO";
+                      color = "#2E8B57";
+                    }
+
+                    return (
+                      <tr className="text-center" key={item.id}>
+                        <td>{index + 1}</td>
+                        <td>{item.responsable}</td>
+                        <td>{item.nom_doc}</td>
+                        <td>{item.f_cargado}</td>
+                        <td
+                          align="center"
+                          style={{ color: "white", backgroundColor: color }}
+                        >
+                          {estado}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </>
+              ))}
+            </tbody>
+          </Table>
+        </ModalBody>
+        <ModalFooter>
+          <Button
+            color="danger"
+            size="lg"
+            onClick={() => abrirCerrarModalEliminar()}
+          >
+            Cerrar
+          </Button>
+        </ModalFooter>
       </Modal>
     </div>
   );

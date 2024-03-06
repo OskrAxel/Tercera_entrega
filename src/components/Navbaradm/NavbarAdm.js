@@ -30,6 +30,7 @@ function NavbarAdm(args) {
     id: "",
     contrasena: "",
     contrasena_lit: "",
+    id_adm: "",
   });
 
   const [modalContra, setModalContra] = useState(false);
@@ -45,7 +46,7 @@ function NavbarAdm(args) {
     }));
     console.log(data);
   };
-
+  /////Listar datos administrador
   const peticionGet = async () => {
     await axios
       .get(`http://localhost:80/api/adm/contraadm.php`, {
@@ -77,12 +78,13 @@ function NavbarAdm(args) {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
-  ////
+  ////Modificar Contraseña Administrador
   const peticionPutContra = async () => {
     var f = new FormData();
     ///)
     f.append("contrasena", data.contrasena);
     f.append("contrasena_lit", data.contrasena_lit);
+    f.append("usu_modificacion", data.id_adm);
     f.append("METHOD", "PUT");
     await axios
       .post(`http://localhost:80/api/adm/contraadm.php`, f, {
@@ -233,7 +235,8 @@ function NavbarAdm(args) {
           <Button
             color="danger"
             size="lg"
-            onClick={() => abrirCerrarModalContra()}>
+            onClick={() => abrirCerrarModalContra()}
+          >
             Cancelar
           </Button>
         </ModalFooter>

@@ -68,7 +68,8 @@ if($_POST['METHOD']=='INF'){
 
 if($_POST['METHOD']=='FINF'){
     unset($_POST['METHOD']);
-    $query="SELECT id_doc,nom_usu,nom_doc,f_cargado from informe";
+    $query="SELECT CONCAT(usuarios_bec.nombre,' ',usuarios_bec.apellido) AS responsable,informe.nom_doc, informe.f_cargado FROM informe 
+                RIGHT JOIN usuarios_bec ON usuarios_bec.id_bec = informe.id_bec";
     $resultado=metodoGet($query);
     echo json_encode($resultado->fetchAll()); 
     header("HTTP/1.1 200 OK");
