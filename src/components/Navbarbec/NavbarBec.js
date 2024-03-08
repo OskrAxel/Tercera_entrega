@@ -34,6 +34,8 @@ function NavbarBec(args) {
     contrasena: "",
     contrasena_lit: "",
     id_bec: "",
+    nombre: "",
+    apellido: "",
   });
 
   const [modalContra, setModalContra] = useState(false);
@@ -98,6 +100,7 @@ function NavbarBec(args) {
     fd.append("id_bec", data.id_bec);
     fd.append("nom_usu", data.nombre + " " + data.apellido);
     fd.append("nom_doc", nom);
+    fd.append("usu_creacion", data.id_bec);
     const res = await axios.post("https://bqef-bo.com/api/inf/", fd);
     console.log(res.data);
     abrirCerrarModalInsertar();
@@ -122,6 +125,7 @@ function NavbarBec(args) {
         setData(response);
         mostrarAlertaPA();
         abrirCerrarModalContra();
+        peticionGet();
       })
       .catch((error) => {
         console.log(error);
@@ -225,7 +229,8 @@ function NavbarBec(args) {
                   marginTop: "5px",
                 }}
                 color="warning"
-                onClick={() => abrirCerrarModalInsertar()}>
+                onClick={() => abrirCerrarModalInsertar()}
+              >
                 <FaIcons.FaPlus /> ENVIAR INF
               </Button>
             </NavItem>
@@ -337,7 +342,8 @@ function NavbarBec(args) {
           <Button
             color="danger"
             size="lg"
-            onClick={() => abrirCerrarModalInsertar()}>
+            onClick={() => abrirCerrarModalInsertar()}
+          >
             Cancelar
           </Button>
         </ModalFooter>
@@ -379,7 +385,8 @@ function NavbarBec(args) {
           <Button
             color="danger"
             size="lg"
-            onClick={() => abrirCerrarModalContra()}>
+            onClick={() => abrirCerrarModalContra()}
+          >
             Cancelar
           </Button>
         </ModalFooter>
@@ -424,13 +431,15 @@ function NavbarBec(args) {
           <Button
             className="btn btn-success"
             size="lg"
-            onClick={() => peticionPuti()}>
+            onClick={() => peticionPuti()}
+          >
             Guardar
           </Button>
           <Button
             color="danger"
             size="lg"
-            onClick={() => abrirCerrarModalFoto()}>
+            onClick={() => abrirCerrarModalFoto()}
+          >
             Cancelar
           </Button>
         </ModalFooter>
