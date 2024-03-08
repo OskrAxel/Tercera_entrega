@@ -27,15 +27,6 @@ function Registro({ nombre }) {
           </Button>
         </Card>
       </Col>
-      {/* <div id="ali">
-        <a
-          href="https://www.freepik.es/foto-gratis/montanas-bolivia_30806351.htm"
-          target="_blank"
-          rel="noopener noreferrer">
-          Imagen de kamchatka
-        </a>
-        en Freepik;
-      </div> */}
     </div>
   );
 }

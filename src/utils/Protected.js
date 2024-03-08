@@ -7,10 +7,7 @@ export default function Protected(props) {
   useEffect(() => {
     let login = localStorage.getItem("login");
     if (!login) {
-      localStorage.setItem(
-        "loginStatus",
-        "Por favor inicie sesión para ingresar!"
-      );
+      localStorage.setItem("loginStatus", "Por favor inicie sesión!");
       naviget("/", { replace: true });
     }
   }, [naviget]);

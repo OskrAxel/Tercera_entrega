@@ -38,7 +38,7 @@ const Analisis = () => {
     var f = new FormData();
     f.append("METHOD", "1BEC");
     await axios
-      .post("http://localhost:80/api/adm/dashboard/", f)
+      .post("https://bqef-bo.com/api/adm/dashboard/", f)
       .then((response) => {
         console.log(response.data);
         var respuesta = response.data;
@@ -64,7 +64,7 @@ const Analisis = () => {
     var f = new FormData();
     f.append("METHOD", "CIUBEC");
     await axios
-      .post("http://localhost:80/api/adm/dashboard/", f)
+      .post("https://bqef-bo.com/api/adm/dashboard/", f)
       .then((response) => {
         console.log(response.data);
         var respuesta = response.data;
@@ -89,7 +89,7 @@ const Analisis = () => {
     var f = new FormData();
     f.append("METHOD", "BEC");
     await axios
-      .post("http://localhost:80/api/adm/dashboard/", f)
+      .post("https://bqef-bo.com/api/adm/dashboard/", f)
       .then((response) => {
         console.log(response.data);
         setDataB(response.data);
@@ -104,7 +104,7 @@ const Analisis = () => {
     var f = new FormData();
     f.append("METHOD", "PER");
     await axios
-      .post("http://localhost:80/api/adm/dashboard/", f)
+      .post("https://bqef-bo.com/api/adm/dashboard/", f)
       .then((response) => {
         console.log(response.data);
         setDataP(response.data);
@@ -121,7 +121,7 @@ const Analisis = () => {
     var f = new FormData();
     f.append("METHOD", "FEC");
     await axios
-      .post("http://localhost:80/api/adm/dashboard/", f)
+      .post("https://bqef-bo.com/api/adm/dashboard/", f)
       .then((response) => {
         console.log(response.data);
         setDataF(response.data);
@@ -138,7 +138,7 @@ const Analisis = () => {
     var f = new FormData();
     f.append("METHOD", "FINF");
     await axios
-      .post("http://localhost:80/api/adm/dashboard/", f)
+      .post("https://bqef-bo.com/api/adm/dashboard/", f)
       .then((response) => {
         console.log(response.data);
         setDataFI(response.data);
@@ -154,7 +154,7 @@ const Analisis = () => {
     var f = new FormData();
     f.append("METHOD", "INF");
     await axios
-      .post("http://localhost:80/api/adm/dashboard/", f)
+      .post("https://bqef-bo.com/api/adm/dashboard/", f)
       .then((response) => {
         console.log(response.data);
         setDataI(response.data);
@@ -297,8 +297,7 @@ const Analisis = () => {
             style={{
               color: "black",
               width: "18rem",
-            }}
-          >
+            }}>
             <div className="row g-0">
               <CardBody className="col-md-4">
                 <CardTitle tag="h5">Cuentas</CardTitle>
@@ -326,8 +325,7 @@ const Analisis = () => {
                   justifyContent: "center",
                   fontSize: "8rem",
                   boxSizing: "border-box",
-                }}
-              >
+                }}>
                 <FaIcons.FaUserGraduate />
               </CardBody>
             </div>
@@ -338,8 +336,7 @@ const Analisis = () => {
             style={{
               color: "black",
               width: "18rem",
-            }}
-          >
+            }}>
             <div className="row g-0">
               <CardBody className="col-md-4">
                 <CardTitle tag="h5">Cuentas</CardTitle>
@@ -367,8 +364,7 @@ const Analisis = () => {
                   justifyContent: "center",
                   fontSize: "8rem",
                   boxSizing: "border-box",
-                }}
-              >
+                }}>
                 <FaIcons.FaUserTie />
               </CardBody>
             </div>
@@ -378,8 +374,7 @@ const Analisis = () => {
             style={{
               color: "black",
               width: "18rem",
-            }}
-          >
+            }}>
             <div className="row g-0">
               <CardBody className="col-md-4">
                 <CardTitle tag="h5">Informes</CardTitle>
@@ -407,8 +402,7 @@ const Analisis = () => {
                   justifyContent: "center",
                   fontSize: "8rem",
                   boxSizing: "border-box",
-                }}
-              >
+                }}>
                 <FaIcons.FaReadme />
               </CardBody>
             </div>
@@ -418,8 +412,7 @@ const Analisis = () => {
             style={{
               color: "black",
               width: "18rem",
-            }}
-          >
+            }}>
             <div className="row g-0">
               <CardBody className="col-md-4">
                 <CardTitle tag="h5">Fecha Entrega</CardTitle>
@@ -447,8 +440,7 @@ const Analisis = () => {
                   justifyContent: "center",
                   fontSize: "8rem",
                   boxSizing: "border-box",
-                }}
-              >
+                }}>
                 <FaIcons.FaRegCalendarCheck />
               </CardBody>
             </div>
@@ -461,8 +453,7 @@ const Analisis = () => {
               <CardTitle tag="h5">Histórico de registros:</CardTitle>
               <CardText
                 className="text-center"
-                style={{ color: "rgb(33 33 185)" }}
-              >
+                style={{ color: "rgb(33 33 185)" }}>
                 <b>Becarios</b>
               </CardText>
               <div style={{ width: "100%", height: "400px" }}>
@@ -475,8 +466,7 @@ const Analisis = () => {
               <CardTitle tag="h5">Registro según región:</CardTitle>
               <CardText
                 className="text-center"
-                style={{ color: "rgb(33 33 185)" }}
-              >
+                style={{ color: "rgb(33 33 185)" }}>
                 <b>Becarios</b>
               </CardText>
               <div style={{ width: "100%", height: "400px" }}>
@@ -496,8 +486,7 @@ const Analisis = () => {
           border: 0,
           borderRadius: 10,
         }}
-        onClick={() => abrirCerrarModalVer()}
-      >
+        onClick={() => abrirCerrarModalVer()}>
         <FaIcons.FaExclamationCircle />
         &nbsp; AVISO
       </Button>
@@ -512,18 +501,16 @@ const Analisis = () => {
             <CardBody className="p-0">
               <Row className="justify-content-center">
                 <object
-                  data={"http://localhost:80/api/PDF/reporte_pdf_Informes.php"}
+                  data={"https://bqef-bo.com/api/PDF/reporte_pdf_Informes.php"}
                   type="application/pdf"
                   width="400"
-                  height="600"
-                >
+                  height="600">
                   <div
                     style={{
                       position: "absolute",
                       width: "100%",
                       height: "100%",
-                    }}
-                  ></div>
+                    }}></div>
                 </object>
               </Row>
             </CardBody>

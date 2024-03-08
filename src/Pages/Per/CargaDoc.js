@@ -30,7 +30,7 @@ const CargaDoc = () => {
   });
   const peticionGet = async () => {
     await axios
-      .get(`http://localhost:80/api/per/contraper.php`, {
+      .get(`https://bqef-bo.com/api/per/contraper.php`, {
         params: {
           id: localStorage.getItem("user"),
         },
@@ -63,7 +63,7 @@ const CargaDoc = () => {
   }, []);
   ////Mostrar comunicados
   async function getComunicado() {
-    const res = await axios.get("http://localhost:80/api/per/com/");
+    const res = await axios.get("https://bqef-bo.com/api/per/com/");
     setLista(res.data);
     console.log(res.data);
   }
@@ -75,7 +75,7 @@ const CargaDoc = () => {
     fd.append("detalle", detalle);
     fd.append("nom_doc", nom);
     fd.append("nom_usu", data.nombre + " " + data.apellido);
-    const res = await axios.post("http://localhost:80/api/per/com/", fd);
+    const res = await axios.post("https://bqef-bo.com/api/per/com/", fd);
     console.log(res.data);
     mostrarAlertaN();
     abrirCerrarModalInsertar();
@@ -89,7 +89,7 @@ const CargaDoc = () => {
   ////eliminar comunicado
   async function deleteComunicado(id_com) {
     const res = await axios.delete(
-      "http://localhost:80/api/per/com/?id_com=" + id_com
+      "https://bqef-bo.com/api/per/com/?id_com=" + id_com
     );
     abrirCerrarModalEliminar();
     getComunicado();
@@ -177,9 +177,8 @@ const CargaDoc = () => {
         </div>
         <div id="subt">
           <Link
-            to={"http://localhost:80/api/PDF/reporte_pdf_comunicados.php"}
-            target="_blank"
-          >
+            to={"https://bqef-bo.com/api/PDF/reporte_pdf_comunicados.php"}
+            target="_blank">
             <Button color="primary" size="lg">
               <FaIcons.FaFileDownload /> Reporte
             </Button>
@@ -188,8 +187,7 @@ const CargaDoc = () => {
           <Button
             color="success"
             size="lg"
-            onClick={() => abrirCerrarModalInsertar()}
-          >
+            onClick={() => abrirCerrarModalInsertar()}>
             <FaIcons.FaPlus /> Añadir
           </Button>
         </div>
@@ -226,16 +224,14 @@ const CargaDoc = () => {
                 <td>
                   <Button
                     color="warning"
-                    onClick={() => seleccionarUsuario(item, "Editar")}
-                  >
+                    onClick={() => seleccionarUsuario(item, "Editar")}>
                     <FaIcons.FaRegEye />
                     &nbsp;&nbsp;Visualizar
                   </Button>
                   &nbsp;&nbsp;&nbsp;
                   <Button
                     color="danger"
-                    onClick={() => seleccionarUsuario(item, "Eliminar")}
-                  >
+                    onClick={() => seleccionarUsuario(item, "Eliminar")}>
                     Eliminar
                   </Button>
                 </td>
@@ -296,8 +292,7 @@ const CargaDoc = () => {
             <Button
               color="danger"
               size="lg"
-              onClick={() => abrirCerrarModalInsertar()}
-            >
+              onClick={() => abrirCerrarModalInsertar()}>
               Cancelar
             </Button>
           </ModalFooter>
@@ -313,15 +308,13 @@ const CargaDoc = () => {
             <Button
               color="success"
               size="lg"
-              onClick={() => deleteComunicado(usuarioSeleccionado.id_com)}
-            >
+              onClick={() => deleteComunicado(usuarioSeleccionado.id_com)}>
               Sí
             </Button>
             <Button
               color="danger"
               size="lg"
-              onClick={() => abrirCerrarModalEliminar()}
-            >
+              onClick={() => abrirCerrarModalEliminar()}>
               No
             </Button>
           </ModalFooter>
@@ -344,8 +337,7 @@ const CargaDoc = () => {
                     type="application/pdf"
                     alt="archivo_per"
                     width="400"
-                    height="600"
-                  >
+                    height="600">
                     <p>
                       Tu navegador no puede mostrar este archivo PDF. Puedes
                       descargarlo
@@ -354,8 +346,7 @@ const CargaDoc = () => {
                           "data:application/pdf;base64," +
                           usuarioSeleccionado.archivo_com
                         }
-                        download
-                      >
+                        download>
                         aquí
                       </a>
                       .
@@ -370,8 +361,7 @@ const CargaDoc = () => {
               style={{ float: "right" }}
               color="success"
               size="lg"
-              onClick={handleDescargarPdf}
-            >
+              onClick={handleDescargarPdf}>
               <FaIcons.FaDownload />
               Download
             </Button>

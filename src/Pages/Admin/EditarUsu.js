@@ -14,7 +14,7 @@ export default function ListUser() {
   }, []);
 
   function getUser() {
-    axios.get(`http://localhost:80/api/user/${id}`).then(function (response) {
+    axios.get(`https://bqef-bo.com/api/user/${id}`).then(function (response) {
       console.log(response.data);
       setInputs(response.data);
     });
@@ -29,7 +29,7 @@ export default function ListUser() {
     event.preventDefault();
 
     axios
-      .put(`http://localhost:80/api/user/${id}/edit`, inputs)
+      .put(`https://bqef-bo.com/api/user/${id}/edit`, inputs)
       .then(function (response) {
         console.log(response.data);
         navigate("/");

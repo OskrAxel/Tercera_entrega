@@ -7,7 +7,7 @@ import "../Bec/bec.scss";
 import Swal from "sweetalert2";
 
 function ListUser() {
-  const baseUrl = "http://localhost:80/api/bec/";
+  const baseUrl = "https://bqef-bo.com/api/bec/";
   const [data, setData] = useState([]);
   const [modalInsertar, setModalInsertar] = useState(false);
   const [modalEditar, setModalEditar] = useState(false);
@@ -49,7 +49,7 @@ function ListUser() {
   const [dataAdm, setDataAdm] = useState({});
   const peticionGetAdm = async () => {
     await axios
-      .get(`http://localhost:80/api/adm/contraadm.php`, {
+      .get(`https://bqef-bo.com/api/adm/contraadm.php`, {
         params: {
           id: localStorage.getItem("user"),
         },
@@ -228,8 +228,7 @@ function ListUser() {
           <Button
             color="success"
             size="lg"
-            onClick={() => abrirCerrarModalInsertar()}
-          >
+            onClick={() => abrirCerrarModalInsertar()}>
             <FaIcons.FaPlus /> Añadir
           </Button>
           {/* </Link> */}
@@ -273,15 +272,13 @@ function ListUser() {
                 <td>
                   <button
                     className="btn btn-warning"
-                    onClick={() => seleccionarUsuario(Usuario, "Editar")}
-                  >
+                    onClick={() => seleccionarUsuario(Usuario, "Editar")}>
                     Editar
                   </button>{" "}
                   {"  "}
                   <button
                     className="btn btn-danger"
-                    onClick={() => seleccionarUsuario(Usuario, "Eliminar")}
-                  >
+                    onClick={() => seleccionarUsuario(Usuario, "Eliminar")}>
                     Eliminar
                   </button>
                 </td>
@@ -357,8 +354,7 @@ function ListUser() {
             <Button
               color="danger"
               size="lg"
-              onClick={() => abrirCerrarModalInsertar()}
-            >
+              onClick={() => abrirCerrarModalInsertar()}>
               Cancelar
             </Button>
           </ModalFooter>
@@ -427,8 +423,7 @@ function ListUser() {
             <Button
               color="danger"
               size="lg"
-              onClick={() => abrirCerrarModalEditar()}
-            >
+              onClick={() => abrirCerrarModalEditar()}>
               Cancelar
             </Button>
           </ModalFooter>
@@ -447,8 +442,7 @@ function ListUser() {
             <Button
               color="danger"
               size="lg"
-              onClick={() => abrirCerrarModalEliminar()}
-            >
+              onClick={() => abrirCerrarModalEliminar()}>
               No
             </Button>
           </ModalFooter>

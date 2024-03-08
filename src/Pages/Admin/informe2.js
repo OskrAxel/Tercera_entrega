@@ -27,7 +27,7 @@ function Informe2() {
   const [dataAdm, setDataAdm] = useState({});
   const peticionGetAdm = async () => {
     await axios
-      .get(`http://localhost:80/api/adm/contraadm.php`, {
+      .get(`https://bqef-bo.com/api/adm/contraadm.php`, {
         params: {
           id: localStorage.getItem("user"),
         },
@@ -42,7 +42,7 @@ function Informe2() {
   };
   /////Listado informes
   async function getImagenes() {
-    const res = await axios.get("http://localhost:80/api/inf/");
+    const res = await axios.get("https://bqef-bo.com/api/inf/");
     setLista(res.data);
     setTablaUsuarios(res.data);
     console.log(res.data);
@@ -56,7 +56,7 @@ function Informe2() {
     fd.append("nom_usu", descripcion);
     fd.append("nom_doc", nom);
     fd.append("f_cargado", usuarioSeleccionado.f_cargado);
-    const res = await axios.post("http://localhost:80/api/inf/", fd);
+    const res = await axios.post("https://bqef-bo.com/api/inf/", fd);
     console.log(res.data);
     abrirCerrarModalInsertar();
 
@@ -66,7 +66,7 @@ function Informe2() {
   /////Eliminar patrocinador
   async function deleteImagen(id_doc) {
     const res = await axios.delete(
-      "http://localhost:80/api/inf/?id_doc=" + id_doc
+      "https://bqef-bo.com/api/inf/?id_doc=" + id_doc
     );
     abrirCerrarModalEliminar();
     mostrarAlertaD();

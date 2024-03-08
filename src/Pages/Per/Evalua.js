@@ -20,7 +20,7 @@ import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
 function Evalua() {
-  const baseUrl = "http://localhost:80/api/bec/";
+  const baseUrl = "https://bqef-bo.com/api/bec/";
   const [data, setData] = useState([]);
   const [modalEditar, setModalEditar] = useState(false);
   const [usuarioSeleccionado, setusuarioSeleccionado] = useState({
@@ -84,7 +84,7 @@ function Evalua() {
     f.append("p4", fram4);
     f.append("METHOD", "POST");
     await axios
-      .post("http://localhost:80/api/per/eva.php", f, {
+      .post("https://bqef-bo.com/api/per/eva.php", f, {
         params: { id: usuarioSeleccionado.id },
       })
       .then((response) => {
@@ -155,9 +155,8 @@ function Evalua() {
         </div>
         <div id="subt">
           <Link
-            to={"http://localhost:80/api/PDF/reporte_pdf_Evaluacion.php"}
-            target="_blank"
-          >
+            to={"https://bqef-bo.com/api/PDF/reporte_pdf_Evaluacion.php"}
+            target="_blank">
             <Button color="primary" size="lg">
               <FaIcons.FaFileDownload /> Reporte
             </Button>
@@ -201,8 +200,7 @@ function Evalua() {
                 <td>
                   <Button
                     className="btn btn-secondary"
-                    onClick={() => seleccionarUsuario(Usuario)}
-                  >
+                    onClick={() => seleccionarUsuario(Usuario)}>
                     <FaIcons.FaClipboardCheck />
                     &nbsp;EVALUAR
                   </Button>
@@ -219,8 +217,7 @@ function Evalua() {
 
         <Modal isOpen={modalEditar}>
           <ModalHeader
-            style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}
-          >
+            style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}>
             Evaluar Becario
           </ModalHeader>
           <ModalBody>
@@ -429,8 +426,7 @@ function Evalua() {
             {"   "}
             <button
               className="btn btn-danger"
-              onClick={() => abrirCerrarModalEditar()}
-            >
+              onClick={() => abrirCerrarModalEditar()}>
               Cancelar
             </button>
           </ModalFooter>

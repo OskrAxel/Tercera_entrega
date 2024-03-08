@@ -29,7 +29,7 @@ function Regper() {
   ///
   const peticionGet = async () => {
     await axios
-      .get(`http://localhost:80/api/per/per.php?id=${id}`)
+      .get(`https://bqef-bo.com/api/per/per.php?id=${id}`)
       .then((response) => {
         console.log(response.data);
         setData(response.data);
@@ -49,7 +49,7 @@ function Regper() {
     f.append("email", data.email);
     f.append("METHOD", "PUT");
     await axios
-      .post(`http://localhost:80/api/per/per.php`, f, {
+      .post(`https://bqef-bo.com/api/per/per.php`, f, {
         params: { id: data.id },
       })
       .then((response) => {

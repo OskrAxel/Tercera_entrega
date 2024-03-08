@@ -20,8 +20,6 @@ function RegComp() {
     nom_pad: "",
     nom_mad: "",
   });
-  // const iduser = localStorage.getItem("iduser");
-  // let id = "ocusi"; //////aqui se configura el usuiario
   ///
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -34,7 +32,7 @@ function RegComp() {
   ///
   const peticionGet = async () => {
     await axios
-      .get(`http://localhost:80/api/bec/bec.php`, {
+      .get(`https://bqef-bo.com/api/bec/bec.php`, {
         params: {
           id: localStorage.getItem("iduser"),
         },
@@ -65,7 +63,7 @@ function RegComp() {
     f.append("nom_mad", data.nom_mad);
     f.append("METHOD", "PUT");
     await axios
-      .post(`http://localhost:80/api/bec/bec.php`, f, {
+      .post(`https://bqef-bo.com/api/bec/bec.php`, f, {
         params: { id: data.id },
       })
       .then((response) => {

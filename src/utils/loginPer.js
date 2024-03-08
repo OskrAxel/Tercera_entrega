@@ -51,7 +51,7 @@ function LoginPer() {
 
   function loginSubmit() {
     if (user !== "" && pass != "") {
-      var url = "http://localhost:80/api/loginPer.php";
+      var url = "https://bqef-bo.com/api/loginPer.php";
       var headers = {
         Accept: "application/json",
         "Content-type": "application/json",

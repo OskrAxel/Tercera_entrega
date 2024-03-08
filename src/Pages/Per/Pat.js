@@ -6,7 +6,7 @@ import "../Bec/bec.scss";
 import { Link } from "react-router-dom";
 
 function ListPat() {
-  const baseUrl = "http://localhost:80/api/pat/";
+  const baseUrl = "https://bqef-bo.com/api/pat/";
   const [data, setData] = useState([]);
 
   const peticionGet = async () => {
@@ -64,9 +64,8 @@ function ListPat() {
         </div>
         <div id="subt">
           <Link
-            to={"http://localhost:80/api/PDF/reporte_pdf_patrocinador.php"}
-            target="_blank"
-          >
+            to={"https://bqef-bo.com/api/PDF/reporte_pdf_patrocinador.php"}
+            target="_blank">
             <Button color="primary" size="lg">
               <FaIcons.FaFileDownload /> Reporte
             </Button>

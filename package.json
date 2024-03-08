@@ -20,6 +20,7 @@
     "sweetalert2": "^11.10.5",
     "web-vitals": "^2.1.4"
   },
+  "homepage": "https://www.bqef-bo.com/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -43,5 +44,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
   }
 }

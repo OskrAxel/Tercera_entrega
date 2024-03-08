@@ -16,7 +16,7 @@ export default function ListUser() {
     event.preventDefault();
 
     axios
-      .post("http://localhost:80/api/user/save", inputs)
+      .post("https://bqef-bo.com/api/user/save", inputs)
       .then(function (response) {
         console.log(response.data);
         navigate("/");

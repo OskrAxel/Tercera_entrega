@@ -41,7 +41,7 @@ const Dashboard = () => {
     var f = new FormData();
     f.append("METHOD", "1BEC");
     await axios
-      .post("http://localhost:80/api/adm/dashboard/", f)
+      .post("https://bqef-bo.com/api/adm/dashboard/", f)
       .then((response) => {
         console.log(response.data);
         var respuesta = response.data;
@@ -67,7 +67,7 @@ const Dashboard = () => {
     var f = new FormData();
     f.append("METHOD", "CIUBEC");
     await axios
-      .post("http://localhost:80/api/adm/dashboard/", f)
+      .post("https://bqef-bo.com/api/adm/dashboard/", f)
       .then((response) => {
         console.log(response.data);
         var respuesta = response.data;
@@ -92,7 +92,7 @@ const Dashboard = () => {
     var f = new FormData();
     f.append("METHOD", "BEC");
     await axios
-      .post("http://localhost:80/api/adm/dashboard/", f)
+      .post("https://bqef-bo.com/api/adm/dashboard/", f)
       .then((response) => {
         console.log(response.data);
         setDataB(response.data);
@@ -107,7 +107,7 @@ const Dashboard = () => {
     var f = new FormData();
     f.append("METHOD", "PER");
     await axios
-      .post("http://localhost:80/api/adm/dashboard/", f)
+      .post("https://bqef-bo.com/api/adm/dashboard/", f)
       .then((response) => {
         console.log(response.data);
         setDataP(response.data);
@@ -123,7 +123,7 @@ const Dashboard = () => {
     var f = new FormData();
     f.append("METHOD", "FEC");
     await axios
-      .post("http://localhost:80/api/adm/dashboard/", f)
+      .post("https://bqef-bo.com/api/adm/dashboard/", f)
       .then((response) => {
         console.log(response.data);
         setDataF(response.data);
@@ -139,7 +139,7 @@ const Dashboard = () => {
     var f = new FormData();
     f.append("METHOD", "FINF");
     await axios
-      .post("http://localhost:80/api/adm/dashboard/", f)
+      .post("https://bqef-bo.com/api/adm/dashboard/", f)
       .then((response) => {
         console.log(response.data);
         setDataFI(response.data);
@@ -155,7 +155,7 @@ const Dashboard = () => {
     var f = new FormData();
     f.append("METHOD", "INF");
     await axios
-      .post("http://localhost:80/api/adm/dashboard/", f)
+      .post("https://bqef-bo.com/api/adm/dashboard/", f)
       .then((response) => {
         console.log(response.data);
         setDataI(response.data);
@@ -171,7 +171,7 @@ const Dashboard = () => {
     var f = new FormData();
     f.append("METHOD", "LOGS");
     await axios
-      .post("http://localhost:80/api/adm/dashboard/", f)
+      .post("https://bqef-bo.com/api/adm/dashboard/", f)
       .then((response) => {
         console.log(response.data);
         setDataL(response.data);
@@ -320,8 +320,7 @@ const Dashboard = () => {
             style={{
               color: "black",
               width: "18rem",
-            }}
-          >
+            }}>
             <div className="row g-0">
               <CardBody className="col-md-4">
                 <CardTitle tag="h5">Cuentas</CardTitle>
@@ -349,8 +348,7 @@ const Dashboard = () => {
                   justifyContent: "center",
                   fontSize: "8rem",
                   boxSizing: "border-box",
-                }}
-              >
+                }}>
                 <FaIcons.FaUserGraduate />
               </CardBody>
             </div>
@@ -361,8 +359,7 @@ const Dashboard = () => {
             style={{
               color: "black",
               width: "18rem",
-            }}
-          >
+            }}>
             <div className="row g-0">
               <CardBody className="col-md-4">
                 <CardTitle tag="h5">Cuentas</CardTitle>
@@ -390,8 +387,7 @@ const Dashboard = () => {
                   justifyContent: "center",
                   fontSize: "8rem",
                   boxSizing: "border-box",
-                }}
-              >
+                }}>
                 <FaIcons.FaUserTie />
               </CardBody>
             </div>
@@ -401,8 +397,7 @@ const Dashboard = () => {
             style={{
               color: "black",
               width: "18rem",
-            }}
-          >
+            }}>
             <div className="row g-0">
               <CardBody className="col-md-4">
                 <CardTitle tag="h5">Informes</CardTitle>
@@ -430,8 +425,7 @@ const Dashboard = () => {
                   justifyContent: "center",
                   fontSize: "8rem",
                   boxSizing: "border-box",
-                }}
-              >
+                }}>
                 <FaIcons.FaReadme />
               </CardBody>
             </div>
@@ -441,8 +435,7 @@ const Dashboard = () => {
             style={{
               color: "black",
               width: "18rem",
-            }}
-          >
+            }}>
             <div className="row g-0">
               <CardBody className="col-md-4">
                 <CardTitle tag="h5">Fecha Entrega</CardTitle>
@@ -470,8 +463,7 @@ const Dashboard = () => {
                   justifyContent: "center",
                   fontSize: "8rem",
                   boxSizing: "border-box",
-                }}
-              >
+                }}>
                 <FaIcons.FaRegCalendarCheck />
               </CardBody>
             </div>
@@ -484,8 +476,7 @@ const Dashboard = () => {
               <CardTitle tag="h5">Histórico de registros:</CardTitle>
               <CardText
                 className="text-center"
-                style={{ color: "rgb(33 33 185)" }}
-              >
+                style={{ color: "rgb(33 33 185)" }}>
                 <b>Becarios</b>
               </CardText>
               <div style={{ width: "100%", height: "400px" }}>
@@ -498,8 +489,7 @@ const Dashboard = () => {
               <CardTitle tag="h5">Registro según región:</CardTitle>
               <CardText
                 className="text-center"
-                style={{ color: "rgb(33 33 185)" }}
-              >
+                style={{ color: "rgb(33 33 185)" }}>
                 <b>Becarios</b>
               </CardText>
               <div style={{ width: "100%", height: "400px" }}>
@@ -548,8 +538,7 @@ const Dashboard = () => {
           border: 0,
           borderRadius: 10,
         }}
-        onClick={() => abrirCerrarModalEliminar()}
-      >
+        onClick={() => abrirCerrarModalEliminar()}>
         <FaIcons.FaExclamationCircle />
         &nbsp; INFORMES
       </Button>
@@ -564,18 +553,16 @@ const Dashboard = () => {
             <CardBody className="p-0">
               <Row className="justify-content-center">
                 <object
-                  data={"http://localhost:80/api/PDF/reporte_pdf_Informes.php"}
+                  data={"https://bqef-bo.com/api/PDF/reporte_pdf_Informes.php"}
                   type="application/pdf"
                   width="400"
-                  height="600"
-                >
+                  height="600">
                   <div
                     style={{
                       position: "absolute",
                       width: "100%",
                       height: "100%",
-                    }}
-                  ></div>
+                    }}></div>
                 </object>
               </Row>
             </CardBody>
@@ -587,15 +574,13 @@ const Dashboard = () => {
       <Modal isOpen={modalEliminar} size="xl">
         <ModalHeader
           className="text-center"
-          style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}
-        >
+          style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}>
           Estado Informes
         </ModalHeader>
         <div id="subt">
           <Link
-            to={"http://localhost:80/api/PDF/reporte_pdf_Informes.php"}
-            target="_blank"
-          >
+            to={"https://bqef-bo.com/api/PDF/reporte_pdf_Informes.php"}
+            target="_blank">
             <Button color="primary" size="lg">
               <FaIcons.FaFileDownload /> Reporte
             </Button>
@@ -650,8 +635,7 @@ const Dashboard = () => {
                         <td>{item.f_cargado}</td>
                         <td
                           align="center"
-                          style={{ color: "white", backgroundColor: color }}
-                        >
+                          style={{ color: "white", backgroundColor: color }}>
                           {estado}
                         </td>
                       </tr>
@@ -666,8 +650,7 @@ const Dashboard = () => {
           <Button
             color="danger"
             size="lg"
-            onClick={() => abrirCerrarModalEliminar()}
-          >
+            onClick={() => abrirCerrarModalEliminar()}>
             Cerrar
           </Button>
         </ModalFooter>

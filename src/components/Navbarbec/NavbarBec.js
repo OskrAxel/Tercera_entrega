@@ -57,7 +57,7 @@ function NavbarBec(args) {
   ////CONTRASEÑA
   const peticionGet = async () => {
     await axios
-      .get(`http://localhost:80/api/bec/contrabec.php`, {
+      .get(`https://bqef-bo.com/api/bec/contrabec.php`, {
         params: {
           id: localStorage.getItem("iduser"),
         },
@@ -98,7 +98,7 @@ function NavbarBec(args) {
     fd.append("id_bec", data.id_bec);
     fd.append("nom_usu", data.nombre + " " + data.apellido);
     fd.append("nom_doc", nom);
-    const res = await axios.post("http://localhost:80/api/inf/", fd);
+    const res = await axios.post("https://bqef-bo.com/api/inf/", fd);
     console.log(res.data);
     abrirCerrarModalInsertar();
     mostrarAlertaC();
@@ -115,7 +115,7 @@ function NavbarBec(args) {
     f.append("contrasena_lit", data.contrasena_lit);
     f.append("METHOD", "PUT");
     await axios
-      .post(`http://localhost:80/api/bec/contrabec.php`, f, {
+      .post(`https://bqef-bo.com/api/bec/contrabec.php`, f, {
         params: { idb: data.id },
       })
       .then((response) => {
@@ -139,7 +139,7 @@ function NavbarBec(args) {
   ////MOSTRAR IMAGEN DE PERFIL
   const getImagenes = async () => {
     await axios
-      .get(`http://localhost:80/api/bec/img/index.php`, {
+      .get(`https://bqef-bo.com/api/bec/img/index.php`, {
         params: {
           id: localStorage.getItem("iduser"),
         },
@@ -160,7 +160,7 @@ function NavbarBec(args) {
     f.append("archivo_foto", imagenP);
     f.append("METHOD", "PUT");
     await axios
-      .post(`http://localhost:80/api/bec/foto.php`, f, {
+      .post(`https://bqef-bo.com/api/bec/foto.php`, f, {
         params: { id: data.id },
       })
       .then((response) => {
@@ -225,8 +225,7 @@ function NavbarBec(args) {
                   marginTop: "5px",
                 }}
                 color="warning"
-                onClick={() => abrirCerrarModalInsertar()}
-              >
+                onClick={() => abrirCerrarModalInsertar()}>
                 <FaIcons.FaPlus /> ENVIAR INF
               </Button>
             </NavItem>
@@ -338,8 +337,7 @@ function NavbarBec(args) {
           <Button
             color="danger"
             size="lg"
-            onClick={() => abrirCerrarModalInsertar()}
-          >
+            onClick={() => abrirCerrarModalInsertar()}>
             Cancelar
           </Button>
         </ModalFooter>
@@ -381,8 +379,7 @@ function NavbarBec(args) {
           <Button
             color="danger"
             size="lg"
-            onClick={() => abrirCerrarModalContra()}
-          >
+            onClick={() => abrirCerrarModalContra()}>
             Cancelar
           </Button>
         </ModalFooter>
@@ -427,15 +424,13 @@ function NavbarBec(args) {
           <Button
             className="btn btn-success"
             size="lg"
-            onClick={() => peticionPuti()}
-          >
+            onClick={() => peticionPuti()}>
             Guardar
           </Button>
           <Button
             color="danger"
             size="lg"
-            onClick={() => abrirCerrarModalFoto()}
-          >
+            onClick={() => abrirCerrarModalFoto()}>
             Cancelar
           </Button>
         </ModalFooter>

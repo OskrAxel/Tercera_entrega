@@ -3,9 +3,7 @@ import ListUser from "./Pages/Admin/Crud";
 import Dashboard from "./Pages/Admin/dashboard";
 import ListUserAdm from "./Pages/Admin/Crud-Adm";
 import ListUserPat from "./Pages/Admin/Crud-Pat";
-import Informe from "./Pages/Admin/informe";
 import Informe2 from "./Pages/Admin/informe2";
-import CardPdf from "./Pages/Admin/inf3";
 import Protected from "./utils/Protected";
 import LoginBec from "./utils/loginBec";
 import LoginPer from "./utils/loginPer";
@@ -82,14 +80,9 @@ function AppAdm() {
               element={<Protected Component={ListUserPat} />}
             />
             <Route
-              path="/informe"
-              element={<Protected Component={Informe} />}
-            />
-            <Route
               path="/informe2"
               element={<Protected Component={Informe2} />}
             />
-            <Route path="/pdf" element={<Protected Component={CardPdf} />} />
             <Route
               path="/PdfConv2M"
               element={<Protected Component={PdfConv2M} />}

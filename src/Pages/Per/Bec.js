@@ -8,7 +8,7 @@ import "../Bec/bec.scss";
 import { Link } from "react-router-dom";
 
 function ListBe() {
-  const baseUrl = "http://localhost:80/api/bec/";
+  const baseUrl = "https://bqef-bo.com/api/bec/";
   const [data, setData] = useState([]);
   const [modalInsertar, setModalInsertar] = useState(false);
   const [modalEditar, setModalEditar] = useState(false);
@@ -178,9 +178,8 @@ function ListBe() {
         </div>
         <div id="subt">
           <Link
-            to={"http://localhost:80/api/PDF/reporte_pdf_becarios.php"}
-            target="_blank"
-          >
+            to={"https://bqef-bo.com/api/PDF/reporte_pdf_becarios.php"}
+            target="_blank">
             <Button color="primary" size="lg">
               <FaIcons.FaFileDownload /> Reporte
             </Button>
@@ -292,8 +291,7 @@ function ListBe() {
             <Button
               color="danger"
               size="lg"
-              onClick={() => abrirCerrarModalInsertar()}
-            >
+              onClick={() => abrirCerrarModalInsertar()}>
               Cancelar
             </Button>
           </ModalFooter>
@@ -362,8 +360,7 @@ function ListBe() {
             {"   "}
             <button
               className="btn btn-danger"
-              onClick={() => abrirCerrarModalEditar()}
-            >
+              onClick={() => abrirCerrarModalEditar()}>
               Cancelar
             </button>
           </ModalFooter>
@@ -380,8 +377,7 @@ function ListBe() {
             </button>
             <button
               className="btn btn-secondary"
-              onClick={() => abrirCerrarModalEliminar()}
-            >
+              onClick={() => abrirCerrarModalEliminar()}>
               No
             </button>
           </ModalFooter>

@@ -49,7 +49,7 @@ function NavbarAdm(args) {
   /////Listar datos administrador
   const peticionGet = async () => {
     await axios
-      .get(`http://localhost:80/api/adm/contraadm.php`, {
+      .get(`https://bqef-bo.com/api/adm/contraadm.php`, {
         params: {
           id: localStorage.getItem("user"),
         },
@@ -87,7 +87,7 @@ function NavbarAdm(args) {
     f.append("usu_modificacion", data.id_adm);
     f.append("METHOD", "PUT");
     await axios
-      .post(`http://localhost:80/api/adm/contraadm.php`, f, {
+      .post(`https://bqef-bo.com/api/adm/contraadm.php`, f, {
         params: { idb: data.id },
       })
       .then((response) => {
@@ -135,7 +135,7 @@ function NavbarAdm(args) {
 
   const handleClick = () => {
     axios
-      .get("http://localhost:80/api/adm/backup.php")
+      .get("https://bqef-bo.com/api/adm/backup.php")
       .then((response) => {
         setMessage(response.data.message);
         mostrarAlertaBack();
@@ -235,8 +235,7 @@ function NavbarAdm(args) {
           <Button
             color="danger"
             size="lg"
-            onClick={() => abrirCerrarModalContra()}
-          >
+            onClick={() => abrirCerrarModalContra()}>
             Cancelar
           </Button>
         </ModalFooter>

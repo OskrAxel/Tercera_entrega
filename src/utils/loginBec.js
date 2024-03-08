@@ -51,7 +51,7 @@ function LoginBec() {
 
   function loginSubmit() {
     if (iduser !== "" && pass != "") {
-      var url = "http://localhost:80/api/loginBec.php";
+      var url = "https://bqef-bo.com/api/loginBec.php";
       var headers = {
         Accept: "application/json",
         "Content-type": "application/json",

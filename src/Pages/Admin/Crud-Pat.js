@@ -7,7 +7,7 @@ import "../Bec/bec.scss";
 import Swal from "sweetalert2";
 
 function ListUserPat() {
-  const baseUrl = "http://localhost:80/api/pat/";
+  const baseUrl = "https://bqef-bo.com/api/pat/";
   const [data, setData] = useState([]);
   const [modalInsertar, setModalInsertar] = useState(false);
   const [modalEditar, setModalEditar] = useState(false);
@@ -49,7 +49,7 @@ function ListUserPat() {
   const [dataAdm, setDataAdm] = useState({});
   const peticionGetAdm = async () => {
     await axios
-      .get(`http://localhost:80/api/adm/contraadm.php`, {
+      .get(`https://bqef-bo.com/api/adm/contraadm.php`, {
         params: {
           id: localStorage.getItem("user"),
         },

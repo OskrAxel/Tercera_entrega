@@ -67,7 +67,7 @@ function NavbarBec(args) {
   /////Mostrar contraseña
   const peticionGetContraseña = async () => {
     await axios
-      .get(`http://localhost:80/api/per/contraper.php`, {
+      .get(`https://bqef-bo.com/api/per/contraper.php`, {
         params: {
           id: localStorage.getItem("user"),
         },
@@ -104,7 +104,7 @@ function NavbarBec(args) {
     f.append("contrasena_lit", data.contrasena_lit);
     f.append("METHOD", "PUT");
     await axios
-      .post(`http://localhost:80/api/per/contraper.php`, f, {
+      .post(`https://bqef-bo.com/api/per/contraper.php`, f, {
         params: { idb: data.id },
       })
       .then((response) => {
@@ -120,7 +120,7 @@ function NavbarBec(args) {
   const [lista, setLista] = useState([]);
   const peticionGetFecha = async () => {
     await axios
-      .get(`http://localhost:80/api/per/fe/`)
+      .get(`https://bqef-bo.com/api/per/fe/`)
       .then((response) => {
         console.log(response.data);
         setusuarioSeleccionado(response.data);
@@ -135,7 +135,7 @@ function NavbarBec(args) {
     e.preventDefault();
     let fd = new FormData();
     fd.append("fecha", usuarioSeleccionado.fecha);
-    const res = await axios.post("http://localhost:80/api/per/fe/", fd);
+    const res = await axios.post("https://bqef-bo.com/api/per/fe/", fd);
     console.log(res.data);
     mostrarAlertaFec();
     abrirCerrarModalFecha();
@@ -252,8 +252,7 @@ function NavbarBec(args) {
           <Button
             color="danger"
             size="lg"
-            onClick={() => abrirCerrarModalContra()}
-          >
+            onClick={() => abrirCerrarModalContra()}>
             Cancelar
           </Button>
         </ModalFooter>
@@ -290,8 +289,7 @@ function NavbarBec(args) {
           <Button
             color="danger"
             size="lg"
-            onClick={() => abrirCerrarModalFecha()}
-          >
+            onClick={() => abrirCerrarModalFecha()}>
             Cancelar
           </Button>
         </ModalFooter>

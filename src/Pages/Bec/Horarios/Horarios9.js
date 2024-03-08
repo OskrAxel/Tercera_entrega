@@ -69,7 +69,7 @@ function Horarios9() {
   ///
   const peticionGet = async () => {
     await axios
-      .get(`http://localhost:80/api/bec/horario9.php`, {
+      .get(`https://bqef-bo.com/api/bec/horario9.php`, {
         params: {
           id: localStorage.getItem("iduser"),
         },
@@ -126,7 +126,7 @@ function Horarios9() {
     ///
     f.append("METHOD", "PUT");
     await axios
-      .post(`http://localhost:80/api/bec/horario9.php`, f, {
+      .post(`https://bqef-bo.com/api/bec/horario9.php`, f, {
         params: { id: data.idBec },
       })
       .then((response) => {
