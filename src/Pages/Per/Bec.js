@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { Input, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import { Table, Button } from "reactstrap";
 import * as FaIcons from "react-icons/fa";
@@ -46,20 +45,19 @@ function ListBe() {
   const abrirCerrarModalEliminar = () => {
     setModalEliminar(!modalEliminar);
   };
-
+  /////Listado usuarios becarios
   const peticionGet = async () => {
     await axios
       .get(baseUrl)
       .then((response) => {
         setData(response.data);
-        // setUsuarios(response.data); ///para barra busqueda
-        setTablaUsuarios(response.data); ///para barra busqueda
+        setTablaUsuarios(response.data);
       })
       .catch((error) => {
         console.log(error);
       });
   };
-
+  /////Crear Usuario becario
   const peticionPost = async () => {
     var f = new FormData();
     f.append("nombre", usuarioSeleccionado.nombre);
@@ -215,19 +213,19 @@ function ListBe() {
             </tr>
           </thead>
           <tbody>
-            {data.map((Usuario) => (
-              <tr className="text-center" key={Usuario.id}>
-                <td>{cont++}</td>
-                <td>{Usuario.nombre}</td>
-                <td>{Usuario.apellido}</td>
-                <td>{Usuario.email}</td>
-                <td>{Usuario.carrera}</td>
-                <td>{Usuario.anio}</td>
-                <td>{Usuario.celular}</td>
-                <td>{Usuario.ciudad}</td>
-                <td>{Usuario.direccion}</td>
-                <td>{Usuario.nom_pad}</td>
-                <td>{Usuario.nom_mad}</td>
+            {usuarioSeleccionado.map((tem, index) => (
+              <tr className="text-center" key={tem.id}>
+                <td>{index + 1}</td>
+                <td>{tem.nombre}</td>
+                <td>{tem.apellido}</td>
+                <td>{tem.email}</td>
+                <td>{tem.carrera}</td>
+                <td>{tem.anio}</td>
+                <td>{tem.celular}</td>
+                <td>{tem.ciudad}</td>
+                <td>{tem.direccion}</td>
+                <td>{tem.nom_pad}</td>
+                <td>{tem.nom_mad}</td>
               </tr>
             ))}
           </tbody>

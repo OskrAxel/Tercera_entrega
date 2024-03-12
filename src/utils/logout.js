@@ -1,5 +1,5 @@
 const Logout = () => {
   localStorage.clear();
-  window.location.href = "/LoginBec";
+  window.location.href = "/";
 };
 export default Logout;

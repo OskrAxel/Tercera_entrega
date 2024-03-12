@@ -261,9 +261,9 @@ function ListUserPat() {
             </tr>
           </thead>
           <tbody>
-            {data.map((Usuario) => (
+            {data.map((Usuario, index) => (
               <tr className="text-center" key={Usuario.id}>
-                <td>{cont++}</td>
+                <td>{index + 1}</td>
                 <td>{Usuario.nombre}</td>
                 <td>{Usuario.id_pat}</td>
                 <td>{Usuario.pais}</td>

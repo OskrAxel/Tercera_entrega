@@ -256,10 +256,10 @@ function ListUserAdm() {
             </tr>
           </thead>
           <tbody>
-            {data.map((Usuario) => (
+            {data.map((Usuario, index) => (
               <tr className="text-center" key={Usuario.id}>
                 {/* <td>{Usuario.id}</td> */}
-                <td>{cont++}</td>
+                <td>{index + 1}</td>
                 <td>{Usuario.nombre}</td>
                 <td>{Usuario.apellido}</td>
                 <td>{Usuario.id_per}</td>

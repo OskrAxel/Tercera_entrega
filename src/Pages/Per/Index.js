@@ -12,8 +12,7 @@ function Ini({ nombre }) {
           style={{
             width: "50rem",
             background: "rgba(232, 232, 232, 0.65)",
-          }}
-        >
+          }}>
           <CardTitle tag="h4">Nota:</CardTitle>
           <CardText>
             <h2>Bienvenido: {user}</h2>
@@ -29,12 +28,6 @@ function Ini({ nombre }) {
         </Card>
       </Col>
     </div>
-    // <div id="ali">
-    //   <a href="https://www.freepik.es/foto-gratis/montanas-bolivia_30806351.htm#query=paisaje%20bolivia&position=10&from_view=search&track=ais">
-    //     Imagen de kamchatka
-    //   </a>{" "}
-    //   en Freepik;
-    // </div>
   );
 }
 

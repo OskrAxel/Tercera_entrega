@@ -212,9 +212,9 @@ function Informe2() {
             </tr>
           </thead>
           <tbody>
-            {lista.map((item) => (
+            {lista.map((item, index) => (
               <tr className="text-center" key={item.id_doc}>
-                <td>{cont++}</td>
+                <td>{index + 1}</td>
                 <td>{item.nom_doc}</td>
                 <td>{item.nom_usu}</td>
                 <td>{item.f_cargado}</td>

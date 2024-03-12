@@ -63,7 +63,7 @@ function Evalua() {
 
   const peticionGet = async () => {
     await axios
-      .get(baseUrl)
+      .get("https://bqef-bo.com/api/bec")
       .then((response) => {
         setData(response.data);
         setTablaUsuarios(response.data);

@@ -31,6 +31,8 @@ function NavbarBec(args) {
     id: "",
     contrasena: "",
     contrasena_lit: "",
+    nombre: "",
+    apellido: "",
   });
   const [modalContra, setModalContra] = useState(false);
   const abrirCerrarModalContra = () => {
@@ -96,10 +98,9 @@ function NavbarBec(args) {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
-  ////
+  ////Modificar contraseña Personal Administrativo
   const peticionPutContra = async () => {
     var f = new FormData();
-    ///)
     f.append("contrasena", data.contrasena);
     f.append("contrasena_lit", data.contrasena_lit);
     f.append("METHOD", "PUT");
@@ -109,6 +110,7 @@ function NavbarBec(args) {
       })
       .then((response) => {
         setData(response);
+        peticionGetContraseña();
         mostrarAlertaU();
         abrirCerrarModalContra();
       })

@@ -43,7 +43,7 @@ const Dashboard = () => {
     await axios
       .post("https://bqef-bo.com/api/adm/dashboard/", f)
       .then((response) => {
-        console.log(response.data);
+        //console.log(response.data);
         var respuesta = response.data;
         var auxAnio = [],
           auxAnioB = [];
@@ -69,7 +69,7 @@ const Dashboard = () => {
     await axios
       .post("https://bqef-bo.com/api/adm/dashboard/", f)
       .then((response) => {
-        console.log(response.data);
+        //console.log(response.data);
         var respuesta = response.data;
         var auxCiu = [],
           auxReg = [];
@@ -94,7 +94,7 @@ const Dashboard = () => {
     await axios
       .post("https://bqef-bo.com/api/adm/dashboard/", f)
       .then((response) => {
-        console.log(response.data);
+        //console.log(response.data);
         setDataB(response.data);
       })
       .catch((error) => {
@@ -109,7 +109,7 @@ const Dashboard = () => {
     await axios
       .post("https://bqef-bo.com/api/adm/dashboard/", f)
       .then((response) => {
-        console.log(response.data);
+        //console.log(response.data);
         setDataP(response.data);
       })
       .catch((error) => {
@@ -125,7 +125,7 @@ const Dashboard = () => {
     await axios
       .post("https://bqef-bo.com/api/adm/dashboard/", f)
       .then((response) => {
-        console.log(response.data);
+        //console.log(response.data);
         setDataF(response.data);
       })
       .catch((error) => {
@@ -139,9 +139,9 @@ const Dashboard = () => {
     var f = new FormData();
     f.append("METHOD", "FINF");
     await axios
-      .post("https://bqef-bo.com/api/adm/dashboard/", f)
+      .post("http://localhost:80/api/adm/dashboard/", f)
       .then((response) => {
-        console.log(response.data);
+        //console.log(response.data);
         setDataFI(response.data);
       })
       .catch((error) => {
@@ -157,7 +157,7 @@ const Dashboard = () => {
     await axios
       .post("https://bqef-bo.com/api/adm/dashboard/", f)
       .then((response) => {
-        console.log(response.data);
+        //console.log(response.data);
         setDataI(response.data);
       })
       .catch((error) => {
@@ -512,14 +512,14 @@ const Dashboard = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {dataL.map((user, index) => (
+                      {/* {dataL.map((user, index) => (
                         <tr className="text-center" key={user.id}>
                           <td>{index + 1}</td>
                           <td>{user.usuario_mod}</td>
                           <td>{user.detalle}</td>
                           <td>{user.fecha_hora}</td>
                         </tr>
-                      ))}
+                      ))} */}
                     </tbody>
                   </Table>
                 </div>
@@ -571,7 +571,7 @@ const Dashboard = () => {
       </Modal>
 
       {/* Modal VER REPORTE INFORMES*/}
-      <Modal isOpen={modalEliminar} size="xl">
+      {/* <Modal isOpen={modalEliminar} size="xl">
         <ModalHeader
           className="text-center"
           style={{ color: "white", background: "rgba(18, 80, 61, .85)" }}>
@@ -598,7 +598,7 @@ const Dashboard = () => {
               </tr>
             </thead>
             <tbody>
-              {dataF.map((itemF, indexF) => (
+              {dataF.map((itemF) => (
                 <>
                   <tr key={itemF.id_fech}></tr>
                   {dataFI.map((item, index) => {
@@ -654,7 +654,7 @@ const Dashboard = () => {
             Cerrar
           </Button>
         </ModalFooter>
-      </Modal>
+      </Modal> */}
     </div>
   );
 };

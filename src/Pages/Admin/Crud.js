@@ -8,7 +8,15 @@ import Swal from "sweetalert2";
 
 function ListUser() {
   const baseUrl = "https://bqef-bo.com/api/bec/";
-  const [data, setData] = useState([]);
+  const [data, setData] = useState({
+    id: "",
+    nombre: "",
+    apellido: "",
+    id_bec: "",
+    email: "",
+    contrasena: "",
+    celular: "",
+  });
   const [modalInsertar, setModalInsertar] = useState(false);
   const [modalEditar, setModalEditar] = useState(false);
   const [modalEliminar, setModalEliminar] = useState(false);
@@ -67,6 +75,7 @@ function ListUser() {
     await axios
       .get(baseUrl)
       .then((response) => {
+        console.log(response.data);
         setData(response.data);
         setTablaUsuarios(response.data);
       })
@@ -260,9 +269,9 @@ function ListUser() {
             </tr>
           </thead>
           <tbody>
-            {data.map((Usuario) => (
+            {data.map((Usuario, index) => (
               <tr className="text-center" key={Usuario.id}>
-                <td>{cont++}</td>
+                <td>{index + 1}</td>
                 <td>{Usuario.nombre}</td>
                 <td>{Usuario.apellido}</td>
                 <td>{Usuario.id_bec}</td>

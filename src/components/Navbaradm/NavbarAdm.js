@@ -55,7 +55,7 @@ function NavbarAdm(args) {
         },
       })
       .then((response) => {
-        console.log(response.data);
+        //console.log(response.data);
         setData(response.data);
       })
       .catch((error) => {
@@ -63,9 +63,9 @@ function NavbarAdm(args) {
       });
   };
   ////
-  const act = () => {
-    window.location.reload();
-  };
+  // const act = () => {
+  //   window.location.reload();
+  // };
   ////
   const naviget = useNavigate();
   function logoutSubmit() {

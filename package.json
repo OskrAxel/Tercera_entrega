@@ -20,7 +20,7 @@
     "sweetalert2": "^11.10.5",
     "web-vitals": "^2.1.4"
   },
-  "homepage": "https://www.bqef-bo.com/",
+  "homepage": "https://bqef-bo.com/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
